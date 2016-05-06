@@ -1,6 +1,6 @@
 module Mnemosyne
   class Trace < Span
-    attr_reader :uuid
+    attr_reader :uuid, :transaction, :origin
 
     def initialize(name, transaction: nil, origin: nil)
       super name

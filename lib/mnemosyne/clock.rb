@@ -2,7 +2,7 @@ module Mnemosyne
   class Clock
     def tick
       now = Time.now
-      now.to_i * 1_000_000_000 + now.usec * 1_000
+      now.to_i * 1_000_000_000 + now.nsec
     end
 
     class << self
