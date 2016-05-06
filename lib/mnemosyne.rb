@@ -6,7 +6,9 @@ module Mnemosyne
   require 'mnemosyne/span'
   require 'mnemosyne/trace'
 
-  require 'mnemosyne/middleware'
+  module Middleware
+    require 'mnemosyne/middleware/rack'
+  end
 
   require 'mnemosyne/railtie' if defined?(Rails)
 end
