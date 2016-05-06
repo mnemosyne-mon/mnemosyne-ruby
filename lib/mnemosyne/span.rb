@@ -1,28 +1,31 @@
 module Mnemosyne
   class Span
-    attr_reader :name, :start_tick, :stop_tick
+    attr_reader :name, :start, :stop, :meta
 
     def initialize(name)
       @name = name
+      @meta = {}
+
+      @start = false
+      @stop  = false
     end
 
-    def start_tick
-      @start_tick = ::Mnemosyne::Clock.tick
-
+    def start!
+      @start = ::Mnemosyne::Clock.tick
       self
     end
 
-    def stop_tick
-      @stop_tick = ::Mnemosyne::Clock.tick
-
+    def stop!
+      @stop = ::Mnemosyne::Clock.tick
       self
     end
 
     def serialize
       {
         name: name,
-        start_tick: stop_tick,
-        stop_tick: stop_tick
+        start: start,
+        stop: stop,
+        meta: meta
       }
     end
   end

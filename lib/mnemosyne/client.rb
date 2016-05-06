@@ -22,7 +22,10 @@ module Mnemosyne
     def send(trace)
       data = JSON.dump trace.serialize
 
-      exchange.publish data, routing_key: trace.name, persistent: true
+      exchange.publish data,
+        routing_key: trace.name,
+        persistent: true,
+        content_type: 'application/json'
     end
 
     class << self
