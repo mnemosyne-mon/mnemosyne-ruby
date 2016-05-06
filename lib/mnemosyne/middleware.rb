@@ -52,7 +52,13 @@ module Mnemosyne
     end
 
     def call(env)
-      trace = ::Mnemosyne::Trace.new 'app.rack.request'
+      transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') { ::SecureRandom.uuid }
+      origin      = env.fetch('HTTP_X_MNEMOSYNE_ORIGIN', false)
+
+      trace = ::Mnemosyne::Trace.new 'app.rack.request',
+        transaction: transaction,
+        origin: origin
+
       trace.start!
 
       env['mnemosyne.trace'] = trace

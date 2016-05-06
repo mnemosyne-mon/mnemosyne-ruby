@@ -2,11 +2,14 @@ module Mnemosyne
   class Trace < Span
     attr_reader :uuid
 
-    def initialize(name)
+    def initialize(name, transaction: nil, origin: nil)
       super name
 
       @uuid = ::SecureRandom.uuid
       @span = []
+
+      @origin      = origin
+      @transaction = transaction
     end
 
     def <<(span)
@@ -26,6 +29,8 @@ module Mnemosyne
     def serialize
       {
         uuid: uuid,
+        origin: origin,
+        transaction: transaction,
         name: name,
         start: start,
         stop: stop,
