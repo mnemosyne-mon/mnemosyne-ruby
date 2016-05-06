@@ -52,7 +52,7 @@ module Mnemosyne
     end
 
     def call(env)
-      trace = ::Mnemosyne::Trace.new 'app/rack/request'
+      trace = ::Mnemosyne::Trace.new 'app.rack.request'
       env['mnemosyne.trace'] = trace
 
       response = @app.call env
