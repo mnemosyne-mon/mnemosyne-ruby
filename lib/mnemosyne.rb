@@ -1,5 +1,12 @@
 require 'mnemosyne/version'
 
 module Mnemosyne
-  # Your code goes here...
+  require 'mnemosyne/clock'
+  require 'mnemosyne/client'
+  require 'mnemosyne/trace'
+  require 'mnemosyne/span'
+
+  require 'mnemosyne/middleware'
+
+  require 'mnemosyne/railtie' if defined?(Rails)
 end
