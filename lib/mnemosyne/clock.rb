@@ -1,17 +1,12 @@
 module Mnemosyne
-  class Clock
-    def tick
-      now = Time.now
-      now.to_i * 1_000_000_000 + now.nsec
-    end
-
+  module Clock
     class << self
-      def default
-        @default ||= Clock.new
+      def tick
+        to_tick Time.now
       end
 
-      def tick
-        default.tick
+      def to_tick(time)
+        time.to_i * 1_000_000_000 + time.nsec
       end
     end
   end

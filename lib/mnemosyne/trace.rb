@@ -17,7 +17,7 @@ module Mnemosyne
     end
 
     def submit
-      stop! unless stop
+      finish! unless finish
 
       client.send self
     end
@@ -33,7 +33,7 @@ module Mnemosyne
         transaction: transaction,
         name: name,
         start: start,
-        stop: stop,
+        stop: finish,
         meta: meta,
         span: @span.map(&:serialize)
       }

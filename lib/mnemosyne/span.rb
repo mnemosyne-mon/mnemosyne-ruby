@@ -1,13 +1,13 @@
 module Mnemosyne
   class Span
-    attr_reader :name, :start, :stop, :meta
+    attr_reader :name, :start, :finish, :meta
 
-    def initialize(name)
+    def initialize(name, start: false, finish: false, meta: {})
       @name = name
-      @meta = {}
+      @meta = meta
 
-      @start = false
-      @stop  = false
+      @start  = start
+      @finish = finish
     end
 
     def start!
@@ -15,8 +15,8 @@ module Mnemosyne
       self
     end
 
-    def stop!
-      @stop = ::Mnemosyne::Clock.tick
+    def finish!
+      @finish = ::Mnemosyne::Clock.tick
       self
     end
 
@@ -24,7 +24,7 @@ module Mnemosyne
       {
         name: name,
         start: start,
-        stop: stop,
+        stop: finish,
         meta: meta
       }
     end

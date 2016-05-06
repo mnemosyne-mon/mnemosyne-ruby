@@ -62,11 +62,12 @@ module Mnemosyne
 
         trace.start!
 
-        env['mnemosyne.trace'] = trace
+        ::Mnemosyne.current_trace = trace
 
         response = @app.call env
 
-        response[2] = Proxy.new(response[2]) { trace.submit } if trace
+        response[2] = Proxy.new(response[2]) { trace.submit if trace }
+
         response
       rescue Exception
         trace.submit if trace
