@@ -1,7 +1,9 @@
+require 'forwardable'
+
 module Mnemosyne
   module Probes
     class Registration
-      extend Forwardable
+      extend ::Forwardable
 
       attr_reader :class_name, :require_paths
 
