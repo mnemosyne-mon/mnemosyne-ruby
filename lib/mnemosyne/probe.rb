@@ -2,7 +2,12 @@ module Mnemosyne
   class Probe
     def install
       self.class.subscriptions.each do |subscribe|
-        ::ActiveSupport::Notifications.subscribe(subscribe, &method(:call))
+        ::ActiveSupport::Notifications.subscribe(subscribe) do |*args|
+          trace = ::Mnemosyne.current_trace
+          return unless trace
+
+          call(trace, *args)
+        end
       end
     end
 
