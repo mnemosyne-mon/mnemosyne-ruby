@@ -3,7 +3,7 @@
 module Mnemosyne
   module Probes
     module ActionController
-      class ProcessAction < ::Mnemosyne::Probe
+      class Probe < ::Mnemosyne::Probe
         subscribe 'process_action.action_controller'
 
         def call(trace, name, start, finish, id, payload)
@@ -24,6 +24,6 @@ module Mnemosyne
       end
     end
 
-    register('ActionController::Base', 'action_controller', ActionController::ProcessAction.new)
+    register('ActionController::Base', 'action_controller', ActionController::Probe.new)
   end
 end

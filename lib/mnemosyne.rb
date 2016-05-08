@@ -15,7 +15,8 @@ module Mnemosyne
   require 'mnemosyne/probes'
 
   module Probes
-    require 'mnemosyne/probes/action_controller/process_action'
+    require 'mnemosyne/probes/action_controller'
+    require 'mnemosyne/probes/active_record'
   end
 
   module Middleware
