@@ -8,7 +8,7 @@ module Mnemosyne
           start  = ::Mnemosyne::Clock.to_tick(start)
           finish = ::Mnemosyne::Clock.to_tick(finish)
 
-          span = ::Mnemosyne::Span.new(name, start: start, finish: finish, meta: payload)
+          span = ::Mnemosyne::Span.new("rails.#{name}", start: start, finish: finish, meta: payload)
           ::Mnemosyne.current_trace << span
         end
       end
