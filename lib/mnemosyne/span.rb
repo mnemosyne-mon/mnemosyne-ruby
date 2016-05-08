@@ -1,10 +1,11 @@
 module Mnemosyne
   class Span
-    attr_reader :name, :start, :finish, :meta
+    attr_reader :uuid, :name, :start, :finish, :meta
 
     def initialize(name, start: false, finish: false, meta: {})
       @name = name
       @meta = meta
+      @uuid = ::SecureRandom.uuid
 
       @start  = start
       @finish = finish
@@ -22,6 +23,7 @@ module Mnemosyne
 
     def serialize
       {
+        uuid: uuid,
         name: name,
         start: start,
         stop: finish,
