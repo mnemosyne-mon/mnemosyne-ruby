@@ -5,8 +5,8 @@ module Mnemosyne
 
       self.class.subscriptions.each do |subscribe|
         ::ActiveSupport::Notifications.subscribe(subscribe) do |*args|
-          trace = ::Mnemosyne.current_trace
-          return unless trace
+          trace = ::Mnemosyne::Instrumenter.current_trace
+          next unless trace
 
           call(trace, *args)
         end

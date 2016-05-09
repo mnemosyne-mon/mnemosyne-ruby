@@ -19,11 +19,11 @@ module Mnemosyne
       @exchange ||= channel.topic 'mnemosyne', durable: true
     end
 
-    def send(trace)
-      data = JSON.dump trace.serialize
+    def send(key, data)
+      blob = JSON.dump data
 
-      exchange.publish data,
-        routing_key: trace.name,
+      exchange.publish blob,
+        routing_key: key,
         persistent: true,
         content_type: 'application/json'
     end

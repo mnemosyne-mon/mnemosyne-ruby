@@ -8,9 +8,13 @@ module Mnemosyne
   extend Global
 
   require 'mnemosyne/clock'
-  require 'mnemosyne/client'
   require 'mnemosyne/span'
   require 'mnemosyne/trace'
+
+  require 'mnemosyne/config'
+  require 'mnemosyne/client'
+  require 'mnemosyne/instrumenter'
+
   require 'mnemosyne/probe'
   require 'mnemosyne/probes'
 

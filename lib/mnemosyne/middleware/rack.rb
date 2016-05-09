@@ -58,22 +58,24 @@ module Mnemosyne
         transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') { ::SecureRandom.uuid }
         origin      = env.fetch('HTTP_X_MNEMOSYNE_ORIGIN', false)
 
-        trace = ::Mnemosyne::Trace.new 'app.rack.request',
-          transaction: transaction,
-          origin: origin
+        trace = ::Mnemosyne::Instrumenter.trace 'app.rack.request',
+                                                transaction: transaction,
+                                                origin: origin
 
-        trace.start!
+        if trace
+          trace.start!
 
-        ::Mnemosyne.current_trace = trace
-
-        response = @app.call env
-
-        response[2] = Proxy.new(response[2]) { trace.submit if trace }
-
-        response
+          response = @app.call env
+          response[2] = Proxy.new(response[2]) { trace.submit }
+          response
+        else
+          @app.call env
+        end
       rescue Exception
         trace.submit if trace
         raise
+      ensure
+        trace.release if trace
       end
     end
   end
