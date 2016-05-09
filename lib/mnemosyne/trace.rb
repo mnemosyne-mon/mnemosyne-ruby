@@ -1,6 +1,6 @@
 module Mnemosyne
   class Trace < Span
-    attr_reader :uuid, :transaction, :origin
+    attr_reader :uuid, :transaction, :application, :origin
 
     def initialize(name, transaction: nil, origin: nil)
       super name
@@ -10,6 +10,7 @@ module Mnemosyne
 
       @origin      = origin
       @transaction = transaction
+      @application = '9d77c3fa-9859-45a6-9765-99b18fdf1aeb' # TODO
     end
 
     def <<(span)
@@ -31,6 +32,7 @@ module Mnemosyne
         uuid: uuid,
         origin: origin,
         transaction: transaction,
+        application: application,
         name: name,
         start: start,
         stop: finish,
