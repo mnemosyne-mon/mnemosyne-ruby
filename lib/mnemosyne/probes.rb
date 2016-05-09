@@ -13,6 +13,12 @@ module Mnemosyne
         @probe = probe
       end
 
+      def installable?
+        return true unless class_name
+
+        ::Mnemosyne::Probes.class_available? class_name
+      end
+
       delegate install: :@probe
     end
 
@@ -26,7 +32,7 @@ module Mnemosyne
       def register(*args)
         registration = Registration.new(*args)
 
-        if class_available? registration.class_name
+        if registration.installable?
           registration.install
         else
           register_require_hook registration
@@ -37,7 +43,7 @@ module Mnemosyne
         registration = require_hooks[name]
         return unless registration
 
-        if class_available? registration.class_name
+        if registration.installable?
           registration.install
 
           unregister_require_hook registration

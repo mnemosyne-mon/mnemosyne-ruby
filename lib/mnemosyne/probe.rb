@@ -1,6 +1,8 @@
 module Mnemosyne
   class Probe
     def install
+      setup
+
       self.class.subscriptions.each do |subscribe|
         ::ActiveSupport::Notifications.subscribe(subscribe) do |*args|
           trace = ::Mnemosyne.current_trace
@@ -9,6 +11,10 @@ module Mnemosyne
           call(trace, *args)
         end
       end
+    end
+
+    def setup
+      # noop
     end
 
     class << self
