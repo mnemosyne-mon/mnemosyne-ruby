@@ -21,6 +21,7 @@ module Mnemosyne
   module Probes
     require 'mnemosyne/probes/mnemosyne/tracer'
 
+    require 'mnemosyne/probes/acfs/middleware'
     require 'mnemosyne/probes/action_controller/process_action'
     require 'mnemosyne/probes/action_controller/renderers'
     require 'mnemosyne/probes/active_record'
