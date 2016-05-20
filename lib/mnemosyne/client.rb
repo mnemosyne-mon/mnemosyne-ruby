@@ -1,3 +1,5 @@
+require 'bunny'
+
 module Mnemosyne
   class Client
     def initialize
@@ -5,7 +7,7 @@ module Mnemosyne
 
     def connection
       @connection ||= begin
-        conn = Bunny.new
+        conn = ::Bunny.new
         conn.start
         conn
       end
