@@ -16,7 +16,7 @@ module Mnemosyne
             sql: payload[:sql]
           }
 
-          span = ::Mnemosyne::Span.new "db.query",
+          span = ::Mnemosyne::Span.new "db.query.active_record",
             start: start, finish: finish, meta: meta
 
           trace << span

@@ -17,7 +17,7 @@ module Mnemosyne
               format: payload[:format]
             }
 
-            span = ::Mnemosyne::Span.new "rails.#{name}",
+            span = ::Mnemosyne::Span.new "app.controller.request.rails",
               start: start, finish: finish, meta: meta
 
             trace << span
