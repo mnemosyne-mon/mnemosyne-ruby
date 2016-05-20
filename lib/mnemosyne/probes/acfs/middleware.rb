@@ -4,10 +4,8 @@ module Mnemosyne
   module Probes
     module Acfs
       module Middleware
-        CATEGORY = 'acfs.run'.freeze
-
         class Probe < ::Mnemosyne::Probe
-          subscribe 'acfs.runner.sync_run'
+          subscribe 'acfs.run'
 
           def setup
             require 'mnemosyne/middleware/acfs'
@@ -19,11 +17,17 @@ module Mnemosyne
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
+            callers = caller
+
+            while !(callers[0].include? 'lib/acfs/global.rb:')
+              callers.shift
+            end
+
             meta = {
-              caller: payload[:controller],
+              backtrace: callers[1..-1]
             }
 
-            span = ::Mnemosyne::Span.new 'acfs.runner.sync_run',
+            span = ::Mnemosyne::Span.new 'acfs.run',
               start: start, finish: finish, meta: meta
 
             trace << span
