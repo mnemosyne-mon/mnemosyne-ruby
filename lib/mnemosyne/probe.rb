@@ -11,6 +11,8 @@ module Mnemosyne
           call(trace, *args)
         end
       end
+
+      ::Mnemosyne::Instrumenter.logger.debug { "Installed probe #{self.class.name}"}
     end
 
     def setup
