@@ -3,7 +3,7 @@
 module Mnemosyne
   module Probes
     module Acfs
-      module Middleware
+      module Request
         class Probe < ::Mnemosyne::Probe
           subscribe 'acfs.run'
 
@@ -36,6 +36,6 @@ module Mnemosyne
       end
     end
 
-    register 'Acfs::Runner', 'acfs/runner', Acfs::Middleware::Probe.new
+    register 'Acfs::Runner', 'acfs/runner', Acfs::Request::Probe.new
   end
 end
