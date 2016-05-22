@@ -31,6 +31,8 @@ module Mnemosyne
     require 'mnemosyne/probes/grape/endpoint_run'
     require 'mnemosyne/probes/grape/endpoint_run_filters'
     require 'mnemosyne/probes/responder/respond'
+    require 'mnemosyne/probes/restify/em'
+    require 'mnemosyne/probes/restify/typhoeus'
   end
 
   module Middleware
