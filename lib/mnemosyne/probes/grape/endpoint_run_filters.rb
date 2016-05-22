@@ -3,7 +3,7 @@
 module Mnemosyne
   module Probes
     module Grape
-      module EndpointRun
+      module EndpointRunFilters
         class Probe < ::Mnemosyne::Probe
           subscribe 'endpoint_run_filters.grape'
 
@@ -22,6 +22,6 @@ module Mnemosyne
       end
     end
 
-    register('Grape::Endpoint', 'grape/endpoint', Grape::EndpointRun::Probe.new)
+    register('Grape::Endpoint', 'grape/endpoint', Grape::EndpointRunFilters::Probe.new)
   end
 end
