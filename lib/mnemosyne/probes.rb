@@ -78,7 +78,7 @@ module ::Kernel
     ret = require_without_mn(name)
 
     begin
-      ::Mnemosyne::Probe.require_hook(name)
+      ::Mnemosyne::Probes.require_hook(name)
     rescue Exception
     end
 
