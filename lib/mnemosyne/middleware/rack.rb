@@ -58,7 +58,7 @@ module Mnemosyne
         transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') { ::SecureRandom.uuid }
         origin      = env.fetch('HTTP_X_MNEMOSYNE_ORIGIN', false)
 
-        trace = ::Mnemosyne::Instrumenter.trace 'app.rack.request',
+        trace = ::Mnemosyne::Instrumenter.trace 'app.web.request.rack',
                                                 transaction: transaction,
                                                 origin: origin
 
