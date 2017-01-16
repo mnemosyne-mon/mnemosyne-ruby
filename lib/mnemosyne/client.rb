@@ -6,14 +6,17 @@ module Mnemosyne
 
     def initialize(config)
       @config = config
+    end
 
-      @config.logger.info "[Mnemosyne] Connect to #{@config.server}..."
+    def connection
+      @connection ||= begin
+        @config.logger.info "[Mnemosyne] Connect to #{@config.server}..."
 
-      @connection = ::Bunny.new @config.amqp, \
-        logger: @config.logger,
-        threaded: false
+        connection = ::Bunny.new @config.amqp, logger: @config.logger
 
-      @connection.start
+        connection.start
+        connection
+      end
     end
 
     def channel
