@@ -1,52 +1,62 @@
 require 'socket'
-require 'forwardable'
+require 'uri'
+require 'cgi'
 
 module Mnemosyne
   class Config
-    extend Forwardable
+    attr_reader :application
+    attr_reader :hostname
+    attr_reader :amqp
+    attr_reader :exchange
+    attr_reader :logger
+    attr_reader :server
 
     def initialize(config)
-      @values = {
-        enabled: true
-      }
+      @application = config.fetch('application').freeze
+      @enabled     = config.fetch('enabled', true)
+      @hostname    = config.fetch('hostname') { default_hostname }.freeze
+      @exchange    = config.fetch('exchange', 'mnemosyne').freeze
+      @logger      = config.fetch('logger') { Logger.new($stdout) }
 
-      config.each_pair do |key, value|
-        @values[key.to_sym] = value
+      server       = config.fetch('server', 'amqp://localhost')
+      @amqp        = AMQ::Settings.configure(server).freeze
+      @server      = make_amqp_uri(@amqp).freeze
+
+      if not application.present?
+        raise RuntimeError, 'Application must be configured'
       end
 
-      @values[:hostname] ||= Socket.gethostbyname(Socket.gethostname).first
-    end
-
-    def_delegators :@values, :[], :fetch, :key?
-
-    REQUIRED = [
-      :application,
-      :hostname,
-      :server
-    ]
-
-    def validate!
-      REQUIRED.each do |required_key|
-        next if self[required_key].present?
-
-        raise RuntimeError.new "Configuration key missing: #{required_key}."
+      if not hostname.present?
+        raise RuntimeError, 'Hostname must be configured'
       end
     end
 
     def enabled?
-      !!self[:enabled]
+      !!@enabled
     end
 
-    def logger
-      @logger ||= @values[:logger] || Logger.new($stdout)
+    private
+
+    def default_hostname
+      Socket.gethostbyname(Socket.gethostname).first
     end
 
-    def application
-      self[:application]
-    end
+    def make_amqp_uri(amqp)
+      uri = URI('')
 
-    def hostname
-      self[:hostname]
+      uri.scheme = amqp[:scheme]
+      uri.user   = amqp[:user]
+      uri.host   = amqp[:host]
+
+      if amqp[:port] != AMQ::URI::AMQP_PORTS[uri.scheme]
+        uri.port = amqp[:port]
+      end
+
+      if amqp[:vhost] != '/'
+        uri.path = '/' + ::CGI.escape(amqp[:vhost])
+      end
+
+      uri
     end
   end
 end

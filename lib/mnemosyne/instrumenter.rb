@@ -15,7 +15,7 @@ module Mnemosyne
       end
 
       @logger = config.logger
-      @client = Client.new # TODO: pass config
+      @client = Client.new(config)
 
       logger.info 'Mnemosyne instrumenter started.'
     end

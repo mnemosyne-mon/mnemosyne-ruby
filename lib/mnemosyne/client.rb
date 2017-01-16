@@ -2,15 +2,18 @@ require 'bunny'
 
 module Mnemosyne
   class Client
-    def initialize
-    end
+    attr_reader :connection
 
-    def connection
-      @connection ||= begin
-        conn = ::Bunny.new
-        conn.start
-        conn
-      end
+    def initialize(config)
+      @config = config
+
+      @config.logger.info "[Mnemosyne] Connect to #{@config.server}..."
+
+      @connection = ::Bunny.new @config.amqp, \
+        logger: @config.logger,
+        threaded: false
+
+      @connection.start
     end
 
     def channel
@@ -18,7 +21,7 @@ module Mnemosyne
     end
 
     def exchange
-      @exchange ||= channel.topic 'mnemosyne', durable: true
+      @exchange ||= channel.topic @config.exchange, durable: true
     end
 
     def send(key, data)
