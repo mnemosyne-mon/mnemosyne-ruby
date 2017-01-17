@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'mnemosyne/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'mnemosyne'
+  spec.name          = 'mnemosyne-ruby'
   spec.version       = Mnemosyne::VERSION
   spec.authors       = ['Jan Graichen']
   spec.email         = ['jgraichen@altimos.de']
