@@ -12,7 +12,9 @@ module Mnemosyne
       @connection ||= begin
         @config.logger.info "[Mnemosyne] Connect to #{@config.server}..."
 
-        connection = ::Bunny.new @config.amqp, logger: @config.logger
+        connection = ::Bunny.new @config.amqp,
+          logger: @config.logger,
+          threaded: false
 
         connection.start
         connection
