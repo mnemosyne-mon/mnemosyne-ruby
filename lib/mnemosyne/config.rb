@@ -7,6 +7,7 @@ module Mnemosyne
   class Config
     attr_reader :application
     attr_reader :hostname
+    attr_reader :platform
     attr_reader :amqp
     attr_reader :exchange
     attr_reader :logger
@@ -14,6 +15,7 @@ module Mnemosyne
 
     # rubocop:disable Metrics/AbcSize
     def initialize(config)
+      @platform    = config.fetch('platform', 'default').freeze
       @application = config.fetch('application').freeze
       @enabled     = config.fetch('enabled', true)
       @hostname    = config.fetch('hostname') { default_hostname }.freeze

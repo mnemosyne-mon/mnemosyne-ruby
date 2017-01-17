@@ -49,7 +49,8 @@ module Mnemosyne
     def submit(trace)
       blob = {
         hostname: @config.hostname,
-        application: @config.application
+        platform: @config.platform,
+        application: @config.application,
       }
 
       # TODO: nest
