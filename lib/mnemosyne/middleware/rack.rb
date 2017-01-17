@@ -11,13 +11,13 @@ module Mnemosyne
         end
 
         def respond_to_missing?(*args)
-          return false if args.first && args.first.to_s == 'to_ary'.freeze
+          return false if args.first && args.first.to_s == 'to_ary'
 
           @body.respond_to?(*args)
         end
 
         def method_missing(*args)
-          super if args.first && args.first.to_s == 'to_ary'.freeze
+          super if args.first && args.first.to_s == 'to_ary'
 
           if block_given?
             @body.__send__(*args, &Proc.new)
@@ -54,13 +54,16 @@ module Mnemosyne
         @app = app
       end
 
+      # rubocop:disable Metrics/MethodLength
       def call(env)
-        transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') { ::SecureRandom.uuid }
         origin      = env.fetch('HTTP_X_MNEMOSYNE_ORIGIN', false)
+        transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') do
+          ::SecureRandom.uuid
+        end
 
         trace = ::Mnemosyne::Instrumenter.trace 'app.web.request.rack',
-                                                transaction: transaction,
-                                                origin: origin
+          transaction: transaction,
+          origin: origin
 
         if trace
           trace.start!
@@ -71,12 +74,20 @@ module Mnemosyne
         else
           @app.call env
         end
+
+      # rubocop:disable Lint/RescueException
       rescue Exception
         trace.submit if trace
         raise
       ensure
         trace.release if trace
       end
+    end
+
+    private
+
+    def _uuid
+      ::SecureRandom.uuid
     end
   end
 end

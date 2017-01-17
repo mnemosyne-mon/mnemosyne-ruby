@@ -12,7 +12,8 @@ module Mnemosyne
               ::Mnemosyne::Probes::Responder::Respond::Instrumentation
           end
 
-          def call(trace, name, start, finish, id, payload)
+          # rubocop:disable Metrics/ParameterLists
+          def call(trace, _name, start, finish, _id, _payload)
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
@@ -25,7 +26,9 @@ module Mnemosyne
 
         module Instrumentation
           def respond
-            ::ActiveSupport::Notifications.instrument 'respond.responders.mnemosyne' do
+            ::ActiveSupport::Notifications.instrument \
+              'respond.responders.mnemosyne' do
+
               super
             end
           end
@@ -33,6 +36,8 @@ module Mnemosyne
       end
     end
 
-    register('ActionController::Responder', 'action_controller/responder', Responder::Respond::Probe.new)
+    register 'ActionController::Responder',
+      'action_controller/responder',
+      Responder::Respond::Probe.new
   end
 end

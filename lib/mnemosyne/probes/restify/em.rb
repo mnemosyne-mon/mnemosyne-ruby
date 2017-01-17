@@ -22,7 +22,8 @@ module Mnemosyne
       end
     end
 
-    register 'Restify::Adapter::EM::Connection', 'restify/adapter/em',
+    register 'Restify::Adapter::EM::Connection',
+      'restify/adapter/em',
       Restify::EM::Probe.new
   end
 end

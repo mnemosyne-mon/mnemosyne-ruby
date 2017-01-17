@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'thread'
 
 module Mnemosyne
@@ -10,9 +11,7 @@ module Mnemosyne
     def initialize(config)
       @config = config
 
-      unless @config
-        raise RuntimeError.new 'Config required!'
-      end
+      raise 'Config required!' unless @config
 
       @logger = config.logger
       @client = Client.new(config)
@@ -28,8 +27,9 @@ module Mnemosyne
       Thread.current[IDENT] = trace
     end
 
+    # rubocop:disable Metrics/MethodLength
     def trace(name, **kwargs)
-      if trace = current_trace
+      if (trace = current_trace)
         return yield trace if block_given?
         return trace
       end
@@ -52,7 +52,7 @@ module Mnemosyne
         application: @config.application
       }
 
-      # TODO nest
+      # TODO: nest
       blob.merge! trace.serialize
 
       logger.debug { "Submit trace #{trace.uuid}" }
@@ -61,7 +61,7 @@ module Mnemosyne
     end
 
     def release(trace)
-      return unless current_trace === trace
+      return unless current_trace.equal?(trace)
 
       self.current_trace = nil
     end
@@ -90,11 +90,8 @@ module Mnemosyne
       end
 
       def trace(*args)
-        if (instrumenter = instance)
-          instrumenter.trace(*args)
-        else
-          nil
-        end
+        return unless (instrumenter = instance)
+        instrumenter.trace(*args)
       end
 
       def logger
@@ -106,11 +103,8 @@ module Mnemosyne
       end
 
       def current_trace
-        if (instrumenter = instance)
-          instrumenter.current_trace
-        else
-          nil
-        end
+        return unless (instrumenter = instance)
+        instrumenter.current_trace
       end
     end
   end

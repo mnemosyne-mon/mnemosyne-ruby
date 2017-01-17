@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Mnemosyne
   class Probe
+    # rubocop:disable Metrics/MethodLength
     def install
       setup
 
@@ -12,7 +15,9 @@ module Mnemosyne
         end
       end
 
-      ::Mnemosyne::Instrumenter.logger.debug { "Installed probe #{self.class.name}"}
+      ::Mnemosyne::Instrumenter.logger.debug do
+        "Installed probe #{self.class.name}"
+      end
     end
 
     def setup

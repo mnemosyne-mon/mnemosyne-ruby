@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mnemosyne
   module Middleware
     module Restify
@@ -24,6 +26,7 @@ module Mnemosyne
       end
 
       class << self
+        # rubocop:disable Metrics/MethodLength
         def call(request, writer)
           if (trace = ::Mnemosyne::Instrumenter.current_trace)
             meta = {url: request.uri, method: request.method}

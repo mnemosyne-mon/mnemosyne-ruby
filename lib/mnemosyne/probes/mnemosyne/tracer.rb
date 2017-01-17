@@ -7,7 +7,8 @@ module Mnemosyne
         class Probe < ::Mnemosyne::Probe
           subscribe 'trace.mnemosyne'
 
-          def call(trace, name, start, finish, id, payload)
+          # rubocop:disable Metrics/ParameterLists
+          def call(trace, _name, start, finish, _id, payload)
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
@@ -20,6 +21,6 @@ module Mnemosyne
       end
     end
 
-    register(nil, nil, Mnemosyne::Tracer::Probe.new)
+    register nil, nil, Mnemosyne::Tracer::Probe.new
   end
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'bunny'
 
 module Mnemosyne
@@ -40,7 +41,7 @@ module Mnemosyne
 
     class << self
       def instance
-        @instance ||= self.new
+        @instance ||= new
       end
     end
   end

@@ -22,7 +22,8 @@ module Mnemosyne
       end
     end
 
-    register 'Restify::Adapter::Typhoeus', 'restify/adapter/typhoeus',
+    register 'Restify::Adapter::Typhoeus',
+      'restify/adapter/typhoeus',
       Restify::Typhoeus::Probe.new
   end
 end

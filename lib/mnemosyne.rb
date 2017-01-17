@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'mnemosyne/version'
 
 require 'active_support'

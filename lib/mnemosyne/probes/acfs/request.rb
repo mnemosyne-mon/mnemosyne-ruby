@@ -13,15 +13,14 @@ module Mnemosyne
             ::Acfs::Runner.use ::Mnemosyne::Middleware::Acfs
           end
 
-          def call(trace, name, start, finish, id, payload)
+          # rubocop:disable Metrics/ParameterLists
+          def call(trace, _name, start, finish, _id, _payload)
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
             callers = caller
 
-            while !(callers[0].include? 'lib/acfs/global.rb:')
-              callers.shift
-            end
+            callers.shift until callers[0].include? 'lib/acfs/global.rb:'
 
             meta = {
               backtrace: callers[1..-1]

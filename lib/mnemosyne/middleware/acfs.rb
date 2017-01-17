@@ -3,11 +3,11 @@
 module Mnemosyne
   module Middleware
     class Acfs
-
       def initialize(app, *_)
         @app = app
       end
 
+      # rubocop:disable Metrics/MethodLength
       def call(request)
         trace = ::Mnemosyne::Instrumenter.current_trace
 

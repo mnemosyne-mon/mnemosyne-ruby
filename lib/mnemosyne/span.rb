@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mnemosyne
   class Span
     attr_reader :uuid, :name, :start, :finish, :meta

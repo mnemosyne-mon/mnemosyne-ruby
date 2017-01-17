@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mnemosyne
   class Trace < Span
     attr_reader :uuid, :transaction, :origin

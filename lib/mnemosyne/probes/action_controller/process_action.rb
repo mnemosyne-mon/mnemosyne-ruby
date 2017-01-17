@@ -7,7 +7,8 @@ module Mnemosyne
         class Probe < ::Mnemosyne::Probe
           subscribe 'process_action.action_controller'
 
-          def call(trace, name, start, finish, id, payload)
+          # rubocop:disable Metrics/ParameterLists
+          def call(trace, _name, start, finish, _id, payload)
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
@@ -17,7 +18,7 @@ module Mnemosyne
               format: payload[:format]
             }
 
-            span = ::Mnemosyne::Span.new "app.controller.request.rails",
+            span = ::Mnemosyne::Span.new 'app.controller.request.rails',
               start: start, finish: finish, meta: meta
 
             trace << span
@@ -26,6 +27,8 @@ module Mnemosyne
       end
     end
 
-    register('ActionController::Base', 'action_controller', ActionController::ProcessAction::Probe.new)
+    register 'ActionController::Base',
+      'action_controller',
+      ActionController::ProcessAction::Probe.new
   end
 end

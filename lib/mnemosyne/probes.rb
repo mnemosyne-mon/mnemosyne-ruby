@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'forwardable'
 
 module Mnemosyne
@@ -42,12 +43,11 @@ module Mnemosyne
       def require_hook(name)
         registration = require_hooks[name]
         return unless registration
+        return unless registration.installable?
 
-        if registration.installable?
-          registration.install
+        registration.install
 
-          unregister_require_hook registration
-        end
+        unregister_require_hook registration
       end
 
       def register_require_hook(registration)
@@ -71,14 +71,17 @@ module Mnemosyne
   end
 end
 
-module ::Kernel
+module Kernel
   alias require_without_mn require
 
   def require(name)
     ret = require_without_mn(name)
 
+    # rubocop:disable Lint/RescueException
     begin
       ::Mnemosyne::Probes.require_hook(name)
+
+      # rubocop:disable Lint/HandleExceptions
     rescue Exception
     end
 

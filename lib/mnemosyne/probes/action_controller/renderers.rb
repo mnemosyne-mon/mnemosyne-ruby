@@ -13,11 +13,12 @@ module Mnemosyne
             ::ActionController::Base.prepend Instrumentation
           end
 
-          def call(trace, name, start, finish, id, payload)
+          # rubocop:disable Metrics/ParameterLists
+          def call(trace, _name, start, finish, _id, _payload)
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
-            span = ::Mnemosyne::Span.new "app.controller.renderers.rails",
+            span = ::Mnemosyne::Span.new 'app.controller.renderers.rails',
               start: start, finish: finish
 
             trace << span
@@ -35,7 +36,7 @@ module Mnemosyne
     end
 
     register 'ActionController::Base',
-             'action_controller/metal/renderers',
-             ActionController::Renderers::Probe.new
+      'action_controller/metal/renderers',
+      ActionController::Renderers::Probe.new
   end
 end

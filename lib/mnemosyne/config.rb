@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'socket'
 require 'uri'
 require 'cgi'
@@ -11,6 +12,7 @@ module Mnemosyne
     attr_reader :logger
     attr_reader :server
 
+    # rubocop:disable Metrics/AbcSize
     def initialize(config)
       @application = config.fetch('application').freeze
       @enabled     = config.fetch('enabled', true)
@@ -22,17 +24,12 @@ module Mnemosyne
       @amqp        = AMQ::Settings.configure(server).freeze
       @server      = make_amqp_uri(@amqp).freeze
 
-      if not application.present?
-        raise RuntimeError, 'Application must be configured'
-      end
-
-      if not hostname.present?
-        raise RuntimeError, 'Hostname must be configured'
-      end
+      raise 'Application must be configured' unless application.present?
+      raise 'Hostname must be configured' unless hostname.present?
     end
 
     def enabled?
-      !!@enabled
+      @enabled
     end
 
     private
@@ -45,16 +42,10 @@ module Mnemosyne
       uri = URI('')
 
       uri.scheme = amqp[:scheme]
-      uri.user   = amqp[:user]
-      uri.host   = amqp[:host]
-
-      if amqp[:port] != AMQ::URI::AMQP_PORTS[uri.scheme]
-        uri.port = amqp[:port]
-      end
-
-      if amqp[:vhost] != '/'
-        uri.path = '/' + ::CGI.escape(amqp[:vhost])
-      end
+      uri.user = amqp[:user]
+      uri.host = amqp[:host]
+      uri.port = amqp[:port] if amqp[:port] != AMQ::URI::AMQP_PORTS[uri.scheme]
+      uri.path = '/' + ::CGI.escape(amqp[:vhost]) if amqp[:vhost] != '/'
 
       uri
     end

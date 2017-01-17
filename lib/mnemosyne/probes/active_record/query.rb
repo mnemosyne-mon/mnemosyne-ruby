@@ -7,7 +7,8 @@ module Mnemosyne
         class Probe < ::Mnemosyne::Probe
           subscribe 'sql.active_record'
 
-          def call(trace, name, start, finish, id, payload)
+          # rubocop:disable Metrics/ParameterLists
+          def call(trace, _name, start, finish, _id, payload)
             return if payload[:name] == 'SCHEMA' || payload[:name] == 'CACHE'
 
             start  = ::Mnemosyne::Clock.to_tick(start)
@@ -17,7 +18,7 @@ module Mnemosyne
               sql: payload[:sql]
             }
 
-            span = ::Mnemosyne::Span.new "db.query.active_record",
+            span = ::Mnemosyne::Span.new 'db.query.active_record',
               start: start, finish: finish, meta: meta
 
             trace << span
@@ -26,6 +27,8 @@ module Mnemosyne
       end
     end
 
-    register('ActiveRecord::Base', 'active_record', ActiveRecord::Query::Probe.new)
+    register 'ActiveRecord::Base',
+      'active_record',
+      ActiveRecord::Query::Probe.new
   end
 end
