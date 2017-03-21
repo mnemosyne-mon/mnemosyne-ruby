@@ -8,7 +8,7 @@ module Mnemosyne
 
       config['application'] ||= app.class.name.underscore.titleize
 
-      # config['logger']  = Rails.logger
+      config['logger']  ||= Rails.logger
       config['enabled'] ||= config.key?('server')
 
       config = ::Mnemosyne::Config.new(config)
