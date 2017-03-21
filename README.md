@@ -4,18 +4,22 @@ The ruby client plugin for the Mnemosyne monitoring system. It extracts full app
 
 Currently supported probes:
 
-* ActionController: Process Action, Renderers
-* ActiveRecord: SQL query
+* Acfs: Remote calls including tracing middleware
+* ActionController: Processing actions and rendering
+* ActiveView: Template and Partial rendering
+* ActiveRecord: SQL query time
+* Grape: Endpoint run, filter and render times
+* Mnemosyne: Custom traces
 * Responders: render time
-* Custom instrumentation
-
+* Restify: Remote calls including tracing middleware
+* Rack: Middleware for request tracing
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mnemosyne'
+gem 'mnemosyne-ruby', '0.2.0'
 ```
 
 And then execute:
