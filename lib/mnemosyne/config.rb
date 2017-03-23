@@ -37,7 +37,7 @@ module Mnemosyne
     private
 
     def default_hostname
-      Socket.gethostbyname(Socket.gethostname).first
+      Socket.gethostname
     end
 
     def make_amqp_uri(amqp)
