@@ -19,13 +19,11 @@ module Mnemosyne
 
           request.headers['X-Mnemosyne-Transaction'] = trace.transaction
           request.headers['X-Mnemosyne-Origin'] = span.uuid
-        end
 
-        request.on_complete do |response, nxt|
-          begin
+          request.on_complete do |response, nxt|
             span.finish!
             trace << span
-          ensure
+
             nxt.call(response)
           end
         end
