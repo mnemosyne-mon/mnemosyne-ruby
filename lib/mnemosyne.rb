@@ -2,6 +2,7 @@
 require 'mnemosyne/version'
 
 require 'active_support'
+require 'active_support/core_ext/object/blank'
 require 'active_support/notifications'
 
 module Mnemosyne
@@ -12,7 +13,7 @@ module Mnemosyne
   require 'mnemosyne/span'
   require 'mnemosyne/trace'
 
-  require 'mnemosyne/config'
+  require 'mnemosyne/configuration'
   require 'mnemosyne/client'
   require 'mnemosyne/instrumenter'
 

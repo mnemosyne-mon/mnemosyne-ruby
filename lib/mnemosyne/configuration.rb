@@ -4,7 +4,7 @@ require 'uri'
 require 'cgi'
 
 module Mnemosyne
-  class Config
+  class Configuration
     attr_reader :application
     attr_reader :hostname
     attr_reader :platform
@@ -15,19 +15,19 @@ module Mnemosyne
 
     # rubocop:disable Metrics/AbcSize
     def initialize(config)
-      @platform    = config.fetch('platform', 'default').freeze
-      @application = config.fetch('application').freeze
+      @platform    = config.fetch('platform', 'default').to_s.strip.freeze
+      @application = config.fetch('application', nil).to_s.strip.freeze
       @enabled     = config.fetch('enabled', true)
-      @hostname    = config.fetch('hostname') { default_hostname }.freeze
-      @exchange    = config.fetch('exchange', 'mnemosyne').freeze
+      @hostname    = config.fetch('hostname') { default_hostname }.to_s.strip.freeze
+      @exchange    = config.fetch('exchange', 'mnemosyne').to_s.freeze
       @logger      = config.fetch('logger') { Logger.new($stdout) }
 
       server       = config.fetch('server', 'amqp://localhost')
       @amqp        = AMQ::Settings.configure(server).freeze
-      @server      = make_amqp_uri(@amqp).freeze
+      @server      = make_amqp_uri(@amqp).to_s.freeze
 
-      raise 'Application must be configured' unless application.present?
-      raise 'Hostname must be configured' unless hostname.present?
+      raise ArgumentError.new('Application is required') if application.blank?
+      raise ArgumentError.new('Hostname is required') if hostname.blank?
     end
 
     def enabled?

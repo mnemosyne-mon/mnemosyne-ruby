@@ -7,13 +7,12 @@ module Mnemosyne
       config = app.config_for('mnemosyne')
 
       config['application'] ||= app.class.name.underscore.titleize
-
-      config['logger'] ||= Rails.logger
+      config['logger']      ||= Rails.logger
 
       # If a server URL is configured, we assume that Mnemosyne should be enabled
       config['enabled'] = config.key?('server') unless config.key?('enabled')
 
-      config = ::Mnemosyne::Config.new(config)
+      config = ::Mnemosyne::Configuration.new(config)
 
       if config.enabled?
         ::Mnemosyne::Instrumenter.start!(config)
