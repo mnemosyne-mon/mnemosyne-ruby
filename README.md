@@ -19,7 +19,7 @@ Currently supported probes:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mnemosyne-ruby', '0.2.0'
+gem 'mnemosyne-ruby', '~> 1.0'
 ```
 
 And then execute:
