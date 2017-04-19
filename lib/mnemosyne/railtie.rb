@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails'
 
 module Mnemosyne
@@ -9,7 +10,7 @@ module Mnemosyne
       config['application'] ||= app.class.name.underscore.titleize
       config['logger']      ||= Rails.logger
 
-      # If a server URL is configured, we assume that Mnemosyne should be enabled
+      # If server is configured mnemosyne should be enabled by default
       config['enabled'] = config.key?('server') unless config.key?('enabled')
 
       config = ::Mnemosyne::Configuration.new(config)
