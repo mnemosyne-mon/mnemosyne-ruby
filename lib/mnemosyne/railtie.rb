@@ -8,8 +8,10 @@ module Mnemosyne
 
       config['application'] ||= app.class.name.underscore.titleize
 
-      config['logger']  ||= Rails.logger
-      config['enabled'] ||= config.key?('server')
+      config['logger'] ||= Rails.logger
+
+      # If a server URL is configured, we assume that Mnemosyne should be enabled
+      config['enabled'] = config.key?('server') unless config.key?('enabled')
 
       config = ::Mnemosyne::Config.new(config)
 
