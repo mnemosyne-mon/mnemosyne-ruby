@@ -35,8 +35,9 @@ module Mnemosyne
 
       def extract_meta(request)
         {
+          url: request.url,
           method: request.method,
-          url: request.url
+          params: request.params
         }
       end
     end
