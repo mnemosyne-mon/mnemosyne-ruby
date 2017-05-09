@@ -3,12 +3,9 @@
 module Mnemosyne
   module Middleware
     class Sidekiq
-      def call(worker, job, queue) # rubocop:disable MethodLength, AbcSize
-        mnemosyne = job.delete('mnemosyne')
-        mnemosyne = {} unless mnemosyne.is_a?(Hash)
-
-        origin      = mnemosyne.fetch('origin', false)
-        transaction = mnemosyne.fetch('transaction') { ::SecureRandom.uuid }
+      def call(worker, job, queue) # rubocop:disable MethodLength
+        origin      = job.delete('mnemosyne.origin') { false }
+        transaction = job.delete('mnemosyne.transaction') { uuid }
 
         trace = ::Mnemosyne::Instrumenter.trace 'app.job.perform.sidekiq',
           transaction: transaction,
@@ -26,6 +23,12 @@ module Mnemosyne
           trace.submit
           trace.release
         end
+      end
+
+      private
+
+      def uuid
+        ::SecureRandom.uuid
       end
     end
   end
