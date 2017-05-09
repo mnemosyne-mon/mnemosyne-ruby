@@ -13,7 +13,6 @@ module Mnemosyne
             ::ActionController::Base.prepend Instrumentation
           end
 
-          # rubocop:disable Metrics/ParameterLists
           def call(trace, _name, start, finish, _id, _payload)
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)

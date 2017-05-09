@@ -3,7 +3,7 @@
 module Mnemosyne
   module Middleware
     module Restify
-      def call(request) # rubocop:disable MethodLength
+      def call(request)
         if (trace = ::Mnemosyne::Instrumenter.current_trace)
           meta = {url: request.uri, method: request.method}
 

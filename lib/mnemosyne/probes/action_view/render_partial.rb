@@ -7,7 +7,6 @@ module Mnemosyne
         class Probe < ::Mnemosyne::Probe
           subscribe 'render_partial.action_view'
 
-          # rubocop:disable Metrics/ParameterLists
           def call(trace, _name, start, finish, _id, payload)
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)

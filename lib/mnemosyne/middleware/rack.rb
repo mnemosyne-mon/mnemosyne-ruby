@@ -54,7 +54,7 @@ module Mnemosyne
         @app = app
       end
 
-      def call(env) # rubocop:disable MethodLength
+      def call(env)
         origin      = env.fetch('HTTP_X_MNEMOSYNE_ORIGIN', false)
         transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') { uuid }
 

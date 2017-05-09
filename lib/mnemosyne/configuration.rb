@@ -14,7 +14,7 @@ module Mnemosyne
     attr_reader :logger
     attr_reader :server
 
-    def initialize(config) # rubocop:disable AbcSize, MethodLength
+    def initialize(config) # rubocop:disable AbcSize
       @platform    = config.fetch('platform', 'default').to_s.strip.freeze
       @application = config.fetch('application', nil).to_s.strip.freeze
       @enabled     = config.fetch('enabled', true)

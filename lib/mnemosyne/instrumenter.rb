@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'thread'
 
 module Mnemosyne
@@ -27,7 +28,7 @@ module Mnemosyne
       Thread.current[IDENT] = trace
     end
 
-    def trace(name, **kwargs) # rubocop:disable MethodLength
+    def trace(name, **kwargs)
       if (trace = current_trace)
         return yield trace if block_given?
         return trace
@@ -69,7 +70,7 @@ module Mnemosyne
     class << self
       attr_reader :instance
 
-      def start!(config = nil) # rubocop:disable MethodLength
+      def start!(config = nil)
         return @instance if @instance
 
         MUTEX.synchronize do

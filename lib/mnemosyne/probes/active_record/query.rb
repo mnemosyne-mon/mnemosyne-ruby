@@ -7,7 +7,6 @@ module Mnemosyne
         class Probe < ::Mnemosyne::Probe
           subscribe 'sql.active_record'
 
-          # rubocop:disable Metrics/ParameterLists
           def call(trace, _name, start, finish, _id, payload)
             return if payload[:name] == 'SCHEMA' || payload[:name] == 'CACHE'
 

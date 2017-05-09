@@ -3,7 +3,7 @@
 module Mnemosyne
   module Middleware
     class Sidekiq
-      def call(worker, job, queue) # rubocop:disable MethodLength
+      def call(worker, job, queue)
         origin      = job.delete('mnemosyne.origin') { false }
         transaction = job.delete('mnemosyne.transaction') { uuid }
 

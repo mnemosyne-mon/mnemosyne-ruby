@@ -46,5 +46,15 @@ Metrics/LineLength:
   Exclude:
     - 'mnemosyne.gemspec'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
