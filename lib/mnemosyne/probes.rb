@@ -25,7 +25,8 @@ module Mnemosyne
 
     class << self
       def class_available?(class_name)
-        Module.const_get(class_name).is_a? Class
+        Module.const_get(class_name).is_a?(Class) ||
+          Module.const_get(class_name).is_a?(Module)
       rescue NameError
         false
       end

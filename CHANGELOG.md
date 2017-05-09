@@ -1,5 +1,10 @@
 # Changelog
 
+## next
+
+* Add sidekiq server instrumentation
+* Add acfs request parameter tracing
+
 ## 1.0.1
 
 * Fix issue with `enabled` configuration flag (#1)

@@ -34,6 +34,7 @@ module Mnemosyne
     require 'mnemosyne/probes/grape/endpoint_run_filters'
     require 'mnemosyne/probes/responder/respond'
     require 'mnemosyne/probes/restify/base'
+    require 'mnemosyne/probes/sidekiq/server'
   end
 
   module Middleware
