@@ -18,9 +18,11 @@ module Mnemosyne
       @platform    = config.fetch('platform', 'default').to_s.strip.freeze
       @application = config.fetch('application', nil).to_s.strip.freeze
       @enabled     = config.fetch('enabled', true)
-      @hostname    = config.fetch('hostname') { hostname }.to_s.strip.freeze
       @exchange    = config.fetch('exchange', 'mnemosyne').to_s.freeze
-      @logger      = config.fetch('logger') { Logger.new($stdout) }
+      @logger      = config.fetch('logger') { Logger.new(STDOUT) }
+
+      hostname  = config.fetch('hostname') { default_hostname }
+      @hostname = hostname.to_s.strip.freeze
 
       server       = config.fetch('server', 'amqp://localhost')
       @amqp        = AMQ::Settings.configure(server).freeze
@@ -36,7 +38,7 @@ module Mnemosyne
 
     private
 
-    def hostname
+    def default_hostname
       Socket.gethostname
     end
 
