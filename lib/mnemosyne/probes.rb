@@ -78,12 +78,9 @@ module Kernel
   def require(name)
     ret = require_without_mn(name)
 
-    # rubocop:disable Lint/RescueException
     begin
       ::Mnemosyne::Probes.require_hook(name)
-
-      # rubocop:disable Lint/HandleExceptions
-    rescue Exception
+    rescue Exception # rubocop:disable RescueException, HandleExceptions
     end
 
     ret

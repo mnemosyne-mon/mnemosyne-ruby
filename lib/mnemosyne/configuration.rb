@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'socket'
 require 'uri'
 require 'cgi'
@@ -13,12 +14,11 @@ module Mnemosyne
     attr_reader :logger
     attr_reader :server
 
-    # rubocop:disable Metrics/AbcSize
-    def initialize(config)
+    def initialize(config) # rubocop:disable AbcSize, MethodLength
       @platform    = config.fetch('platform', 'default').to_s.strip.freeze
       @application = config.fetch('application', nil).to_s.strip.freeze
       @enabled     = config.fetch('enabled', true)
-      @hostname    = config.fetch('hostname') { default_hostname }.to_s.strip.freeze
+      @hostname    = config.fetch('hostname') { hostname }.to_s.strip.freeze
       @exchange    = config.fetch('exchange', 'mnemosyne').to_s.freeze
       @logger      = config.fetch('logger') { Logger.new($stdout) }
 
@@ -36,11 +36,11 @@ module Mnemosyne
 
     private
 
-    def default_hostname
+    def hostname
       Socket.gethostname
     end
 
-    def make_amqp_uri(amqp)
+    def make_amqp_uri(amqp) # rubocop:disable AbcSize
       uri = URI('')
 
       uri.scheme = amqp[:scheme]

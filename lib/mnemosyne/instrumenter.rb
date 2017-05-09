@@ -27,8 +27,7 @@ module Mnemosyne
       Thread.current[IDENT] = trace
     end
 
-    # rubocop:disable Metrics/MethodLength
-    def trace(name, **kwargs)
+    def trace(name, **kwargs) # rubocop:disable MethodLength
       if (trace = current_trace)
         return yield trace if block_given?
         return trace
@@ -50,7 +49,7 @@ module Mnemosyne
       blob = {
         hostname: @config.hostname,
         platform: @config.platform,
-        application: @config.application,
+        application: @config.application
       }
 
       # TODO: nest
@@ -70,7 +69,7 @@ module Mnemosyne
     class << self
       attr_reader :instance
 
-      def start!(config = nil)
+      def start!(config = nil) # rubocop:disable MethodLength
         return @instance if @instance
 
         MUTEX.synchronize do

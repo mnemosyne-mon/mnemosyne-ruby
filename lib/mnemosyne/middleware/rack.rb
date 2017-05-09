@@ -71,7 +71,6 @@ module Mnemosyne
         else
           @app.call env
         end
-
       rescue Exception # rubocop:disable RescueException
         trace.submit if trace
         raise

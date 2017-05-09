@@ -2,8 +2,7 @@
 
 module Mnemosyne
   class Probe
-    # rubocop:disable Metrics/MethodLength
-    def install
+    def install # rubocop:disable Metrics/MethodLength
       setup
 
       self.class.subscriptions.each do |subscribe|

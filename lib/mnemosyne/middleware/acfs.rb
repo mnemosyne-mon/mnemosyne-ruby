@@ -7,8 +7,7 @@ module Mnemosyne
         @app = app
       end
 
-      # rubocop:disable Metrics/MethodLength
-      def call(request)
+      def call(request) # rubocop:disable MethodLength
         trace = ::Mnemosyne::Instrumenter.current_trace
 
         if trace
