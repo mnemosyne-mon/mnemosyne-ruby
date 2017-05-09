@@ -54,12 +54,9 @@ module Mnemosyne
         @app = app
       end
 
-      # rubocop:disable Metrics/MethodLength
-      def call(env)
+      def call(env) # rubocop:disable MethodLength
         origin      = env.fetch('HTTP_X_MNEMOSYNE_ORIGIN', false)
-        transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') do
-          ::SecureRandom.uuid
-        end
+        transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') { uuid }
 
         trace = ::Mnemosyne::Instrumenter.trace 'app.web.request.rack',
           transaction: transaction,
@@ -75,8 +72,7 @@ module Mnemosyne
           @app.call env
         end
 
-      # rubocop:disable Lint/RescueException
-      rescue Exception
+      rescue Exception # rubocop:disable RescueException
         trace.submit if trace
         raise
       ensure
@@ -86,7 +82,7 @@ module Mnemosyne
 
     private
 
-    def _uuid
+    def uuid
       ::SecureRandom.uuid
     end
   end
