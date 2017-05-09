@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Mnemosyne::Configuration do
+RSpec.describe Mnemosyne::Configuration do
   let(:params) { {'application' => 'abc'} }
   let(:config) { described_class.new(params) }
   subject { config }

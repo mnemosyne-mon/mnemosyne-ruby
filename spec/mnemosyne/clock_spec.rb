@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Mnemosyne::Clock do
+RSpec.describe Mnemosyne::Clock do
   describe '.tick' do
     it 'returns nsec timestamp' do
       Timecop.freeze do
