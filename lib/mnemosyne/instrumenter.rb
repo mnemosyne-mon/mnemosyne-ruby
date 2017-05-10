@@ -46,18 +46,9 @@ module Mnemosyne
     end
 
     def submit(trace)
-      blob = {
-        hostname: @config.hostname,
-        platform: @config.platform,
-        application: @config.application
-      }
-
-      # TODO: nest
-      blob.merge! trace.serialize
-
       logger.debug { "Submit trace #{trace.uuid}" }
 
-      @client.send 'mnemosyne.trace', blob
+      @client.call trace
     end
 
     def release(trace)

@@ -30,12 +30,19 @@ module Mnemosyne
       @exchange ||= channel.topic @config.exchange, durable: true
     end
 
-    def send(key, data)
-      blob = JSON.dump data
+    def call(trace)
+      message = {
+        hostname: @config.hostname,
+        platform: @config.platform,
+        application: @config.application
+      }
 
-      exchange.publish blob,
-        routing_key: key,
+      # TODO: nest
+      message.merge! trace.serialize
+
+      exchange.publish JSON.dump(message),
         persistent: true,
+        routing_key: 'mnemosyne.trace',
         content_type: 'application/json'
     end
 
