@@ -14,6 +14,8 @@ module Mnemosyne
       @config = config
       @logger = logger
 
+      ::Mnemosyne::Probes.activate!
+
       logger.info 'Mnemosyne instrumenter started.'
     end
 

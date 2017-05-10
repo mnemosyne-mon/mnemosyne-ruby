@@ -7,7 +7,6 @@ RSpec.describe Mnemosyne::Probes::Restify::Base do
   it 'creates span' do
     trace = with_tracing do
       Restify.new('http://google.com').get.value!
-      puts('abc')
     end
 
     expect(trace.span.size).to eq 1

@@ -17,6 +17,7 @@ module Mnemosyne
   require 'mnemosyne/client'
   require 'mnemosyne/instrumenter'
 
+  require 'mnemosyne/registry'
   require 'mnemosyne/probe'
   require 'mnemosyne/probes'
 
