@@ -13,11 +13,11 @@ module Mnemosyne
           request.headers['X-Mnemosyne-Transaction'] = trace.transaction
           request.headers['X-Mnemosyne-Origin'] = span.uuid
 
-          super.then do |response|
-            span.finish!
-            trace << span
-
-            response
+          super.tap do |x|
+            x.add_observer do |_, _response, _err|
+              span.finish!
+              trace << span
+            end
           end
         else
           super
