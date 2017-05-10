@@ -9,3 +9,7 @@ group :development, :test do
   gem 'pry', require: false
   gem 'pry-byebug', require: false
 end
+
+group :test do
+  gem 'restify', require: false
+end

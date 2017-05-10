@@ -9,13 +9,10 @@ module Mnemosyne
 
     attr_reader :logger
 
-    def initialize(config)
+    def initialize(config:, client:, logger:)
+      @client = client
       @config = config
-
-      raise 'Config required!' unless @config
-
-      @logger = config.logger
-      @client = Client.new(config)
+      @logger = logger
 
       logger.info 'Mnemosyne instrumenter started.'
     end
@@ -76,7 +73,10 @@ module Mnemosyne
         MUTEX.synchronize do
           return @instance if @instance
 
-          @instance = new(config)
+          client = Client.new(config)
+          logger = config.logger
+
+          @instance = new(config: config, client: client, logger: logger)
         end
       rescue => err
         message = "Unable to start instrumenter: #{err}"
@@ -88,6 +88,15 @@ module Mnemosyne
         end
 
         raise
+      end
+
+      def with(instrumenter)
+        old = instance
+        @instance = instrumenter
+
+        yield(instrumenter)
+      ensure
+        @instance = old
       end
 
       def trace(*args)

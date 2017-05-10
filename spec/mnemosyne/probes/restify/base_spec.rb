@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+require 'spec_helper'
+require 'restify'
+
+RSpec.describe Mnemosyne::Probes::Restify::Base do
+  it 'creates span' do
+    trace = with_tracing do
+      Restify.new('http://google.com').get.value!
+      puts('abc')
+    end
+
+    expect(trace.span.size).to eq 1
+
+    span = trace.span.first
+
+    expect(span.name).to eq 'external.http.restify'
+    expect(span.meta[:url]).to eq 'http://google.com'
+    expect(span.meta[:method]).to eq :get
+  end
+end
