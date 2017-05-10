@@ -7,13 +7,17 @@ module Mnemosyne
         origin      = job.delete('mnemosyne.origin') { false }
         transaction = job.delete('mnemosyne.transaction') { uuid }
 
+        meta = {
+          raw: job,
+          queue: queue,
+          worker: worker.class.name,
+          arguments: job['args']
+        }
+
         trace = ::Mnemosyne::Instrumenter.trace 'app.job.perform.sidekiq',
           transaction: transaction,
-          origin: origin
-
-        trace.meta[:worker] = worker.class.name
-        trace.meta[:queue] = queue
-        trace.meta[:job] = job
+          origin: origin,
+          meta: meta
 
         trace.start! if trace
 

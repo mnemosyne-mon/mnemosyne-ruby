@@ -4,8 +4,8 @@ module Mnemosyne
   class Trace < Span
     attr_reader :uuid, :transaction, :origin, :span
 
-    def initialize(instrumenter, name, transaction: nil, origin: nil)
-      super name
+    def initialize(instrumenter, name, transaction: nil, origin: nil, **kwargs)
+      super(name, **kwargs)
 
       @uuid = ::SecureRandom.uuid
       @span = []
