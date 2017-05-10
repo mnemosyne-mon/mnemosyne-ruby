@@ -2,9 +2,10 @@
 
 module Mnemosyne
   class Span
-    attr_reader :uuid, :name, :start, :finish, :meta
+    attr_reader :uuid, :name, :start, :finish, :meta, :type
 
     def initialize(name, start: false, finish: false, meta: {})
+      @type = nil
       @name = name
       @meta = meta
       @uuid = ::SecureRandom.uuid
@@ -14,12 +15,23 @@ module Mnemosyne
     end
 
     def start!
+      raise 'Already started' if @start
+
       @start = ::Mnemosyne::Clock.tick
+
       self
     end
 
-    def finish!
+    def finish!(oneshot: false)
+      raise 'Already finished' if @finish
+
       @finish = ::Mnemosyne::Clock.tick
+
+      if oneshot
+        @start = @finish unless @start
+        @type  = :oneshot
+      end
+
       self
     end
 
@@ -27,6 +39,7 @@ module Mnemosyne
       {
         uuid: uuid,
         name: name,
+        type: type,
         start: start,
         stop: finish,
         meta: meta
