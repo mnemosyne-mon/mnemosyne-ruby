@@ -12,4 +12,5 @@ end
 
 group :test do
   gem 'restify', require: false
+  gem 'sidekiq', require: false
 end

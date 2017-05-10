@@ -15,27 +15,27 @@ class NullClient
 end
 
 module TracingHelper
-  def with_tracing(name: 'test', **kwargs)
-    client = NullClient.new
+  def with_instrumentation(**kwargs, &block)
+    traces = []
+    client = ->(trace) { traces << trace }
     logger = ::Logger.new(STDOUT)
     config = ::Mnemosyne::Configuration.new \
-      'application' => 'test'
-
-    trace = nil
+      'application' => kwargs.delete(:application) { 'test' }
 
     instrumenter = ::Mnemosyne::Instrumenter.new \
       config: config,
       logger: logger,
       client: client
 
-    ::Mnemosyne::Instrumenter.with(instrumenter) do |i|
-      i.trace(name, **kwargs) do |t|
-        trace = t
-        yield(t)
-      end
-    end
+    ::Mnemosyne::Instrumenter.with(instrumenter, &block)
 
-    trace
+    traces.first
+  end
+
+  def with_trace(name: 'mnemosyne.test', **kwargs, &block)
+    with_instrumentation(**kwargs) do |instrumenter|
+      instrumenter.trace(name, **kwargs, &block)
+    end
   end
 end
 
