@@ -1,7 +1,9 @@
 # Changelog
 
-## next
+## 1.1.0
 
+* Add msgr server & client instrumentation
+* Add sidekiq client instrumentation
 * Add sidekiq server instrumentation
 * Add acfs request parameter tracing
 
