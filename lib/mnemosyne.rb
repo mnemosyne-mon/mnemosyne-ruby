@@ -33,6 +33,7 @@ module Mnemosyne
     require 'mnemosyne/probes/grape/endpoint_render'
     require 'mnemosyne/probes/grape/endpoint_run'
     require 'mnemosyne/probes/grape/endpoint_run_filters'
+    require 'mnemosyne/probes/msgr/client'
     require 'mnemosyne/probes/msgr/consumer'
     require 'mnemosyne/probes/responder/respond'
     require 'mnemosyne/probes/restify/base'

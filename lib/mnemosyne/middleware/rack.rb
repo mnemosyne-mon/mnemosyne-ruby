@@ -56,7 +56,9 @@ module Mnemosyne
 
       def call(env)
         origin      = env.fetch('HTTP_X_MNEMOSYNE_ORIGIN', false)
-        transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') { uuid }
+        transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') do
+          ::SecureRandom.uuid
+        end
 
         trace = ::Mnemosyne::Instrumenter.trace 'app.web.request.rack',
           transaction: transaction,
@@ -77,12 +79,6 @@ module Mnemosyne
       ensure
         trace.release if trace
       end
-    end
-
-    private
-
-    def uuid
-      ::SecureRandom.uuid
     end
   end
 end
