@@ -20,7 +20,7 @@ end
 
 RSpec.describe Mnemosyne::Probes::Sidekiq::Client do
   it 'creates span' do
-    trace = with_tracing do
+    trace = with_trace do
       HardWorker.perform_async('test')
     end
 

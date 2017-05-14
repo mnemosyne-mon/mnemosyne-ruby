@@ -5,7 +5,7 @@ require 'restify'
 
 RSpec.describe Mnemosyne::Probes::Restify::Base do
   it 'creates span' do
-    trace = with_tracing do
+    trace = with_trace do
       Restify.new('http://google.com').get.value!
     end
 
