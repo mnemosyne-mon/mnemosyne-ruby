@@ -42,7 +42,7 @@ module Mnemosyne
 
       exchange.publish JSON.dump(message),
         persistent: true,
-        routing_key: 'mnemosyne.trace',
+        routing_key: "mnemosyne.trace.#{@config.platform}",
         content_type: 'application/json'
     end
 
