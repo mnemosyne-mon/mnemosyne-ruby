@@ -1,22 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'sidekiq'
-require 'sidekiq/testing'
-
-require 'mnemosyne/middleware/sidekiq'
-
-Sidekiq::Testing.server_middleware do |chain|
-  chain.add ::Mnemosyne::Middleware::Sidekiq
-end
-
-class HardWorker
-  include Sidekiq::Worker
-
-  def perform(message)
-    # noop
-  end
-end
+require 'support/sidekiq'
 
 RSpec.describe Mnemosyne::Probes::Sidekiq::Server do
   it 'creates a trace' do
