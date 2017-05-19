@@ -28,6 +28,18 @@ module Mnemosyne
       @amqp        = AMQ::Settings.configure(server).freeze
       @server      = make_amqp_uri(@amqp).to_s.freeze
 
+      raise ArgumentError.new 'Platform is required' if platform.blank?
+
+      if @platform =~ /[^a-zA-Z0-9\-]/
+        raise ArgumentError.new \
+          'Platform may only contain alphanumeric characters'
+      end
+
+      unless @platform =~ /\A[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*\z/
+        raise ArgumentError.new \
+          'Platform must start and end with a alphanumeric characters'
+      end
+
       raise ArgumentError.new('Application is required') if application.blank?
       raise ArgumentError.new('Hostname is required') if hostname.blank?
     end

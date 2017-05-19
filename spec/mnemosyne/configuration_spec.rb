@@ -38,6 +38,35 @@ RSpec.describe Mnemosyne::Configuration do
       let(:params) { super().merge 'hostname' => " \t\n" }
       it { is_expected.to raise_error ArgumentError, 'Hostname is required' }
     end
+
+    context 'with invalid platform (I)' do
+      let(:params) { {'platform' => 'helö'} }
+      it do
+        is_expected.to raise_error ArgumentError, \
+          'Platform may only contain alphanumeric characters'
+      end
+    end
+
+    context 'with invalid platform (II)' do
+      let(:params) { {'platform' => '-abc'} }
+      it do
+        is_expected.to raise_error ArgumentError, \
+          'Platform must start and end with a alphanumeric characters'
+      end
+    end
+
+    context 'with invalid platform (III)' do
+      let(:params) { {'platform' => 'a-b-c-'} }
+      it do
+        is_expected.to raise_error ArgumentError, \
+          'Platform must start and end with a alphanumeric characters'
+      end
+    end
+
+    context 'with blank platform' do
+      let(:params) { {'platform' => ''} }
+      it { is_expected.to raise_error ArgumentError, 'Platform is required' }
+    end
   end
 
   describe '#platform' do
@@ -45,9 +74,19 @@ RSpec.describe Mnemosyne::Configuration do
 
     it { is_expected.to eq 'default' }
 
-    context 'when configured' do
+    context 'with valid value (I)' do
+      let(:params) { super().merge 'platform' => 'platform' }
+      it { is_expected.to eq 'platform' }
+    end
+
+    context 'with valid value (II)' do
       let(:params) { super().merge 'platform' => 'platform-id' }
       it { is_expected.to eq 'platform-id' }
+    end
+
+    context 'with valid value (III)' do
+      let(:params) { super().merge 'platform' => 'platform-id-2' }
+      it { is_expected.to eq 'platform-id-2' }
     end
   end
 
