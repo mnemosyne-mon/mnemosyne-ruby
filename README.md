@@ -12,6 +12,7 @@ Currently supported probes:
 * Mnemosyne: Custom traces
 * Responders: render time
 * Restify: Remote calls including tracing middleware
+* Sidekiq: Client and server tracing
 * Rack: Middleware for request tracing
 
 ## Installation
