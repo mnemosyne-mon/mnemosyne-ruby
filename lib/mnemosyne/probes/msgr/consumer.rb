@@ -16,10 +16,11 @@ module Mnemosyne
           def dispatch(message) # rubocop:disable AbcSize
             route = message.route
             metadata = message.metadata
+            headers = metadata.headers || {}
             delivery_info = message.delivery_info
 
-            origin      = metadata.headers.delete('mnemosyne.origin')
-            transaction = metadata.headers.delete('mnemosyne.transaction') do
+            origin      = headers.delete('mnemosyne.origin')
+            transaction = headers.delete('mnemosyne.transaction') do
               ::SecureRandom.uuid
             end
 
