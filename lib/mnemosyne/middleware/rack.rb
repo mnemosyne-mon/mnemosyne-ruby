@@ -54,15 +54,28 @@ module Mnemosyne
         @app = app
       end
 
-      def call(env)
+      def call(env) # rubocop:disable AbcSize
         origin      = env.fetch('HTTP_X_MNEMOSYNE_ORIGIN', false)
         transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') do
           ::SecureRandom.uuid
         end
 
+        meta = {
+          method: env['REQUEST_METHOD'],
+          path: env['REQUEST_PATH'],
+          query: env['QUERY_STRING'],
+          protocol: env['SERVER_PROTOCOL'],
+          headers: {
+            'Accept': env['HTTP_ACCEPT'],
+            'Host': env['HTTP_HOST'],
+            'User-Agent': env['HTTP_USER_AGENT']
+          }
+        }
+
         trace = ::Mnemosyne::Instrumenter.trace 'app.web.request.rack',
           transaction: transaction,
-          origin: origin
+          origin: origin,
+          meta: meta
 
         if trace
           trace.start!
