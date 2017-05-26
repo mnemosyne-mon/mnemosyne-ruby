@@ -5,7 +5,7 @@ module Mnemosyne
     MAJOR = 1
     MINOR = 1
     PATCH = 0
-    STAGE = :rc1
+    STAGE = nil
 
     STRING = [MAJOR, MINOR, PATCH, STAGE].reject(&:nil?).join('.')
 

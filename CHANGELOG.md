@@ -2,6 +2,7 @@
 
 ## 1.1.0
 
+* Add metadata to rack instrumentation
 * Add msgr server & client instrumentation
 * Add sidekiq client instrumentation
 * Add sidekiq server instrumentation
