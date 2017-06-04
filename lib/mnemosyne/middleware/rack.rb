@@ -60,27 +60,19 @@ module Mnemosyne
           ::SecureRandom.uuid
         end
 
-        meta = {
-          method: env['REQUEST_METHOD'],
-          path: env['REQUEST_PATH'],
-          query: env['QUERY_STRING'],
-          protocol: env['SERVER_PROTOCOL'],
-          headers: {
-            'Accept': env['HTTP_ACCEPT'],
-            'Host': env['HTTP_HOST'],
-            'User-Agent': env['HTTP_USER_AGENT']
-          }
-        }
-
         trace = ::Mnemosyne::Instrumenter.trace 'app.web.request.rack',
           transaction: transaction,
-          origin: origin,
-          meta: meta
+          origin: origin
 
         if trace
           trace.start!
 
+          scan_request(trace, env)
+
           response = @app.call env
+
+          scan_response(trace, response)
+
           response[2] = Proxy.new(response[2]) { trace.submit }
           response
         else
@@ -91,6 +83,30 @@ module Mnemosyne
         raise
       ensure
         trace.release if trace
+      end
+
+      private
+
+      def scan_request(trace, env)
+        trace.meta[:method] = env['REQUEST_METHOD']
+        trace.meta[:path] = env['REQUEST_PATH']
+        trace.meta[:query] = env['QUERY_STRING']
+        trace.meta[:protocol] = env['SERVER_PROTOCOL']
+        trace.meta[:headers] = {
+          'Accept': env['HTTP_ACCEPT'],
+          'Host': env['HTTP_HOST'],
+          'User-Agent': env['HTTP_USER_AGENT']
+        }
+      end
+
+      def scan_response(trace, response)
+        status, headers, = response
+
+        trace.meta[:status] = status
+
+        return unless headers
+
+        trace.meta[:content_type] = headers['Content-Type']
       end
     end
   end
