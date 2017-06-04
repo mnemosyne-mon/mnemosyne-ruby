@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+* Collect response metadata in rack instrumentation
+
 ## 1.1.0
 
 * Add metadata to rack instrumentation
