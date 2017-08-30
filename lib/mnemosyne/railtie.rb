@@ -7,8 +7,9 @@ module Mnemosyne
     initializer 'mnemosyne.initialize' do |app|
       config = app.config_for('mnemosyne')
 
+      ::Mnemosyne::Logging.logger = Rails.logger
+
       config['application'] ||= app.class.name.underscore.titleize
-      config['logger']      ||= Rails.logger
 
       # If server is configured mnemosyne should be enabled by default
       config['enabled'] = config.key?('server') unless config.key?('enabled')
@@ -20,7 +21,7 @@ module Mnemosyne
 
         app.middleware.insert 0, ::Mnemosyne::Middleware::Rack
       else
-        config.logger.warn '[MNEMOSYNE] Instrumenter not enabled.'
+        Rails.logger.warn(Mnemosyne) { 'Instrumentation disabled' }
       end
     end
   end

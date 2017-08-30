@@ -11,21 +11,19 @@ if ENV['DEBUG']
   require 'pry-byebug'
 end
 
-class NullClient
-  def send(*args); end
+::Mnemosyne::Logging.logger = ::Logger.new(STDOUT).tap do |logger|
+  logger.level = ::Logger::DEBUG
 end
 
 module TracingHelper
   def with_instrumentation(**kwargs, &block)
     traces = []
     client = ->(trace) { traces << trace }
-    logger = ::Logger.new(STDOUT)
     config = ::Mnemosyne::Configuration.new \
       'application' => kwargs.delete(:application) { 'test' }
 
     instrumenter = ::Mnemosyne::Instrumenter.new \
       config: config,
-      logger: logger,
       client: client
 
     ::Mnemosyne::Instrumenter.with(instrumenter, &block)

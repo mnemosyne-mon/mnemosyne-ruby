@@ -7,16 +7,15 @@ module Mnemosyne
     IDENT = :__mnemosyne_current_trace
     MUTEX = Mutex.new
 
-    attr_reader :logger
+    include ::Mnemosyne::Logging
 
-    def initialize(config:, client:, logger:)
+    def initialize(config:, client:)
       @client = client
       @config = config
-      @logger = logger
 
       ::Mnemosyne::Probes.activate!
 
-      logger.info 'Mnemosyne instrumenter started.'
+      logger.debug(Mnemosyne) { 'Instrumenter started' }
     end
 
     def current_trace
@@ -46,7 +45,7 @@ module Mnemosyne
     end
 
     def submit(trace)
-      logger.debug { "Submit trace #{trace.uuid}" }
+      logger.debug(Mnemosyne) { "Submit trace #{trace.uuid}" }
 
       @client.call trace
     end
@@ -67,17 +66,12 @@ module Mnemosyne
           return @instance if @instance
 
           client = Client.new(config)
-          logger = config.logger
 
-          @instance = new(config: config, client: client, logger: logger)
+          @instance = new(config: config, client: client)
         end
       rescue => err
-        message = "Unable to start instrumenter: #{err}"
-
-        if config && config.respond_to?(:logger)
-          config.logger.warn message
-        else
-          ::Kernel.warn message
+        ::Mnemosyne::Logging.logger.warn(Mnemosyne) do
+          "Unable to start instrumenter: #{err}"
         end
 
         raise
@@ -95,14 +89,6 @@ module Mnemosyne
       def trace(*args)
         return unless (instrumenter = instance)
         instrumenter.trace(*args)
-      end
-
-      def logger
-        if (instrumenter = instance)
-          instrumenter.logger
-        else
-          @logger ||= Logger.new($stdout)
-        end
       end
 
       def current_trace

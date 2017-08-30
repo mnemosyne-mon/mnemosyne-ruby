@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'mnemosyne/version'
 
 require 'active_support'
@@ -6,6 +7,8 @@ require 'active_support/core_ext/object/blank'
 require 'active_support/notifications'
 
 module Mnemosyne
+  require 'mnemosyne/logging'
+
   require 'mnemosyne/global'
   extend Global
 

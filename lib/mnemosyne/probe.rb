@@ -2,6 +2,8 @@
 
 module Mnemosyne
   class Probe
+    include ::Mnemosyne::Logging
+
     def install
       setup
 
@@ -14,9 +16,7 @@ module Mnemosyne
         end
       end
 
-      ::Mnemosyne::Instrumenter.logger.debug do
-        "Installed probe #{self.class.name}"
-      end
+      logger.debug(Mnemosyne) { "Installed probe #{self.class.name}" }
     end
 
     def setup

@@ -11,7 +11,6 @@ module Mnemosyne
     attr_reader :platform
     attr_reader :amqp
     attr_reader :exchange
-    attr_reader :logger
     attr_reader :server
 
     def initialize(config) # rubocop:disable AbcSize
@@ -19,7 +18,6 @@ module Mnemosyne
       @application = config.fetch('application', nil).to_s.strip.freeze
       @enabled     = config.fetch('enabled', true)
       @exchange    = config.fetch('exchange', 'mnemosyne').to_s.freeze
-      @logger      = config.fetch('logger') { Logger.new(STDOUT) }
 
       hostname  = config.fetch('hostname') { default_hostname }
       @hostname = hostname.to_s.strip.freeze
