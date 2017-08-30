@@ -53,6 +53,12 @@ module Mnemosyne
       activate(registration) if activated?
     end
 
+    def required(path)
+      return unless activated?
+      return unless (set = monitor.delete(path))
+      set.each(&method(:activate))
+    end
+
     private
 
     attr_reader :monitor
@@ -67,19 +73,16 @@ module Mnemosyne
 
     class Monitor
       def initialize
-        @requirements = {}
+        @requirements = Hash.new {|h, k| h[k] = Set.new }
+      end
+
+      def delete(path)
+        @requirements.delete(path)
       end
 
       def <<(registration)
         registration.require_paths.each do |path|
-          @requirements[path] ||= []
           @requirements[path] << registration
-        end
-      end
-
-      def delete(registration)
-        registration.require_paths.each do |path|
-          @requirements[path].delete(registration)
         end
       end
     end

@@ -11,6 +11,10 @@ module Mnemosyne
         registry.activate!
       end
 
+      def required(path)
+        registry.required(path)
+      end
+
       private
 
       def registry
@@ -27,7 +31,7 @@ module Kernel
     ret = require_without_mn(name)
 
     begin
-      ::Mnemosyne::Probes.registry.required(name)
+      ::Mnemosyne::Probes.required(name)
     rescue Exception # rubocop:disable RescueException, HandleExceptions
     end
 
