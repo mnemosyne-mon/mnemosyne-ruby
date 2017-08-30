@@ -2,13 +2,13 @@
 
 require 'spec_helper'
 require 'webmock/rspec'
-require 'restify'
 
 RSpec.describe Mnemosyne::Probes::Restify::Base do
   it 'creates span' do
     trace = with_trace do
       stub_request(:any, 'google.com')
 
+      require 'restify'
       Restify.new('http://google.com').get.value!
     end
 
