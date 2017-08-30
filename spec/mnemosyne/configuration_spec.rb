@@ -139,7 +139,10 @@ RSpec.describe Mnemosyne::Configuration do
     end
 
     context 'when configured' do
-      let(:params) { super().merge 'server' => 'amqps://user:pwd@server:1234/vhost' }
+      let(:params) do
+        super().merge 'server' => 'amqps://user:pwd@server:1234/vhost'
+      end
+
       it do
         is_expected.to include \
           ssl: 0,
@@ -161,7 +164,10 @@ RSpec.describe Mnemosyne::Configuration do
     end
 
     context 'when configured' do
-      let(:params) { super().merge 'server' => 'amqps://user:pwd@server:1234/vhost' }
+      let(:params) do
+        super().merge 'server' => 'amqps://user:pwd@server:1234/vhost'
+      end
+
       it 'strips credentials' do
         is_expected.to eq 'amqps://user@server:1234/vhost'
       end
