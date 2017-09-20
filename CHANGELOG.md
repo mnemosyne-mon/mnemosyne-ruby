@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1
+
+* Improve AMQP connection recovery
+* Fix dynamic probe loading
+
 ## 1.2.0
 
 * Collect response metadata in rack instrumentation
