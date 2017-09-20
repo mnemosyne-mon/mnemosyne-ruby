@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 require 'bunny'
 
 module Mnemosyne
   class Client
-    attr_reader :connection
+    include ::Mnemosyne::Logging
 
     def initialize(config)
       @config = config
@@ -11,10 +12,10 @@ module Mnemosyne
 
     def connection
       @connection ||= begin
-        @config.logger.info "[Mnemosyne] Connect to #{@config.server}..."
+        logger.info "[Mnemosyne] Connect to #{@config.server}..."
 
         connection = ::Bunny.new @config.amqp,
-          logger: @config.logger,
+          logger: logger,
           threaded: false
 
         connection.start
