@@ -15,3 +15,5 @@ group :test do
   gem 'sidekiq', require: false
   gem 'webmock', require: false
 end
+
+gem 'rubocop', '~> 0.50.0'
