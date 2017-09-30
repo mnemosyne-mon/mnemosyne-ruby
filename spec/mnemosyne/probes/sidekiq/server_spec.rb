@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'support/sidekiq'
 
-RSpec.describe Mnemosyne::Probes::Sidekiq::Server do
+RSpec.describe ::Mnemosyne::Probes::Sidekiq::Server do
   it 'creates a trace' do
     trace = with_instrumentation do
       HardWorker.perform_async('test')
@@ -13,7 +13,8 @@ RSpec.describe Mnemosyne::Probes::Sidekiq::Server do
     expect(trace.name).to eq 'app.job.perform.sidekiq'
     expect(trace.meta[:worker]).to eq 'HardWorker'
     expect(trace.meta[:queue]).to eq 'default'
-    expect(trace.meta[:arguments]).to eq %w(test)
+    expect(trace.meta[:arguments]).to eq %w[test]
+  end
 
   it 'reports errors' do
     trace = with_instrumentation do
