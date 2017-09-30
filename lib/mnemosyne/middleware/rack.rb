@@ -4,9 +4,9 @@ module Mnemosyne
   module Middleware
     class Rack
       class Proxy
-        def initialize(body, &block)
+        def initialize(body, trace)
           @body = body
-          @block = block
+          @trace = trace
           @closed = false
         end
 
@@ -33,7 +33,7 @@ module Mnemosyne
           begin
             @body.close if @body.respond_to? :close
           ensure
-            @block.call
+            @trace.submit
           end
         end
 
@@ -42,11 +42,10 @@ module Mnemosyne
         end
 
         def each(*args)
-          if block_given?
-            @body.each(*args, &Proc.new)
-          else
-            @body.each(*args)
-          end
+          @body.each(*args, &Proc.new)
+        rescue StandardError, LoadError, SyntaxError => e
+          @trace.attach_error(e)
+          raise
         end
       end
 
@@ -73,13 +72,17 @@ module Mnemosyne
 
           scan_response(trace, response)
 
-          response[2] = Proxy.new(response[2]) { trace.submit }
+          response[2] = Proxy.new(response[2], trace)
           response
         else
           @app.call env
         end
-      rescue Exception # rubocop:disable RescueException
-        trace.submit if trace
+      rescue StandardError, LoadError, SyntaxError => e
+        if trace
+          trace.attach_error(e)
+          trace.submit
+        end
+
         raise
       ensure
         trace.release if trace
