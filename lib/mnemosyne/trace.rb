@@ -2,13 +2,14 @@
 
 module Mnemosyne
   class Trace < Span
-    attr_reader :uuid, :transaction, :origin, :span
+    attr_reader :uuid, :transaction, :origin, :span, :errors
 
     def initialize(instrumenter, name, transaction: nil, origin: nil, **kwargs)
       super(name, **kwargs)
 
-      @uuid = ::SecureRandom.uuid
-      @span = []
+      @uuid   = ::SecureRandom.uuid
+      @span   = []
+      @errors = []
 
       @origin      = origin
       @transaction = transaction
@@ -18,6 +19,10 @@ module Mnemosyne
 
     def <<(span)
       @span << span
+    end
+
+    def attach_error(error)
+      @errors << error
     end
 
     def submit

@@ -18,6 +18,14 @@ class HardWorker
   end
 end
 
+class FailWorker
+  include Sidekiq::Worker
+
+  def perform(message)
+    raise message
+  end
+end
+
 RSpec.configure do |config|
   config.before(:each) do
     Sidekiq::Worker.clear_all
