@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0
+
+* Add exception serialization to trace and protocol
+* Add exception reporting to Sidekiq, Msgr, Rack and Rails
+
 ## 1.2.1
 
 * Improve AMQP connection recovery
