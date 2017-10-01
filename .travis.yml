@@ -1,5 +1,8 @@
 language: ruby
 cache: bundler
+sudo: required
+services:
+- rabbitmq
 rvm:
 - 2.4.2
 - 2.3.4

@@ -56,6 +56,9 @@ module Mnemosyne
             end
 
             super
+          rescue StandardError, LoadError, SyntaxError => e
+            trace.attach_error(e) if trace
+            raise
           ensure
             if trace
               trace.submit

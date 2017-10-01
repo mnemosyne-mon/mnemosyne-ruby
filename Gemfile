@@ -11,6 +11,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'msgr', require: false
   gem 'restify', require: false
   gem 'sidekiq', require: false
   gem 'webmock', require: false
