@@ -85,8 +85,8 @@ RSpec.describe ::Mnemosyne::Middleware::Rack do
         expect(errors.size).to eq 1
 
         errors.first.tap do |error|
-          expect(error).to be_a RuntimeError
-          expect(error.message).to eq 'fail'
+          expect(error.error).to be_a RuntimeError
+          expect(error.error.message).to eq 'fail'
         end
       end
     end
@@ -113,8 +113,8 @@ RSpec.describe ::Mnemosyne::Middleware::Rack do
           expect(errors.size).to eq 1
 
           errors.first.tap do |error|
-            expect(error).to be_a RuntimeError
-            expect(error.message).to eq 'sfail'
+            expect(error.error).to be_a RuntimeError
+            expect(error.error.message).to eq 'sfail'
           end
         end
       end

@@ -77,8 +77,8 @@ RSpec.describe ::Mnemosyne::Probes::Msgr::Consumer do
       expect(errors.size).to eq 1
 
       errors.first.tap do |error|
-        expect(error).to be_a RuntimeError
-        expect(error.message).to eq 'error'
+        expect(error.error).to be_a RuntimeError
+        expect(error.error.message).to eq 'error'
       end
     end
   end
