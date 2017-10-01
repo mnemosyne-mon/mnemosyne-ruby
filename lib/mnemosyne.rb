@@ -30,6 +30,7 @@ module Mnemosyne
     require 'mnemosyne/probes/acfs/request'
     require 'mnemosyne/probes/action_controller/process_action'
     require 'mnemosyne/probes/action_controller/renderers'
+    require 'mnemosyne/probes/action_dispatch/show_exceptions'
     require 'mnemosyne/probes/action_view/render_partial'
     require 'mnemosyne/probes/action_view/render_template'
     require 'mnemosyne/probes/active_record/query'
