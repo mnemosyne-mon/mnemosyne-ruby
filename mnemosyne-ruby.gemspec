@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Jan Graichen']
   spec.email         = ['jgraichen@altimos.de']
 
-  spec.summary       = 'Ruby/Rails client for Mnemosynce'
+  spec.summary       = 'Ruby/Rails client for Mnemosyne APM'
   spec.homepage      = 'http://github.com/jgraichen/mnemosyne-ruby'
   spec.license       = 'MIT'
 
@@ -19,15 +19,11 @@ Gem::Specification.new do |spec|
   end
 
   spec.bindir        = 'bin'
-  spec.executables   = spec.files.grep(%r{^exe/}) {|f| File.basename(f) }
+  spec.executables   = spec.files.grep(%r{^bin/}) {|f| File.basename(f) }
   spec.require_paths = %w[lib]
 
   spec.add_runtime_dependency 'bunny'
   spec.add_runtime_dependency 'activesupport', '>= 4'
 
   spec.add_development_dependency 'bundler', '~> 1.11'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'timecop', '~> 0.8.0'
-  spec.add_development_dependency 'rubocop', '~> 0.47.1'
 end

@@ -5,6 +5,11 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in mnemosyne.gemspec
 gemspec
 
+gem 'rake', '~> 12.0'
+gem 'rspec', '~> 3.6'
+gem 'rubocop', '~> 0.50.0'
+gem 'timecop', '~> 0.8.0'
+
 group :development, :test do
   gem 'pry', require: false
   gem 'pry-byebug', require: false
