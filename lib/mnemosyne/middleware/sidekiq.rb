@@ -22,7 +22,7 @@ module Mnemosyne
         trace.start! if trace
 
         yield
-      rescue StandardError, LoadError, SyntaxError => err # rubocop:disable RescueException
+      rescue StandardError, LoadError, SyntaxError => err
         trace.attach_error(err)
         raise
       ensure

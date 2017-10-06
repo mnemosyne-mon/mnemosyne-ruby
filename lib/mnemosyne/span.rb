@@ -28,8 +28,8 @@ module Mnemosyne
       @finish = ::Mnemosyne::Clock.tick
 
       if oneshot
-        @start = @finish unless @start
-        @type  = :oneshot
+        @start ||= @finish
+        @type = :oneshot
       end
 
       self

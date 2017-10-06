@@ -16,7 +16,7 @@ RSpec.describe Mnemosyne::Probes::Sidekiq::Client do
     expect(span.name).to eq 'external.job.sidekiq'
     expect(span.meta[:worker]).to eq 'HardWorker'
     expect(span.meta[:queue]).to eq 'default'
-    expect(span.meta[:arguments]).to eq %w(test)
+    expect(span.meta[:arguments]).to eq %w[test]
   end
 
   it 'passes transaction and origin to worker' do
