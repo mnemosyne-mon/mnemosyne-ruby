@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.0
+
+* Add global `#attach_error` for manual error reporting
+
 ## 1.3.0
 
 * Add exception serialization to trace and protocol
