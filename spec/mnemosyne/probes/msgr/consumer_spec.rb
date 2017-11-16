@@ -14,6 +14,10 @@ RSpec.describe ::Mnemosyne::Probes::Msgr::Consumer do
   let(:message) { {} }
 
   before do
+    Msgr.logger.level = 10
+  end
+
+  before do
     client.routes.configure do
       route 'test.index', to: 'test#index'
       route 'test.error', to: 'test#error'
