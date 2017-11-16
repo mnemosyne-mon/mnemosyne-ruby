@@ -2,6 +2,7 @@
 
 ## next
 
+* Add ActiveJob perform probe
 * `attach_error` accepts errors without backtraces and string messages
 * Capture endpoint names for grape web requests
 

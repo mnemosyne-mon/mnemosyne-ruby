@@ -33,6 +33,7 @@ module Mnemosyne
     require 'mnemosyne/probes/action_dispatch/show_exceptions'
     require 'mnemosyne/probes/action_view/render_partial'
     require 'mnemosyne/probes/action_view/render_template'
+    require 'mnemosyne/probes/active_job/perform'
     require 'mnemosyne/probes/active_record/query'
     require 'mnemosyne/probes/grape/endpoint_render'
     require 'mnemosyne/probes/grape/endpoint_run'

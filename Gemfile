@@ -20,6 +20,8 @@ group :test do
   gem 'restify', require: false
   gem 'sidekiq', require: false
   gem 'webmock', require: false
+
+  gem 'rails', require: false
 end
 
 gem 'rubocop', '~> 0.50.0'
