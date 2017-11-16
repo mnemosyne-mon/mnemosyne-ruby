@@ -68,7 +68,23 @@ RSpec.describe Mnemosyne::Trace do
       end
 
       subject { super()[:errors] }
-      it { is_expected.to eq [::Mnemosyne::Trace::Error.new(error).serialize] }
+      it do
+        is_expected.to eq [::Mnemosyne::Trace::Error.new(error).serialize]
+      end
+
+      context 'with error w/o stacktrace' do
+        let(:error) { RuntimeError.new 'error' }
+
+        it { is_expected.to eq [{type: 'RuntimeError', text: 'error'}] }
+      end
+
+      context 'with string' do
+        let(:error) { 'str' }
+
+        it 'is serialized as a RuntimeError' do
+          is_expected.to eq [{type: 'RuntimeError', text: 'str'}]
+        end
+      end
     end
   end
 end

@@ -22,7 +22,14 @@ module Mnemosyne
     end
 
     def attach_error(error)
-      @errors << Error.new(error)
+      case error
+        when Exception
+          @errors << Error.new(error)
+        when String
+          @errors << Error.new(RuntimeError.new(error))
+        else
+          raise ArgumentError.new "Invalid error type: #{error.inspect}"
+      end
     end
 
     def submit
@@ -52,19 +59,25 @@ module Mnemosyne
     Error = Struct.new(:error) do
       BT_REGEXP = /^((?:[a-zA-Z]:)?[^:]+):(\d+)(?::in `([^']+)')?$/
 
-      # rubocop:disable AbcSize
       def serialize
         {
           type: error.class.name,
-          text: error.message,
-          stacktrace: error.backtrace.map do |bt|
-            md = BT_REGEXP.match(bt.to_s).to_a
-
-            {file: md[1], line: md[2], call: md[3], raw: md[0]}
-          end
-        }
+          text: error.message.to_s,
+          stacktrace: serialize_backtrace
+        }.compact
       end
-      # rubocop:enable all
+
+      private
+
+      def serialize_backtrace
+        return unless error.backtrace
+
+        error.backtrace.map do |bt|
+          md = BT_REGEXP.match(bt.to_s).to_a
+
+          {file: md[1], line: md[2], call: md[3], raw: md[0]}
+        end
+      end
     end
   end
 end

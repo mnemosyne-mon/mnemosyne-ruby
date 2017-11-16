@@ -2,6 +2,7 @@
 
 ## next
 
+* `attach_error` accepts errors without backtraces and string messages
 * Capture endpoint names for grape web requests
 
 ## 1.4.0
