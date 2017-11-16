@@ -18,12 +18,7 @@ module Mnemosyne
       def installable?
         return true unless class_name
 
-        begin
-          Module.const_get(class_name).is_a?(Class) ||
-            Module.const_get(class_name).is_a?(Module)
-        rescue NameError
-          false
-        end
+        Module.const_defined?(class_name)
       end
 
       delegate install: :@probe
