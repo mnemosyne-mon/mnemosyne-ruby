@@ -1,6 +1,6 @@
 # Changelog
 
-## next
+## 1.5.0
 
 * Add ActiveJob perform probe
 * `attach_error` accepts errors without backtraces and string messages
