@@ -1,5 +1,9 @@
 # Changelog
 
+## next
+
+* Capture endpoint names for grape web requests
+
 ## 1.4.0
 
 * Add global `#attach_error` for manual error reporting

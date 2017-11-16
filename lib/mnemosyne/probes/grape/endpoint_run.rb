@@ -14,10 +14,25 @@ module Mnemosyne
             endpoint = payload[:endpoint]
             return unless endpoint
 
+            meta = {
+              endpoint: extract_name(endpoint),
+              format: extract_format(payload[:env])
+            }
+
             span = ::Mnemosyne::Span.new 'app.controller.request.grape',
-              start: start, finish: finish
+              start: start, finish: finish, meta: meta
 
             trace << span
+          end
+
+          private
+
+          def extract_name(endpoint)
+            endpoint.options[:for].to_s
+          end
+
+          def extract_format(env)
+            env['api.format'.freeze]
           end
         end
       end
