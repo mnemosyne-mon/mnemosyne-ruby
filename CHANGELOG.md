@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.1
+
+* Avoid using internal AMQP constant: Fix compat with amq-protocol 2.3+
+
 ## 1.5.0
 
 * Add ActiveJob perform probe
