@@ -52,13 +52,18 @@ module Mnemosyne
       Socket.gethostname
     end
 
+    DEFAULT_PORTS = {
+      'amqp' => 5672,
+      'amqps' => 5671
+    }
+
     def make_amqp_uri(amqp) # rubocop:disable AbcSize
       uri = URI('')
 
       uri.scheme = amqp[:scheme]
       uri.user = amqp[:user]
       uri.host = amqp[:host]
-      uri.port = amqp[:port] if amqp[:port] != AMQ::URI::AMQP_PORTS[uri.scheme]
+      uri.port = amqp[:port] if amqp[:port] != DEFAULT_PORTS[uri.scheme]
       uri.path = '/' + ::CGI.escape(amqp[:vhost]) if amqp[:vhost] != '/'
 
       uri
