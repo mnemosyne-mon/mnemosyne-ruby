@@ -35,6 +35,7 @@ module Mnemosyne
     require 'mnemosyne/probes/action_view/render_template'
     require 'mnemosyne/probes/active_job/perform'
     require 'mnemosyne/probes/active_record/query'
+    require 'mnemosyne/probes/active_record/instantiation'
     require 'mnemosyne/probes/grape/endpoint_render'
     require 'mnemosyne/probes/grape/endpoint_run'
     require 'mnemosyne/probes/grape/endpoint_run_filters'
