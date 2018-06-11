@@ -17,9 +17,16 @@ RSpec.describe ::Mnemosyne::Probes::ActiveRecord::Query do
       trace.span.first.tap do |span|
         expect(span.name).to eq 'db.query.active_record'
         expect(span.meta.keys).to match_array %i[sql binds]
-        expect(span.meta).to match \
-          sql: 'SELECT  "records".* FROM "records" WHERE "records"."name" = ? LIMIT ?',
-          binds: ['test', 1]
+
+        if ActiveRecord::VERSION::MAJOR < 5
+          expect(span.meta).to match \
+            sql: 'SELECT  "records".* FROM "records" WHERE "records"."name" = ? LIMIT 1',
+            binds: ['test']
+        else
+          expect(span.meta).to match \
+            sql: 'SELECT  "records".* FROM "records" WHERE "records"."name" = ? LIMIT ?',
+            binds: ['test', 1]
+        end
       end
 
       trace.span[1].tap do |span|

@@ -11,6 +11,8 @@ gem 'rubocop', '~> 0.56.0'
 gem 'timecop', '~> 0.8.0'
 gem 'appraisal'
 
+gem 'rails', require: false
+
 group :development, :test do
   gem 'pry', require: false
   gem 'pry-byebug', require: false
