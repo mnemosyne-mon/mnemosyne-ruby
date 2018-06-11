@@ -2,29 +2,34 @@ language: ruby
 cache: bundler
 sudo: required
 services:
-- rabbitmq
+  - rabbitmq
 rvm:
-- 2.5.1
-- 2.4.4
-- 2.3.7
-- 2.2.10
+  - 2.5.1
+  - 2.4.4
+  - 2.3.7
+  - 2.2.10
+gemfile:
+  - gemfiles/rails_52.gemfile
+  - gemfiles/rails_51.gemfile
+  - gemfiles/rails_50.gemfile
+  - gemfiles/rails_42.gemfile
 before_install:
-- gem update --system
-- gem install bundler
+  - gem update --system
+  - gem install bundler
 script:
-- bundle exec rake rubocop
-- bundle exec rake spec
+  - bundle exec rake rubocop
+  - bundle exec rake spec
 jobs:
   include:
-  - stage: Release
-    rvm: 2.5.1
-    install: skip
-    script: skip
-    deploy:
-      provider: rubygems
-      api_key:
-        secure: GDEAmZLPOYQOsMJRrAcyRIrdOdbkZ5iM0Z9OHjxMwLkHtnR8XcfjNzPdXEji6o1nQaS3PfcLIdpEmis6FJqT4aXRU0F/1VwHAgiYIe3NWs5rFEo2dWS0ScfeQJQ1rY2inq/ayp3r01/eUTVVwhks8hresBlZrT6HR2Jub300lkhJQoAwHB44cekTZrv3PSTpyMhHOBUjk8bpx2m0n/dGM3lOYlAnaL4DA1l6/JdoYNS3hbyphZFnymS4cl5QIxF6NRNlC6uEzmZ0Hr4dK0amnBwUeillqxgAWiYQXyj/do7r1iXdrtORidIb3QfGAhsuxZY9Cu6+E8CfhwvnnY5ElpGrDvlVTBV4hyfudsRq87QwTS64c62dQ7s1cvcMxJcYMfWDyaFkYmGoXN0QCrN9M9JhrXh8sLKAFQIMsc2kH8dyuhlIJXvIZVzdxtey8geOYBwalB8DJl7BM/nbG/LuEagpahJco4k0/+3KDxxMFRplMG4ShkOw/otousiVlsu7idszpgxuVPrVAwAbhIPxJV0i1Ak0Vt/nohkR2DOxdf4E40jDrP2d2A4DMVKU8R92BDH8Qj/nle20TeL/Wx2/3mLBAIH+stUtKILnpwoWEfVhe+Ys3LLEaDtYBLcOr4W9czlFH43GxctbBMiadVQAVBQOIUOTkA84gADFLCIOCA0=
-      gem: mnemosyne-ruby
-      on:
-        tags: true
-        repo: jgraichen/mnemosyne-ruby
+    - stage: Release
+      rvm: 2.5.1
+      install: skip
+      script: skip
+      deploy:
+        provider: rubygems
+        api_key:
+          secure: GDEAmZLPOYQOsMJRrAcyRIrdOdbkZ5iM0Z9OHjxMwLkHtnR8XcfjNzPdXEji6o1nQaS3PfcLIdpEmis6FJqT4aXRU0F/1VwHAgiYIe3NWs5rFEo2dWS0ScfeQJQ1rY2inq/ayp3r01/eUTVVwhks8hresBlZrT6HR2Jub300lkhJQoAwHB44cekTZrv3PSTpyMhHOBUjk8bpx2m0n/dGM3lOYlAnaL4DA1l6/JdoYNS3hbyphZFnymS4cl5QIxF6NRNlC6uEzmZ0Hr4dK0amnBwUeillqxgAWiYQXyj/do7r1iXdrtORidIb3QfGAhsuxZY9Cu6+E8CfhwvnnY5ElpGrDvlVTBV4hyfudsRq87QwTS64c62dQ7s1cvcMxJcYMfWDyaFkYmGoXN0QCrN9M9JhrXh8sLKAFQIMsc2kH8dyuhlIJXvIZVzdxtey8geOYBwalB8DJl7BM/nbG/LuEagpahJco4k0/+3KDxxMFRplMG4ShkOw/otousiVlsu7idszpgxuVPrVAwAbhIPxJV0i1Ak0Vt/nohkR2DOxdf4E40jDrP2d2A4DMVKU8R92BDH8Qj/nle20TeL/Wx2/3mLBAIH+stUtKILnpwoWEfVhe+Ys3LLEaDtYBLcOr4W9czlFH43GxctbBMiadVQAVBQOIUOTkA84gADFLCIOCA0=
+        gem: mnemosyne-ruby
+        on:
+          tags: true
+          repo: jgraichen/mnemosyne-ruby

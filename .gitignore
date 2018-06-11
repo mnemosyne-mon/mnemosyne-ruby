@@ -1,10 +1,12 @@
 /.bundle/
 /.yardoc
-/Gemfile.lock
 /_yardoc/
 /coverage/
 /doc/
+/Gemfile.lock
 /pkg/
+/spec/examples.txt
 /spec/reports/
 /tmp/
-spec/examples.txt
+
+*.lock
