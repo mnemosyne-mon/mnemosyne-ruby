@@ -14,13 +14,28 @@ module Mnemosyne
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
             meta = {
-              sql: payload[:sql]
+              sql: payload[:sql],
+              binds: extract_bind_values(payload)
             }
 
             span = ::Mnemosyne::Span.new 'db.query.active_record',
               start: start, finish: finish, meta: meta
 
             trace << span
+          end
+
+          def extract_bind_values(payload)
+            return if payload[:binds].empty?
+
+            payload[:binds].map do |bind|
+              if bind.is_a?(Array)
+                bind[0].type_cast_for_database(bind[1])
+              else
+                bind.value_for_database
+              end
+            end
+          rescue StandardError
+            []
           end
         end
       end
