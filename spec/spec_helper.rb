@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 $DEBUG = true
 
 require 'mnemosyne'
@@ -32,8 +32,8 @@ module TracingHelper
   end
 
   def with_trace(name: 'mnemosyne.test', **kwargs, &block)
-    with_instrumentation(**kwargs) do |instrumenter|
-      instrumenter.trace(name, **kwargs, &block)
+    with_instrumentation(kwargs) do |instrumenter|
+      instrumenter.trace(name, kwargs, &block)
     end
   end
 end

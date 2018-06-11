@@ -3,7 +3,7 @@
 module Mnemosyne
   module Middleware
     class Acfs
-      def initialize(app, *_)
+      def initialize(app, *)
         @app = app
       end
 

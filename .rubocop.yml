@@ -47,7 +47,8 @@ Style/RescueModifier:
 
 Metrics/LineLength:
   Exclude:
-    - 'mnemosyne.gemspec'
+    - '*.gemspec'
+    - 'spec/**/*'
 
 Metrics/BlockLength:
   Exclude:

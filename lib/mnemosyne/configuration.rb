@@ -55,7 +55,7 @@ module Mnemosyne
     DEFAULT_PORTS = {
       'amqp' => 5672,
       'amqps' => 5671
-    }
+    }.freeze
 
     def make_amqp_uri(amqp) # rubocop:disable AbcSize
       uri = URI('')

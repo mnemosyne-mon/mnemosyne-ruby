@@ -7,7 +7,7 @@ gemspec
 
 gem 'rake', '~> 12.0'
 gem 'rspec', '~> 3.6'
-gem 'rubocop', '~> 0.50.0'
+gem 'rubocop', '~> 0.56.0'
 gem 'timecop', '~> 0.8.0'
 
 group :development, :test do
@@ -23,5 +23,3 @@ group :test do
 
   gem 'rails', require: false
 end
-
-gem 'rubocop', '~> 0.50.0'

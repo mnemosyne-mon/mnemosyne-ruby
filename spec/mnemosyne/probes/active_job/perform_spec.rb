@@ -33,7 +33,7 @@ RSpec.describe ::Mnemosyne::Probes::ActiveJob::Perform do
         begin
           ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper.drain
         rescue RuntimeError
-          # noop
+          nil
         end
       end
 

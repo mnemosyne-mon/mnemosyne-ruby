@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'thread'
-
 module Mnemosyne
   class Instrumenter
     IDENT = :__mnemosyne_current_trace
@@ -32,7 +30,7 @@ module Mnemosyne
         return trace
       end
 
-      trace = self.current_trace = Trace.new(self, name, **kwargs)
+      trace = self.current_trace = Trace.new(self, name, kwargs)
 
       return trace unless block_given?
 
