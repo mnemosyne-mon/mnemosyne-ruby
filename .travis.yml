@@ -17,7 +17,7 @@ script:
 jobs:
   include:
   - stage: Release
-    rvm: 2.4.2
+    rvm: 2.5.1
     install: skip
     script: skip
     deploy:
