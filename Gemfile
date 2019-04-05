@@ -8,7 +8,7 @@ gemspec
 gem 'rake', '~> 12.0'
 gem 'rspec', '~> 3.6'
 gem 'rubocop', '~> 0.67.1'
-gem 'timecop', '~> 0.8.0'
+gem 'timecop', '~> 0.9.1'
 gem 'appraisal'
 
 gem 'rails', require: false
