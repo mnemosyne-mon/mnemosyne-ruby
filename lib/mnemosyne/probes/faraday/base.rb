@@ -29,8 +29,10 @@ module Mnemosyne
 
               span.start!
 
-              env[:request_headers]['X-Mnemosyne-Transaction'] = trace.transaction
-              env[:request_headers]['X-Mnemosyne-Origin'] = span.uuid
+              env[:request_headers].merge!({
+                'X-Mnemosyne-Transaction' => trace.transaction,
+                'X-Mnemosyne-Origin' => span.uuid,
+              }.reject {|_, v| v.nil? })
 
               @app.call(env).on_complete do |env|
                 span.meta[:status] = env[:status]
