@@ -14,6 +14,7 @@ gem 'timecop', '~> 0.8.0'
 gem 'pry', require: false
 gem 'pry-byebug', require: false
 
+gem 'faraday', require: false
 gem 'msgr', require: false
 gem 'rails', require: false
 gem 'restify', require: false

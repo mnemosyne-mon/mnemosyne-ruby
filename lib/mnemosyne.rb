@@ -36,6 +36,7 @@ module Mnemosyne
     require 'mnemosyne/probes/active_job/perform'
     require 'mnemosyne/probes/active_record/query'
     require 'mnemosyne/probes/active_record/instantiation'
+    require 'mnemosyne/probes/faraday/base'
     require 'mnemosyne/probes/grape/endpoint_render'
     require 'mnemosyne/probes/grape/endpoint_run'
     require 'mnemosyne/probes/grape/endpoint_run_filters'
