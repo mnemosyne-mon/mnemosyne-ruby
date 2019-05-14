@@ -32,4 +32,4 @@ jobs:
         gem: mnemosyne-ruby
         on:
           tags: true
-          repo: jgraichen/mnemosyne-ruby
+          repo: mnemosyne-mon/mnemosyne-ruby
