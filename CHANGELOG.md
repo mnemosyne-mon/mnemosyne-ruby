@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.6.1] - 2019-05-14
+### Fixed
+- Fix release pipeline; no code changed
+
 ## [1.6.0] - 2019-05-14
 ### Added
 - Add faraday probe (#11)
@@ -66,7 +70,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Add platform identifier
 
-[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.6.1...HEAD
+[1.6.1]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.4.0...v1.5.0
