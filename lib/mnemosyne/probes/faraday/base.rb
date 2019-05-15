@@ -9,6 +9,7 @@ module Mnemosyne
             ::Faraday.default_connection_options = {
               builder: ::Faraday::RackBuilder.new do |faraday|
                 faraday.use Probe::Middleware
+                faraday.request :url_encoded
                 faraday.adapter ::Faraday.default_adapter
               end
             }

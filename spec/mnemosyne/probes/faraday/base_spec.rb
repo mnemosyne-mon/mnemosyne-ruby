@@ -4,32 +4,58 @@ require 'spec_helper'
 require 'webmock/rspec'
 
 RSpec.describe Mnemosyne::Probes::Faraday::Base do
-  it 'creates a span when tracing' do
-    trace = with_trace do
-      stub_request(:any, 'google.com')
-        .to_return(status: 200, body: 'search')
+  before { require 'faraday' }
 
-      require 'faraday'
-      Faraday.get 'http://google.com'
+  describe 'a GET request' do
+    subject(:request) { Faraday.get 'http://google.com' }
+
+    before do
+      stub_request(:get, 'google.com')
+        .to_return(status: 200, body: 'search')
     end
 
-    expect(trace.span.size).to eq 1
+    it 'creates a span when tracing' do
+      trace = with_trace { request }
 
-    span = trace.span.first
+      expect(trace.span.size).to eq 1
 
-    expect(span.name).to eq 'external.http.faraday'
-    expect(span.meta[:url]).to eq 'http://google.com'
-    expect(span.meta[:method]).to eq :get
-    expect(span.meta[:status]).to eq 200
+      span = trace.span.first
+
+      expect(span.name).to eq 'external.http.faraday'
+      expect(span.meta[:url]).to eq 'http://google.com'
+      expect(span.meta[:method]).to eq :get
+      expect(span.meta[:status]).to eq 200
+    end
+
+    it 'does not affect untraced requests' do
+      expect(request).to be_success
+    end
   end
 
-  it 'does not affect untraced requests' do
-    stub_request(:any, 'google.com')
-      .to_return(status: 200, body: 'search')
+  describe 'a POST request with body' do
+    subject(:request) { Faraday.post 'http://google.com', {q: 'tracing'} }
 
-    require 'faraday'
-    response = Faraday.get 'http://google.com'
+    before do
+      stub_request(:post, 'google.com')
+        .with(body: hash_including(q: 'tracing'))
+        .to_return(status: 200, body: 'search')
+    end
 
-    expect(response).to be_success
+    it 'creates a span when tracing' do
+      trace = with_trace { request }
+
+      expect(trace.span.size).to eq 1
+
+      span = trace.span.first
+
+      expect(span.name).to eq 'external.http.faraday'
+      expect(span.meta[:url]).to eq 'http://google.com'
+      expect(span.meta[:method]).to eq :post
+      expect(span.meta[:status]).to eq 200
+    end
+
+    it 'does not affect untraced requests' do
+      expect(request).to be_success
+    end
   end
 end
