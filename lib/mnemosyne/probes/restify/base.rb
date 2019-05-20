@@ -23,9 +23,10 @@ module Mnemosyne
                 request.headers['X-Mnemosyne-Origin'] = span.uuid
 
                 super.tap do |x|
-                  x.add_observer do |_, _response, _err|
-                    span.finish!
-                    trace << span
+                  x.add_observer do |_, response, _err|
+                    span.meta[:status] = response.code
+
+                    trace << span.finish!
                   end
                 end
               else
