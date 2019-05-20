@@ -25,5 +25,9 @@ RSpec.describe Mnemosyne::Probes::Restify::Base do
       expect(span.meta[:url]).to eq 'http://google.com'
       expect(span.meta[:method]).to eq :get
     end
+
+    it 'does not affect untraced requests' do
+      expect(request).to be
+    end
   end
 end
