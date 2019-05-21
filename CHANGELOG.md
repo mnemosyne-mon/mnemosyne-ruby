@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.7.0] - 2019-05-21
+### Added
+- Restify probe: Attach HTTP response status (#12, #13)
+
 ## [1.6.2] - 2019-05-16
 ### Fixed
 - The Faraday probe dropped Faraday's default request encoder
@@ -74,7 +78,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Add platform identifier
 
-[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.6.2...HEAD
+[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.6.2...v1.7.0
 [1.6.2]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.6.1...v1.6.2
 [1.6.1]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.5.1...v1.6.0
