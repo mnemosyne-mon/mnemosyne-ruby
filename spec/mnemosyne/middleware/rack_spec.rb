@@ -70,6 +70,23 @@ RSpec.describe ::Mnemosyne::Middleware::Rack do
       content_type: 'text/plain'
   end
 
+  context 'with a redirect' do
+    let(:response) do
+      [302, {'Location' => 'http://www.example.org'}, ['']]
+    end
+
+    it 'attaches the target location to the trace' do
+      trace = with_instrumentation do
+        consume rack.call(env)
+      end
+
+      expect(trace.name).to eq 'app.web.request.rack'
+      expect(trace.meta).to include \
+        location: 'http://www.example.org',
+        status: 302
+    end
+  end
+
   context 'with application error' do
     let(:app) { ->(_env) { raise 'fail' } }
 
