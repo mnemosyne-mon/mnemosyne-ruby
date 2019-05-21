@@ -63,6 +63,7 @@ module Mnemosyne
         {
           type: error.class.name,
           text: error.message.to_s,
+          cause: serialize_cause,
           stacktrace: serialize_backtrace
         }.compact
       end
@@ -77,6 +78,10 @@ module Mnemosyne
 
           {file: md[1], line: md[2], call: md[3], raw: md[0]}
         end
+      end
+
+      def serialize_cause
+        self.class.new(error.cause).serialize if error.cause
       end
     end
   end

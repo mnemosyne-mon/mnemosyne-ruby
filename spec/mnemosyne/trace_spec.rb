@@ -85,6 +85,33 @@ RSpec.describe Mnemosyne::Trace do
           is_expected.to eq [{type: 'RuntimeError', text: 'str'}]
         end
       end
+
+      context 'with nested errors' do
+        let(:error) do
+          begin
+            begin
+              raise 'inner'
+            rescue RuntimeError
+              raise 'outer'
+            end
+          rescue RuntimeError => e
+            e
+          end
+        end
+
+        it 'serializes the entire exception hierarchy' do
+          is_expected.to match [
+            hash_including(
+              type: 'RuntimeError',
+              text: 'outer',
+              cause: hash_including(
+                type: 'RuntimeError',
+                text: 'inner',
+              ),
+            )
+          ]
+        end
+      end
     end
   end
 end
