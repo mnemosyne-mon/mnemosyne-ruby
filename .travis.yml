@@ -3,6 +3,10 @@ cache: bundler
 sudo: required
 services:
   - rabbitmq
+addons:
+  apt:
+    packages:
+      - rabbitmq-server
 rvm:
   - 2.6.3
   - 2.5.5
