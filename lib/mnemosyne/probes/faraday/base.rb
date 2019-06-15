@@ -6,41 +6,27 @@ module Mnemosyne
       module Base
         class Probe < ::Mnemosyne::Probe
           def setup
-            ::Faraday.default_connection_options = {
-              builder: ::Faraday::RackBuilder.new do |faraday|
-                faraday.use Probe::Middleware
-                faraday.request :url_encoded
-                faraday.adapter ::Faraday.default_adapter
-              end
-            }
+            require 'mnemosyne/middleware/faraday'
+
+            ::Faraday::Middleware.register_middleware \
+              mnemosyne: ::Mnemosyne::Middleware::Faraday
+
+            ::Faraday::RackBuilder.prepend Extension
           end
+        end
 
-          class Middleware
-            def initialize(app)
-              @app = app
-            end
-
-            def call(env)
-              trace = ::Mnemosyne::Instrumenter.current_trace
-
-              return @app.call(env) unless trace
-
-              span = ::Mnemosyne::Span.new 'external.http.faraday', \
-                meta: {url: env[:url].to_s, method: env[:method]}
-
-              span.start!
-
-              env[:request_headers].merge!({
-                'X-Mnemosyne-Transaction' => trace.transaction,
-                'X-Mnemosyne-Origin' => span.uuid,
-              }.reject {|_, v| v.nil? })
-
-              @app.call(env).on_complete do |env|
-                span.meta[:status] = env[:status]
-
-                trace << span.finish!
+        module Extension
+          def lock!
+            if !@handlers.include?('Mnemosyne::Middleware::Faraday')
+              if respond_to?(:is_adapter?, true) &&
+                  (idx = @handlers.find_index {|h| is_adapter?(h) })
+                insert(idx, ::Mnemosyne::Middleware::Faraday)
+              else
+                use(::Mnemosyne::Middleware::Faraday)
               end
             end
+
+            super
           end
         end
       end
