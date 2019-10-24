@@ -1,3 +1,7 @@
+appraise 'rails-60' do
+  gem 'rails', '~> 6.0.0', require: false
+  gem 'sqlite3', '~> 1.4', require: false
+end
 
 appraise 'rails-52' do
   gem 'rails', '~> 5.2.0', require: false
