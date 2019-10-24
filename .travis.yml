@@ -18,23 +18,17 @@ gemfile:
   - gemfiles/rails_51.gemfile
   - gemfiles/rails_50.gemfile
   - gemfiles/rails_42.gemfile
+
 before_install:
   - echo yes | rvm gemset delete global
   - gem install bundler -v'~>1.0'
 script:
   - bundle exec rake rubocop
   - bundle exec rake spec
-jobs:
-  include:
-    - stage: Release
-      rvm: 2.6.3
-      install: skip
-      script: skip
-      deploy:
-        provider: rubygems
-        api_key:
-          secure: s7hUPxL4RULQ398GXk6Ko/y3QtUy7bZMTzcC4sL9Opsw76IRhOY0n+c6r+S8wHH3n+cRxiLpUyXRAsLMhjd67Rn+qaBoVbEfyzZKt1EAYyskFdPf40Jlq3FjOjRjAJW+hLDYloLXqqgLIrx/ybOv0YOfKyGKmk6eBNCx9S5GPJzt15WAM4Lz+TxNuR82YhsDybcGtTtLJ1WCF5FeQ297l2OESgvikRoADhIIM3HVk6Msyqw7RwFlpoIFGPRhXZD7UmML981rxK4Gxkh5xKGJiInjzL8lYOgT3KIfSLwtp9JoDbtpKbzdIQfA8Z35aRzpLjofPFxxYsKjwmCfdKxvJf5E5hTlenrILqSIovuknHb9oNOp0aCdp52N4+B8BZl7n1muQzr1AKy/ogtkTAgmlPs5tW+qx2h6E5MU0wfy6sS0AqKtVcGaZ1u85llifY2TvYriHReBIf8vddOe6LLbDcPnaTrTnAdsk/Bx9n+Zd8A2l3vzam9RbwTjlr7ZezIY67RRknfScEO+qCt9cfdAKf57ZdpiAecDFEr9V/CdAPEBevxaoiTwzFrjO+N9BY57eGHJsPda8NwNsrBraGBgcgKOXWeg9MowfU+wWpUSbeAJDZ2zZabGRKJkXpbRNNnf3webPSaXfb9qeWrCHXXbuI8JO+PQmx6OX8IHGjqyE1E=
-        gem: mnemosyne-ruby
-        on:
-          tags: true
-          repo: mnemosyne-mon/mnemosyne-ruby
+
+matrix:
+  exclude:
+  - rvm: 2.4.9
+    gemfile: gemfiles/rails_60.gemfile
+  - rvm: 2.3.8
+    gemfile: gemfiles/rails_60.gemfile
