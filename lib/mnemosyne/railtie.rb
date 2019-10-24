@@ -5,7 +5,7 @@ require 'rails'
 module Mnemosyne
   class Railtie < ::Rails::Railtie
     initializer 'mnemosyne.initialize' do |app|
-      config = app.config_for('mnemosyne')
+      config = app.config_for('mnemosyne').stringify_keys
 
       ::Mnemosyne::Logging.logger = Rails.logger
 
