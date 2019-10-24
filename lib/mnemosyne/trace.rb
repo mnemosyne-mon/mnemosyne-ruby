@@ -57,7 +57,7 @@ module Mnemosyne
     end
 
     Error = Struct.new(:error) do
-      BT_REGEXP = /^((?:[a-zA-Z]:)?[^:]+):(\d+)(?::in `([^']+)')?$/
+      BT_REGEXP = /^((?:[a-zA-Z]:)?[^:]+):(\d+)(?::in `([^']+)')?$/.freeze
 
       def serialize
         {

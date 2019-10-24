@@ -77,7 +77,7 @@ RSpec.describe Mnemosyne::Probes::Faraday::Base do
   end
 
   describe 'a POST request with body' do
-    subject(:request) { Faraday.post 'http://google.com', {q: 'tracing'} }
+    subject(:request) { Faraday.post 'http://google.com', q: 'tracing' }
 
     before do
       stub_request(:post, 'google.com')

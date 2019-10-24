@@ -28,6 +28,7 @@ module Mnemosyne
 
         def close
           return if @closed
+
           @closed = true
 
           begin

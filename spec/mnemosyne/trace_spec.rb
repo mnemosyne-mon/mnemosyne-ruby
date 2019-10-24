@@ -106,8 +106,8 @@ RSpec.describe Mnemosyne::Trace do
               text: 'outer',
               cause: hash_including(
                 type: 'RuntimeError',
-                text: 'inner',
-              ),
+                text: 'inner'
+              )
             )
           ]
         end

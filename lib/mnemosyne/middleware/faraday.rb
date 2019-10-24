@@ -21,7 +21,7 @@ module Mnemosyne
 
         env[:request_headers].merge!({
           'X-Mnemosyne-Transaction' => trace.transaction,
-          'X-Mnemosyne-Origin' => span.uuid,
+          'X-Mnemosyne-Origin' => span.uuid
         }.reject {|_, v| v.nil? })
 
         @app.call(env).on_complete do |env|

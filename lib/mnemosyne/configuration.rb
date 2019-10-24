@@ -57,7 +57,7 @@ module Mnemosyne
       'amqps' => 5671
     }.freeze
 
-    def make_amqp_uri(amqp) # rubocop:disable AbcSize
+    def make_amqp_uri(amqp)
       uri = URI('')
 
       uri.scheme = amqp[:scheme]

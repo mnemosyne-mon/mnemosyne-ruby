@@ -51,6 +51,7 @@ module Mnemosyne
     def required(path)
       return unless activated?
       return unless (set = monitor.delete(path))
+
       set.each(&method(:activate))
     end
 

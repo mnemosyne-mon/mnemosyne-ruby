@@ -12,6 +12,7 @@ module Mnemosyne
 
     def attach_error(err)
       return unless (trace = ::Mnemosyne::Instrumenter.current_trace)
+
       trace.attach_error(err)
     end
   end

@@ -27,6 +27,7 @@ module Mnemosyne
     def trace(name, **kwargs)
       if (trace = current_trace)
         return yield trace if block_given?
+
         return trace
       end
 
@@ -86,11 +87,13 @@ module Mnemosyne
 
       def trace(*args)
         return unless (instrumenter = instance)
+
         instrumenter.trace(*args)
       end
 
       def current_trace
         return unless (instrumenter = instance)
+
         instrumenter.current_trace
       end
     end
