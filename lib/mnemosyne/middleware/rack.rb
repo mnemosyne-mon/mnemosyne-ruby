@@ -34,7 +34,7 @@ module Mnemosyne
           begin
             @body.close if @body.respond_to? :close
           ensure
-            @trace.submit
+            _submit_trace
           end
         end
 
@@ -47,6 +47,15 @@ module Mnemosyne
         rescue StandardError, LoadError, SyntaxError => e
           @trace.attach_error(e)
           raise
+        end
+
+        private
+
+        def _submit_trace
+          @trace.submit
+        rescue Exception => e
+          ::Mnemosyne::Logging.logger.error \
+            "Error while submitting trace: #{e}\n  #{e.backtrace.join("\n  ")}"
         end
       end
 

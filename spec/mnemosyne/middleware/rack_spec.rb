@@ -120,4 +120,16 @@ RSpec.describe ::Mnemosyne::Middleware::Rack do
       end
     end
   end
+
+  context 'with exception on submit' do
+    it 'does not abort response' do
+      expect_any_instance_of(::Mnemosyne::Trace).to receive(:submit).and_raise(Exception)
+
+      expect do
+        with_instrumentation do
+          expect(consume(rack.call(env))).to eq 'text'
+        end
+      end.not_to raise_error
+    end
+  end
 end
