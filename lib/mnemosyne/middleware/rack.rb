@@ -119,7 +119,10 @@ module Mnemosyne
 
         return unless headers
 
-        trace.meta[:content_type] = headers['Content-Type']
+        trace.meta.merge!({
+          content_type: headers['Content-Type'],
+          location: headers['Location'],
+        }.compact)
       end
     end
   end
