@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - [Rack] Fix exceptions raised on trace submit corrupting the response
 
+### Added
+- Rack: Collect redirect locations (#14)
+
 ## [1.8.0] - 2019-10-25
 ### Added
 - Improve compatibility with Rails 6.0
