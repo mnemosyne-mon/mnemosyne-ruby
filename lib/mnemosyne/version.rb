@@ -3,9 +3,9 @@
 module Mnemosyne
   module VERSION
     MAJOR = 1
-    MINOR = 9
+    MINOR = 10
     PATCH = 0
-    STAGE = nil
+    STAGE = :beta1
 
     STRING = [MAJOR, MINOR, PATCH, STAGE].reject(&:nil?).join('.')
 
