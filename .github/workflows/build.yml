@@ -95,6 +95,9 @@ jobs:
 
       - name: Install Ruby dependencies
         run: |
+          set -x
+          gem uninstall --all --executables --force bundler
+          gem install bundler --version '~> 1.0'
           bundle config path "$(pwd)/vendor/bundle"
           bundle config without development
           ${{ matrix.env }} bundle update --jobs=$(nproc) --retry=3
