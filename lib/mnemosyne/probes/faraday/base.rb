@@ -18,12 +18,7 @@ module Mnemosyne
         module Extension
           def lock!
             unless @handlers.include?('Mnemosyne::Middleware::Faraday')
-              if respond_to?(:is_adapter?, true) &&
-                 (idx = @handlers.find_index {|h| is_adapter?(h) })
-                insert(idx, ::Mnemosyne::Middleware::Faraday)
-              else
-                use(::Mnemosyne::Middleware::Faraday)
-              end
+              insert(0, ::Mnemosyne::Middleware::Faraday)
             end
 
             super
