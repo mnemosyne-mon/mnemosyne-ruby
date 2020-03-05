@@ -99,4 +99,4 @@ jobs:
       - name: Run rspec
         env:
           REDMINE_VERSION: ${{ matrix.redmine }}
-        run: bundle exec rspec --color
+        run: bundle exec rspec --color ${SPEC}

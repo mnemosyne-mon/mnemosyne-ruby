@@ -32,7 +32,7 @@ before_install:
   - gem install bundler -v'~>1.0'
 script:
   - bundle exec rake rubocop
-  - bundle exec rspec "${SPEC}"
+  - bundle exec rspec ${SPEC}
 
 matrix:
   exclude:
