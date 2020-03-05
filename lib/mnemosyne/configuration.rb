@@ -13,7 +13,7 @@ module Mnemosyne
     attr_reader :exchange
     attr_reader :server
 
-    def initialize(config) # rubocop:disable AbcSize
+    def initialize(config)
       @platform    = config.fetch('platform', 'default').to_s.strip.freeze
       @application = config.fetch('application', nil).to_s.strip.freeze
       @enabled     = config.fetch('enabled', true)

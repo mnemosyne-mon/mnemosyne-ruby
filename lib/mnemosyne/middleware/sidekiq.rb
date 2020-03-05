@@ -19,11 +19,11 @@ module Mnemosyne
           origin: origin,
           meta: meta
 
-        trace.start! if trace
+        trace&.start!
 
         yield
-      rescue StandardError, LoadError, SyntaxError => err
-        trace.attach_error(err)
+      rescue StandardError, LoadError, SyntaxError => e
+        trace.attach_error(e)
         raise
       ensure
         if trace

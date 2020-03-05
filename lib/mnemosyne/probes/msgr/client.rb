@@ -4,11 +4,11 @@ module Mnemosyne
   module Probes
     module Msgr
       module Client
-        NAME = 'external.publish.msgr'.freeze
+        NAME = 'external.publish.msgr'
 
         class Probe < ::Mnemosyne::Probe
           def setup
-            ::Msgr::Client.send :prepend, Instrumentation
+            ::Msgr::Client.prepend Instrumentation
           end
         end
 

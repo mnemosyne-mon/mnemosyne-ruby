@@ -32,7 +32,7 @@ module Mnemosyne
           end
 
           def extract_format(env)
-            env['api.format'.freeze]
+            env['api.format']
           end
         end
       end

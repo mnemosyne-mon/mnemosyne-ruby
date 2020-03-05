@@ -1,14 +1,11 @@
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.3
   Exclude:
     - 'vendor/**/*'
     - 'gemfiles/**/*'
 
-Rails:
-  Enabled: false
 
-
-Layout/AlignParameters:
+Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
 
 Layout/CaseIndentation:
@@ -30,23 +27,8 @@ Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
 
-Style/BracesAroundHashParameters:
-  EnforcedStyle: context_dependent
-
-Style/RaiseArgs:
-  EnforcedStyle: compact
-
-Style/SignalException:
-  EnforcedStyle: only_raise
-
-Style/Semicolon:
-  Exclude:
-    - '**/*_spec.rb'
-
-Style/RescueModifier:
-  Exclude:
-    - '**/*_spec.rb'
-
+Metrics/AbcSize:
+  Enabled: false
 
 Metrics/LineLength:
   Exclude:
@@ -63,5 +45,34 @@ Metrics/ParameterLists:
 Metrics/MethodLength:
   Enabled: false
 
+
+Naming/FileName:
+  Exclude:
+    - lib/mnemosyne-ruby.rb
+
+
 Style/Documentation:
   Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Style/RaiseArgs:
+  EnforcedStyle: compact
+
+Style/SignalException:
+  EnforcedStyle: only_raise
+
+Style/Semicolon:
+  Exclude:
+    - '**/*_spec.rb'
+
+Style/RescueModifier:
+  Exclude:
+    - '**/*_spec.rb'

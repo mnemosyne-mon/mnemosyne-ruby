@@ -4,7 +4,7 @@ module Mnemosyne
   module Probes
     module ActionController
       module Renderers
-        CATEGORY = 'render_to_body.renderers.action_controller'.freeze
+        CATEGORY = 'render_to_body.renderers.action_controller'
 
         class Probe < ::Mnemosyne::Probe
           subscribe CATEGORY

@@ -4,16 +4,16 @@ module Mnemosyne
   module Probes
     module Msgr
       module Consumer
-        NAME = 'app.messaging.receive.msgr'.freeze
+        NAME = 'app.messaging.receive.msgr'
 
         class Probe < ::Mnemosyne::Probe
           def setup
-            ::Msgr::Consumer.send :prepend, Instrumentation
+            ::Msgr::Consumer.prepend Instrumentation
           end
         end
 
         module Instrumentation
-          def dispatch(message) # rubocop:disable AbcSize
+          def dispatch(message)
             route = message.route
             metadata = message.metadata
             headers = metadata.headers || {}
@@ -57,7 +57,7 @@ module Mnemosyne
 
             super
           rescue StandardError, LoadError, SyntaxError => e
-            trace.attach_error(e) if trace
+            trace&.attach_error(e)
             raise
           ensure
             if trace

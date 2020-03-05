@@ -6,7 +6,7 @@ module Mnemosyne
       module ShowExceptions
         class Probe < ::Mnemosyne::Probe
           def setup
-            ::ActionDispatch::ShowExceptions.send :prepend, Instrumentation
+            ::ActionDispatch::ShowExceptions.prepend Instrumentation
           end
 
           module Instrumentation

@@ -5,7 +5,6 @@ module Mnemosyne
     def trace(name, meta: {})
       ::ActiveSupport::Notifications.instrument 'trace.mnemosyne',
         name: name, meta: meta do
-
         yield
       end
     end

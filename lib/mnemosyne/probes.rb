@@ -32,7 +32,7 @@ module Kernel
 
     begin
       ::Mnemosyne::Probes.required(name)
-    rescue Exception # rubocop:disable RescueException, HandleExceptions
+    rescue Exception # rubocop:disable Lint/RescueException,Lint/SuppressedException
     end
 
     ret

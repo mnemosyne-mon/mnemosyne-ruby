@@ -68,9 +68,9 @@ module Mnemosyne
 
           @instance = new(config: config, client: client)
         end
-      rescue StandardError => err
+      rescue StandardError => e
         ::Mnemosyne::Logging.logger.warn(Mnemosyne) do
-          "Unable to start instrumenter: #{err}"
+          "Unable to start instrumenter: #{e}"
         end
 
         raise

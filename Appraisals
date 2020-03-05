@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 appraise 'rails-60' do
   group :test do
     gem 'rails', '~> 6.0.0', require: false

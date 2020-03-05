@@ -53,7 +53,7 @@ module Mnemosyne
 
         def _submit_trace
           @trace.submit
-        rescue Exception => e
+        rescue Exception => e # rubocop:disable Lint/RescueException
           ::Mnemosyne::Logging.logger.error \
             "Error while submitting trace: #{e}\n  #{e.backtrace.join("\n  ")}"
         end
@@ -63,7 +63,7 @@ module Mnemosyne
         @app = app
       end
 
-      def call(env) # rubocop:disable AbcSize
+      def call(env)
         origin      = env.fetch('HTTP_X_MNEMOSYNE_ORIGIN', false)
         transaction = env.fetch('HTTP_X_MNEMOSYNE_TRANSACTION') do
           ::SecureRandom.uuid
@@ -95,7 +95,7 @@ module Mnemosyne
 
         raise
       ensure
-        trace.release if trace
+        trace&.release
       end
 
       private
@@ -121,7 +121,7 @@ module Mnemosyne
 
         trace.meta.merge!({
           content_type: headers['Content-Type'],
-          location: headers['Location'],
+          location: headers['Location']
         }.compact)
       end
     end

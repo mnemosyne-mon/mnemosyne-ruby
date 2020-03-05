@@ -27,7 +27,6 @@ module Mnemosyne
           def respond
             ::ActiveSupport::Notifications.instrument \
               'respond.responders.mnemosyne' do
-
               super
             end
           end

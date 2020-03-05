@@ -11,7 +11,6 @@ class Dummy < ::Rails::Application
   config.paths['config'] << File.join(__dir__, '../dummy/config')
 end
 
-
 RSpec.describe Mnemosyne::Railtie do
   let(:railtie) { described_class.instance }
 
