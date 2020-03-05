@@ -19,8 +19,8 @@ module Mnemosyne
           def lock!
             unless @handlers.include?('Mnemosyne::Middleware::Faraday')
               if ::Faraday::VERSION < '1.0' &&
-                respond_to?(:is_adapter?, true) &&
-                idx = @handlers.find_index {|m| is_adapter?(m) }
+                 respond_to?(:is_adapter?, true) &&
+                 (idx = @handlers.find_index {|m| is_adapter?(m) })
 
                 insert(idx, ::Mnemosyne::Middleware::Faraday)
               else
