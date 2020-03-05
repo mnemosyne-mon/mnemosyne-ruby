@@ -42,6 +42,7 @@ jobs:
           - suite: rails-4.2
             spec: --tag probe:rails --tag ~probe
             env: BUNDLE_GEMFILE=gemfiles/rails_42.gemfile
+            bundle_args: _1_
           - suite: rails-5.0
             spec: --tag probe:rails --tag ~probe
             env: BUNDLE_GEMFILE=gemfiles/rails_50.gemfile
@@ -96,10 +97,10 @@ jobs:
       - name: Install Ruby dependencies
         run: |
           set -x
-          gem install bundler --force --version '~> 1.0'
+          gem install bundler --version '~> 1.0'
           bundle config path "$(pwd)/vendor/bundle"
           bundle config without development
-          ${{ matrix.env }} bundle update --jobs=$(nproc) --retry=3
+          ${{ matrix.env }} bundle ${{ matrix.bundle_args }} update --jobs=$(nproc) --retry=3
 
       - name: Run rspec
         env:
