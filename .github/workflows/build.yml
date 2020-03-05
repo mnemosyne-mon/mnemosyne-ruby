@@ -66,9 +66,9 @@ jobs:
     env:
       SPEC: ${{ matrix.spec }}
       SUITE: ${{ matrix.suite }}
-      FARADAY_VERSION: ${{ matrix.faraday }}
-      SIDEKIQ_VERSION: ${{ matrix.sidekiq }}
-      BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+      FARADAY_VERSION: ${{ matrix.faraday || ">= 0" }}
+      SIDEKIQ_VERSION: ${{ matrix.sidekiq || ">= 0" }}
+      BUNDLE_GEMFILE: ${{ matrix.gemfile  || "Gemfile" }}
 
     services:
       rabbitmq:

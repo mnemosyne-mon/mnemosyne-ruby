@@ -1,0 +1,25 @@
+name: Lint
+on: [push]
+jobs:
+  rubocop:
+    name: rubocop
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+      - uses: actions/cache@v1
+        with:
+          path: vendor
+          key: v1-ruby-2.6
+
+      - name: Run bundle install
+        run: |
+          bundle config path "$(pwd)/vendor/bundle"
+          bundle config without development,test
+          bundle install --jobs=4 --retry=3
+
+      - name: Run rubocop
+        run: bundle exec rubocop --parallel --color
