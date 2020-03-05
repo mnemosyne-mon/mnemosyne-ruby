@@ -8,10 +8,10 @@ addons:
     packages:
       - rabbitmq-server
 rvm:
+  - 2.7.0
   - 2.6.5
   - 2.5.7
   - 2.4.9
-  - 2.3.8
 env:
   - SPEC='--tag ~probe'
   - SPEC='--tag probe:faraday' FARADAY_VERSION='~> 0.9'
@@ -38,8 +38,4 @@ matrix:
     - rvm: 2.4.9
       env: SPEC='--tag probe:rails --tag ~probe' BUNDLE_GEMFILE=gemfiles/rails_60.gemfile
     - rvm: 2.4.9
-      env: SPEC='--tag probe:sidekiq' SIDEKIQ_VERSION='~> 6.0'
-    - rvm: 2.3.8
-      env: SPEC='--tag probe:rails --tag ~probe' BUNDLE_GEMFILE=gemfiles/rails_60.gemfile
-    - rvm: 2.3.8
       env: SPEC='--tag probe:sidekiq' SIDEKIQ_VERSION='~> 6.0'
