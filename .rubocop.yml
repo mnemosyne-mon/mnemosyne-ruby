@@ -15,6 +15,11 @@ Layout/CaseIndentation:
     - end
   IndentOneStep: true
 
+Layout/LineLength:
+  Exclude:
+    - '*.gemspec'
+    - 'spec/**/*'
+
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
@@ -29,11 +34,6 @@ Layout/SpaceInsideHashLiteralBraces:
 
 Metrics/AbcSize:
   Enabled: false
-
-Metrics/LineLength:
-  Exclude:
-    - '*.gemspec'
-    - 'spec/**/*'
 
 Metrics/BlockLength:
   Exclude:

@@ -23,8 +23,8 @@ RSpec.describe Mnemosyne::Probes::Faraday::Base, probe: :faraday do
 
     it 'automatically installs middleware' do
       expect(faraday.builder.handlers.map(&:name)).to eq [
-        'Mnemosyne::Middleware::Faraday',
         'Faraday::Request::UrlEncoded',
+        'Mnemosyne::Middleware::Faraday',
         Faraday::VERSION < '1.0.0' ? 'Faraday::Adapter::NetHttp' : nil
       ].compact
     end
