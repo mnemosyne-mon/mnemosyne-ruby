@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
-require 'bundler/gem_tasks'
+require 'rake/release/task'
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 
-RSpec::Core::RakeTask.new(:spec)
+task default: %i[rubocop spec]
 
 RuboCop::RakeTask.new(:rubocop) do |task|
   task.fail_on_error = false
 end
 
-task default: %i[rubocop spec]
+RSpec::Core::RakeTask.new(:spec)
+
+Rake::Release::Task.new do |spec|
+  spec.sign_tag = true
+end
