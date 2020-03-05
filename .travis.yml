@@ -29,14 +29,17 @@ env:
 
 before_install:
   - echo yes | rvm gemset delete global
-  - gem install bundler -v'~>1.0'
+  - gem install bundler --version '~> 1.0'
 script:
-  - bundle exec rake rubocop
   - bundle exec rspec ${SPEC}
 
 matrix:
   exclude:
-  - rvm: 2.4.9
-    env: SPEC='--tag probe:rails --tag ~probe' BUNDLE_GEMFILE=gemfiles/rails_60.gemfile
-  - rvm: 2.3.8
-    env: SPEC='--tag probe:rails --tag ~probe' BUNDLE_GEMFILE=gemfiles/rails_60.gemfile
+    - rvm: 2.4.9
+      env: SPEC='--tag probe:rails --tag ~probe' BUNDLE_GEMFILE=gemfiles/rails_60.gemfile
+    - rvm: 2.4.9
+      env: SPEC='--tag probe:sidekiq' SIDEKIQ_VERSION='~> 6.0'
+    - rvm: 2.3.8
+      env: SPEC='--tag probe:rails --tag ~probe' BUNDLE_GEMFILE=gemfiles/rails_60.gemfile
+    - rvm: 2.3.8
+      env: SPEC='--tag probe:sidekiq' SIDEKIQ_VERSION='~> 6.0'

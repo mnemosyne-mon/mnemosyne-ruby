@@ -31,44 +31,47 @@ jobs:
             spec: --tag ~probe
           - suite: faraday-0.9
             spec: --tag probe:faraday
-            faraday: ~> 0.9
+            env: FARADAY_VERSION='~> 0.9'
           - suite: faraday-1.0
             spec: --tag probe:faraday
-            faraday: ~> 1.0
+            env: FARADAY_VERSION='~> 1.0'
           - suite: msgr
             spec: --tag probe:msgr
           - suite: rack
             spec: --tag probe:rack
           - suite: rails-4.2
             spec: --tag probe:rails --tag ~probe
-            gemfile: gemfiles/rails_42.gemfile
+            env: BUNDLE_GEMFILE=gemfiles/rails_42.gemfile
           - suite: rails-5.0
             spec: --tag probe:rails --tag ~probe
-            gemfile: gemfiles/rails_50.gemfile
+            env: BUNDLE_GEMFILE=gemfiles/rails_50.gemfile
           - suite: rails-5.1
             spec: --tag probe:rails --tag ~probe
-            gemfile: gemfiles/rails_51.gemfile
+            env: BUNDLE_GEMFILE=gemfiles/rails_51.gemfile
           - suite: rails-5.2
             spec: --tag probe:rails --tag ~probe
-            gemfile: gemfiles/rails_52.gemfile
+            env: BUNDLE_GEMFILE=gemfiles/rails_52.gemfile
           - suite: rails-6.0
             spec: --tag probe:rails --tag ~probe
-            gemfile: gemfiles/rails_60.gemfile
+            env: BUNDLE_GEMFILE=gemfiles/rails_60.gemfile
           - suite: restify
             spec: --tag probe:restify
           - suite: sidekiq-5
             spec: --tag probe:sidekiq
-            sidekiq: ~> 5.0
+            env: SIDEKIQ_VERSION='~> 5.0'
           - suite: sidekiq-6
             spec: --tag probe:sidekiq
-            faraday: ~> 6.0
+            env: SIDEKIQ_VERSION='~> 6.0'
+        exclude:
+          - ruby: 2.4
+            suite: rails-6.0
+          - ruby: 2.4
+            suite: sidekiq-6
+          - ruby: 2.3
+            suite: rails-6.0
+          - ruby: 2.3
+            suite: sidekiq-6
 
-    env:
-      SPEC: ${{ matrix.spec }}
-      SUITE: ${{ matrix.suite }}
-      FARADAY_VERSION: ${{ matrix.faraday || ">= 0" }}
-      SIDEKIQ_VERSION: ${{ matrix.sidekiq || ">= 0" }}
-      BUNDLE_GEMFILE: ${{ matrix.gemfile  || "Gemfile" }}
 
     services:
       rabbitmq:
@@ -94,9 +97,8 @@ jobs:
         run: |
           bundle config path "$(pwd)/vendor/bundle"
           bundle config without development
-          bundle update --jobs=$(nproc) --retry=3
+          ${{ matrix.env }} bundle update --jobs=$(nproc) --retry=3
 
       - name: Run rspec
-        env:
-          REDMINE_VERSION: ${{ matrix.redmine }}
-        run: bundle exec rspec --color ${SPEC}
+        run: |
+          ${{ matrix.env }} bundle exec rspec --color ${{ matrix.spec }}
