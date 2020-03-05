@@ -64,6 +64,8 @@ jobs:
             spec: --tag probe:sidekiq
             env: SIDEKIQ_VERSION='~> 6.0'
         exclude:
+          - ruby: 2.7
+            suite: rails-4.2
           - ruby: 2.4
             suite: rails-6.0
           - ruby: 2.4
