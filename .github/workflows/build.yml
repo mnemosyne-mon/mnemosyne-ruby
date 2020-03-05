@@ -100,5 +100,7 @@ jobs:
           ${{ matrix.env }} bundle update --jobs=$(nproc) --retry=3
 
       - name: Run rspec
+        env:
+          AMQP_SERVER: amqp://localhost:${{ job.services.rabbitmq.ports[5672] }}
         run: |
           ${{ matrix.env }} bundle exec rspec --color ${{ matrix.spec }}

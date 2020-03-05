@@ -7,6 +7,7 @@ RSpec.describe ::Mnemosyne::Probes::Msgr::Consumer, probe: :msgr do
   let(:client) do
     ::Msgr::Client.new \
       size: 1,
+      uri: ENV.fetch('AMQP_SERVER', 'amqp://localhost'),
       prefix: ::SecureRandom.hex(2),
       pool_class: '::Msgr::TestPool'
   end
