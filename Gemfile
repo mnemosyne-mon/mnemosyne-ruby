@@ -14,10 +14,11 @@ gem 'timecop', '~> 0.9.1'
 gem 'pry', require: false
 gem 'pry-byebug', require: false
 
-gem 'faraday', require: false
-gem 'msgr', require: false
+gem 'faraday', ENV['FARADAY_VERSION'], require: false
+gem 'msgr', ENV['MSGR_VERSION'], require: false
+gem 'restify', ENV['RESTIFY_VERSION'], require: false
+gem 'sidekiq', ENV['SIDEKIQ_VERSION'], require: false
+
 gem 'rails', require: false
-gem 'restify', require: false
-gem 'sidekiq', require: false
 gem 'sqlite3', require: false
 gem 'webmock', require: false

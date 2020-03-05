@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'webmock/rspec'
 
-RSpec.describe Mnemosyne::Probes::Faraday::Base do
+RSpec.describe Mnemosyne::Probes::Faraday::Base, probe: :faraday do
   before do
     # Ensure Probes are loaded in case one spec without `with_instrumentation`
     # is executed first. In that case the probe would not have been loaded

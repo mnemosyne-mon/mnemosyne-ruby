@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'support/sidekiq'
 require 'support/active_job'
 
-RSpec.describe ::Mnemosyne::Probes::ActiveJob::Perform do
+RSpec.describe ::Mnemosyne::Probes::ActiveJob::Perform, probe: :rails do
   context 'adapter: sidekiq' do
     it 'creates a trace' do
       trace = with_instrumentation do

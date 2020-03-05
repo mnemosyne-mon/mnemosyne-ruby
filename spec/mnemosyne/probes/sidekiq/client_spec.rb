@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'support/sidekiq'
 
-RSpec.describe Mnemosyne::Probes::Sidekiq::Client do
+RSpec.describe Mnemosyne::Probes::Sidekiq::Client, probe: :sidekiq do
   it 'creates span' do
     trace = with_trace do
       HardWorker.perform_async('test')

@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'support/msgr'
 
-RSpec.describe ::Mnemosyne::Probes::Msgr::Consumer do
+RSpec.describe ::Mnemosyne::Probes::Msgr::Consumer, probe: :msgr do
   let(:client) do
     ::Msgr::Client.new \
       size: 1,

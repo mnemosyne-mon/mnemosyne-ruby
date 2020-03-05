@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'webmock/rspec'
 
-RSpec.describe Mnemosyne::Probes::Restify::Base do
+RSpec.describe Mnemosyne::Probes::Restify::Base, probe: :restify do
   before { require 'restify' }
 
   describe 'a GET request' do

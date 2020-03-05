@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'rack'
 
-RSpec.describe ::Mnemosyne::Middleware::Rack do
+RSpec.describe ::Mnemosyne::Middleware::Rack, probe: :rack do
   let(:app) { ->(_env) { response } }
 
   let(:rack) do

@@ -9,11 +9,11 @@ gem "rubocop", "~> 0.67.1"
 gem "timecop", "~> 0.9.1"
 gem "pry", require: false
 gem "pry-byebug", require: false
-gem "faraday", require: false
-gem "msgr", require: false
+gem "faraday", nil, require: false
+gem "msgr", nil, require: false
+gem "restify", nil, require: false
+gem "sidekiq", nil, require: false
 gem "rails", "~> 4.2.0", require: false
-gem "restify", require: false
-gem "sidekiq", require: false
 gem "sqlite3", "~> 1.3.6", require: false
 gem "webmock", require: false
 
