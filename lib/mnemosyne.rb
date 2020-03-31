@@ -44,6 +44,7 @@ module Mnemosyne
     require 'mnemosyne/probes/msgr/consumer'
     require 'mnemosyne/probes/responder/respond'
     require 'mnemosyne/probes/restify/base'
+    require 'mnemosyne/probes/seahorse/base'
     require 'mnemosyne/probes/sidekiq/client'
     require 'mnemosyne/probes/sidekiq/server'
   end

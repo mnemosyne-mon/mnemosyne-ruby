@@ -11,6 +11,7 @@ gem 'rubocop', '~> 0.80.1'
 gem 'timecop', '~> 0.9.1'
 
 group :test do
+  gem 'aws-sdk-core', '~> 3.0',          require: false
   gem 'faraday', ENV['FARADAY_VERSION'], require: false
   gem 'msgr',    ENV['MSGR_VERSION'],    require: false
   gem 'restify', ENV['RESTIFY_VERSION'], require: false

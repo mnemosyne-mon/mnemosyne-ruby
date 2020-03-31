@@ -24,6 +24,7 @@ jobs:
           - rails-5.2
           - rails-6.0
           - restify
+          - seahorse
           - sidekiq-5
           - sidekiq-6
         include:
@@ -57,6 +58,8 @@ jobs:
             env: BUNDLE_GEMFILE=gemfiles/rails_60.gemfile
           - suite: restify
             spec: --tag probe:restify
+          - suite: seahorse
+            spec: --tag probe:seahorse
           - suite: sidekiq-5
             spec: --tag probe:sidekiq
             env: SIDEKIQ_VERSION='~> 5.0'
