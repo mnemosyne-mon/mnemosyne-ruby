@@ -16,14 +16,9 @@ module Mnemosyne
           @body.respond_to?(*args)
         end
 
-        def method_missing(*args)
+        def method_missing(*args, &block)
           super if args.first && args.first.to_s == 'to_ary'
-
-          if block_given?
-            @body.__send__(*args, &Proc.new)
-          else
-            @body.__send__(*args)
-          end
+          @body.__send__(*args, &block)
         end
 
         def close
@@ -42,8 +37,8 @@ module Mnemosyne
           @closed
         end
 
-        def each(*args)
-          @body.each(*args, &Proc.new)
+        def each(*args, &block)
+          @body.each(*args, &block)
         rescue StandardError, LoadError, SyntaxError => e
           @trace.attach_error(e)
           raise
