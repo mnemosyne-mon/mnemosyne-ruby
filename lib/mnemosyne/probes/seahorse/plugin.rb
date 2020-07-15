@@ -6,10 +6,6 @@ module Mnemosyne
   module Probes
     module Seahorse
       class Plugin < ::Seahorse::Client::Plugin
-        def add_handlers(handlers, _config)
-          handlers.add(Handler, step: :build)
-        end
-
         class Handler < ::Seahorse::Client::Handler
           # @param [RequestContext] context
           # @return [Response]
@@ -40,6 +36,8 @@ module Mnemosyne
             end
           end
         end
+
+        handler(Handler, step: :build)
       end
     end
   end
