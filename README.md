@@ -31,6 +31,8 @@ Or install it yourself as:
 
     $ gem install mnemosyne
 
+Note: Removing support for ancient Ruby or Rails versions will not result in a new major. Please be extra careful when using ancient Ruby or Rails versions and updating gems.
+
 ## Usage
 
 TODO

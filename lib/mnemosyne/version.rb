@@ -3,7 +3,7 @@
 module Mnemosyne
   module VERSION
     MAJOR = 1
-    MINOR = 10
+    MINOR = 11
     PATCH = 0
     STAGE = nil
 
