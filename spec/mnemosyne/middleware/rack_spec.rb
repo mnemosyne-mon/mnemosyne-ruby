@@ -33,11 +33,9 @@ RSpec.describe ::Mnemosyne::Middleware::Rack, probe: :rack do
   def consume(response)
     StringIO.new.tap do |out|
       response.last.tap do |body|
-        begin
-          body.to_enum(:each).inject(out) {|io, s| io << s.to_s }
-        ensure
-          body.close
-        end
+        body.to_enum(:each).inject(out) {|io, s| io << s.to_s }
+      ensure
+        body.close
       end
     end.string
   end

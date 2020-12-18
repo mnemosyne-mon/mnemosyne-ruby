@@ -67,12 +67,10 @@ RSpec.describe ::Mnemosyne::Probes::Msgr::Consumer, probe: :msgr do
 
   it 'reports errors' do
     trace = with_instrumentation do
-      begin
-        client.publish message, to: 'test.error'
-        ::Msgr::TestPool.run
-      rescue RuntimeError
-        nil
-      end
+      client.publish message, to: 'test.error'
+      ::Msgr::TestPool.run
+    rescue RuntimeError
+      nil
     end
 
     expect(trace.name).to eq 'app.messaging.receive.msgr'

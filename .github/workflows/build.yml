@@ -11,14 +11,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ['2.7', '2.6', '2.5', '2.4']
+        ruby: ['2.7', '2.6', '2.5']
         suite:
           - core
           - faraday-0.9
           - faraday-1.0
           - msgr
           - rack
-          - rails-4.2
           - rails-5.0
           - rails-5.1
           - rails-5.2
@@ -39,10 +38,6 @@ jobs:
             spec: --tag probe:msgr
           - suite: rack
             spec: --tag probe:rack
-          - suite: rails-4.2
-            spec: --tag probe:rails --tag ~probe
-            env: BUNDLE_GEMFILE=gemfiles/rails_42.gemfile
-            bundle_args: _1.17.3_
           - suite: rails-5.0
             spec: --tag probe:rails --tag ~probe
             env: BUNDLE_GEMFILE=gemfiles/rails_50.gemfile
@@ -63,17 +58,6 @@ jobs:
           - suite: sidekiq-6
             spec: --tag probe:sidekiq
             env: SIDEKIQ_VERSION='~> 6.0'
-        exclude:
-          - ruby: 2.7
-            suite: rails-4.2
-          - ruby: 2.4
-            suite: rails-6.0
-          - ruby: 2.4
-            suite: sidekiq-6
-          - ruby: 2.3
-            suite: rails-6.0
-          - ruby: 2.3
-            suite: sidekiq-6
 
 
     services:
@@ -84,17 +68,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
+
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          architecture: 'x64'
+
       - uses: actions/cache@v1
         with:
           path: vendor
           key: v1-ruby-${{ matrix.ruby }}-suite-${{ matrix.suite }}
-
-      - name: Install debian dependencies
-        run: sudo apt-get install --yes --quiet libsqlite3-dev
 
       - name: Install Ruby dependencies
         run: |
@@ -102,7 +84,7 @@ jobs:
           gem install bundler --version '1.17.3'
           bundle config path "$(pwd)/vendor/bundle"
           bundle config without development
-          ${{ matrix.env }} bundle ${{ matrix.bundle_args }} update --jobs=$(nproc) --retry=3
+          ${{ matrix.env }} bundle update --jobs=$(nproc) --retry=3
 
       - name: Run rspec
         env:

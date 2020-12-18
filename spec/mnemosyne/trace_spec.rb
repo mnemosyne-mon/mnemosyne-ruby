@@ -56,11 +56,9 @@ RSpec.describe Mnemosyne::Trace do
 
     describe '[errors]' do
       let(:error) do
-        begin
-          raise 'error'
-        rescue RuntimeError => e
-          e
-        end
+        raise 'error'
+      rescue RuntimeError => e
+        e
       end
 
       before do
@@ -89,14 +87,12 @@ RSpec.describe Mnemosyne::Trace do
       context 'with nested errors' do
         let(:error) do
           begin
-            begin
-              raise 'inner'
-            rescue RuntimeError
-              raise 'outer'
-            end
-          rescue RuntimeError => e
-            e
+            raise 'inner'
+          rescue RuntimeError
+            raise 'outer'
           end
+        rescue RuntimeError => e
+          e
         end
 
         it 'serializes the entire exception hierarchy' do

@@ -27,10 +27,3 @@ appraise 'rails-50' do
     gem 'sqlite3', '~> 1.3.6', require: false
   end
 end
-
-appraise 'rails-42' do
-  group :test do
-    gem 'rails', '~> 4.2.0', require: false
-    gem 'sqlite3', '~> 1.3.6', require: false
-  end
-end
