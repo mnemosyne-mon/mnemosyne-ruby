@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Mnemosyne::Trace do
   let(:name) { 'trace.test.mnemosyne' }
   let(:kwargs) { {} }
-  let(:trace) { ::Mnemosyne::Trace.new(nil, name, kwargs) }
+  let(:trace) { ::Mnemosyne::Trace.new(nil, name, **kwargs) }
 
   describe '.serialize' do
     subject { trace.serialize }

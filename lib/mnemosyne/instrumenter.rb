@@ -31,7 +31,7 @@ module Mnemosyne
         return trace
       end
 
-      trace = self.current_trace = Trace.new(self, name, kwargs)
+      trace = self.current_trace = Trace.new(self, name, **kwargs)
 
       return trace unless block_given?
 
@@ -85,10 +85,10 @@ module Mnemosyne
         @instance = old
       end
 
-      def trace(*args)
+      def trace(*args, **kwargs)
         return unless (instrumenter = instance)
 
-        instrumenter.trace(*args)
+        instrumenter.trace(*args, **kwargs)
       end
 
       def current_trace

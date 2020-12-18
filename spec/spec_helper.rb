@@ -32,8 +32,8 @@ module TracingHelper
   end
 
   def with_trace(name: 'mnemosyne.test', **kwargs, &block)
-    with_instrumentation(kwargs) do |instrumenter|
-      instrumenter.trace(name, kwargs, &block)
+    with_instrumentation(**kwargs) do |instrumenter|
+      instrumenter.trace(name, **kwargs, &block)
     end
   end
 end
