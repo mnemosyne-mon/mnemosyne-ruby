@@ -23,7 +23,7 @@ end
 
 group :development do
   gem 'appraisal'
-  gem 'rake-release', '~> 1.2.1'
+  gem 'rake-release', '~> 1.3.0'
 
   gem 'pry', require: false
   gem 'pry-byebug', require: false
