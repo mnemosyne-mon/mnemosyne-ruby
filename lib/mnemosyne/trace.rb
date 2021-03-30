@@ -2,6 +2,8 @@
 
 module Mnemosyne
   class Trace < Span
+    BT_REGEXP = /^((?:[a-zA-Z]:)?[^:]+):(\d+)(?::in `([^']+)')?$/.freeze
+
     attr_reader :uuid, :transaction, :origin, :span, :errors
 
     def initialize(instrumenter, name, transaction: nil, origin: nil, **kwargs)
@@ -57,8 +59,6 @@ module Mnemosyne
     end
 
     Error = Struct.new(:error) do
-      BT_REGEXP = /^((?:[a-zA-Z]:)?[^:]+):(\d+)(?::in `([^']+)')?$/.freeze
-
       def serialize
         {
           type: error.class.name,

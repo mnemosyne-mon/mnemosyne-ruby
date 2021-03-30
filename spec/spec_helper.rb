@@ -11,7 +11,7 @@ if ENV['DEBUG']
   require 'pry-byebug'
 end
 
-::Mnemosyne::Logging.logger = ::Logger.new(STDOUT).tap do |logger|
+::Mnemosyne::Logging.logger = ::Logger.new($stdout).tap do |logger|
   logger.level = ::Logger::DEBUG
 end
 

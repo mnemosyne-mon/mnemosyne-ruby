@@ -3,7 +3,8 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
     - 'gemfiles/**/*'
-
+  NewCops: enable
+  SuggestExtensions: False
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
@@ -26,24 +27,24 @@ Layout/MultilineMethodCallIndentation:
 Layout/SpaceInsideBlockBraces:
   EnforcedStyle: space
   EnforcedStyleForEmptyBraces: no_space
-  SpaceBeforeBlockParameters: false
+  SpaceBeforeBlockParameters: False
 
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
 
 Metrics/AbcSize:
-  Enabled: false
+  Enabled: False
 
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
 Metrics/ParameterLists:
-  Enabled: false
+  Enabled: False
 
 Metrics/MethodLength:
-  Enabled: false
+  Enabled: False
 
 
 Naming/FileName:
@@ -51,17 +52,21 @@ Naming/FileName:
     - lib/mnemosyne-ruby.rb
 
 
+# Single attr_reader statements allow easy documentation of attributes.
+Style/AccessorGrouping:
+  Enabled: False
+
 Style/Documentation:
-  Enabled: false
+  Enabled: False
 
 Style/HashEachMethods:
-  Enabled: false
+  Enabled: False
 
 Style/HashTransformKeys:
-  Enabled: false
+  Enabled: False
 
 Style/HashTransformValues:
-  Enabled: false
+  Enabled: False
 
 Style/RaiseArgs:
   EnforcedStyle: compact
