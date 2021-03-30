@@ -33,7 +33,7 @@ module Mnemosyne
           'Platform may only contain alphanumeric characters'
       end
 
-      unless @platform =~ /\A[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*\z/
+      unless @platform =~ /\A[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\z/
         raise ArgumentError.new \
           'Platform must start and end with a alphanumeric characters'
       end
@@ -64,7 +64,7 @@ module Mnemosyne
       uri.user = amqp[:user]
       uri.host = amqp[:host]
       uri.port = amqp[:port] if amqp[:port] != DEFAULT_PORTS[uri.scheme]
-      uri.path = '/' + ::CGI.escape(amqp[:vhost]) if amqp[:vhost] != '/'
+      uri.path = "/#{::CGI.escape(amqp[:vhost])}" if amqp[:vhost] != '/'
 
       uri
     end

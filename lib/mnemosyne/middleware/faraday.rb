@@ -22,7 +22,7 @@ module Mnemosyne
         env[:request_headers].merge!({
           'X-Mnemosyne-Transaction' => trace.transaction,
           'X-Mnemosyne-Origin' => span.uuid
-        }.reject {|_, v| v.nil? })
+        }.compact)
 
         @app.call(env).on_complete do |env| # rubocop:disable Lint/ShadowingOuterLocalVariable
           span.meta[:status] = env[:status]

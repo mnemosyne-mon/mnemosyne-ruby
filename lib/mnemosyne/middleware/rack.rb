@@ -101,8 +101,8 @@ module Mnemosyne
         trace.meta[:query] = env['QUERY_STRING']
         trace.meta[:protocol] = env['SERVER_PROTOCOL']
         trace.meta[:headers] = {
-          'Accept': env['HTTP_ACCEPT'],
-          'Host': env['HTTP_HOST'],
+          Accept: env['HTTP_ACCEPT'],
+          Host: env['HTTP_HOST'],
           'User-Agent': env['HTTP_USER_AGENT']
         }
       end
