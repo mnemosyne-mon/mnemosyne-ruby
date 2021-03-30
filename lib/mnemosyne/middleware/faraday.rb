@@ -5,10 +5,6 @@ require 'faraday'
 module Mnemosyne
   module Middleware
     class Faraday < ::Faraday::Middleware
-      def initialize(app)
-        @app = app
-      end
-
       def call(env)
         trace = ::Mnemosyne::Instrumenter.current_trace
 
