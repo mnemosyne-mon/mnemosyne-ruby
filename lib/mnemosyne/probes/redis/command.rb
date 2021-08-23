@@ -30,6 +30,8 @@ module Mnemosyne
 
             def extract_span_meta(commands)
               {
+                server: id,
+
                 # Each command is an array, consisting of the command name and any
                 # arguments. We are only interested in the command name.
                 commands: extract_command_names(commands),
