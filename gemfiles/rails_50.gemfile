@@ -10,6 +10,7 @@ gem "timecop", "~> 0.9.1"
 group :test do
   gem "faraday", nil, require: false
   gem "msgr", nil, require: false
+  gem "redis", nil, require: false
   gem "restify", nil, require: false
   gem "sidekiq", nil, require: false
   gem "rails", "~> 5.0.0", require: false
