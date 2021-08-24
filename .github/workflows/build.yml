@@ -74,24 +74,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
+        env:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          BUNDLE_WITHOUT: development,test
         with:
           ruby-version: ${{ matrix.ruby }}
-
-      - uses: actions/cache@v2
-        with:
-          path: vendor
-          key: v1-ruby-${{ matrix.ruby }}-suite-${{ matrix.suite }}
+          bundler-cache: true
 
       - name: Install dependencies
         run: |
-          set -x
           sudo apt install -y redis-server
-          gem install bundler --version '1.17.3'
-          bundle config path "$(pwd)/vendor/bundle"
-          bundle config without development
-          bundle update --jobs=$(nproc) --retry=3
 
       - name: Run rspec
         env:
