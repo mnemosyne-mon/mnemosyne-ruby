@@ -48,9 +48,35 @@ module Mnemosyne
                 # there may be an additional level of nesting.
                 c = c[0] if c[0].is_a?(Array)
 
-                # Symbols and lower-case names are allowed
-                c[0].to_s.upcase
-              end.join(', ')
+                # For some commands, we also extract *some* of the arguments.
+                name, args = parse_name_and_args(c)
+
+                "#{name} #{args}".strip
+              end.join("\n")
+            end
+
+            ##
+            # A map of known commands to the arguments (identified by position)
+            # that should be included verbatim in the metadata. Arguments not
+            # listed here will be replaced by a "?" character.
+            #
+            KNOWN_ARGUMENTS = {
+              'GET' => [0],
+              'SET' => [0]
+            }.freeze
+
+            def parse_name_and_args(command)
+              command = command.dup
+
+              # Symbols and lower-case names are allowed
+              name = command.delete_at(0).to_s.upcase
+
+              allowed = KNOWN_ARGUMENTS[name] || []
+              args = command.each_with_index.map do |arg, index|
+                allowed.include?(index) ? arg : '?'
+              end.join(' ')
+
+              [name, args]
             end
           end
         end

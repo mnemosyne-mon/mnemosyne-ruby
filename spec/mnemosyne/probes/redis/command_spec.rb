@@ -26,12 +26,12 @@ RSpec.describe ::Mnemosyne::Probes::Redis::Command, probe: :redis do
 
     span = trace.span[0]
     expect(span.name).to eq 'db.query.redis'
-    expect(span.meta[:commands]).to eq 'SET'
+    expect(span.meta[:commands]).to eq 'SET mykey ?'
     expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
 
     span = trace.span[1]
     expect(span.name).to eq 'db.query.redis'
-    expect(span.meta[:commands]).to eq 'GET'
+    expect(span.meta[:commands]).to eq 'GET mykey'
     expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
   end
 
@@ -49,7 +49,7 @@ RSpec.describe ::Mnemosyne::Probes::Redis::Command, probe: :redis do
 
     span = trace.span[0]
     expect(span.name).to eq 'db.query.redis'
-    expect(span.meta[:commands]).to eq 'SET, SET'
+    expect(span.meta[:commands]).to eq "SET foo ?\nSET baz ?"
     expect(span.meta[:pipelined]).to eq true
     expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
   end
@@ -67,7 +67,7 @@ RSpec.describe ::Mnemosyne::Probes::Redis::Command, probe: :redis do
 
     span = trace.span[0]
     expect(span.name).to eq 'db.query.redis'
-    expect(span.meta[:commands]).to eq 'SET, SET'
+    expect(span.meta[:commands]).to eq "SET mykey ?\nSET foo ?"
     expect(span.meta[:pipelined]).to eq true
     expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
   end
@@ -85,7 +85,7 @@ RSpec.describe ::Mnemosyne::Probes::Redis::Command, probe: :redis do
 
     span = trace.span[0]
     expect(span.name).to eq 'db.query.redis'
-    expect(span.meta[:commands]).to eq 'SET, SET'
+    expect(span.meta[:commands]).to eq "SET mykey ?\nSET foo ?"
     expect(span.meta[:pipelined]).to eq true
     expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
   end
@@ -101,7 +101,7 @@ RSpec.describe ::Mnemosyne::Probes::Redis::Command, probe: :redis do
 
     span = trace.span[0]
     expect(span.name).to eq 'db.query.redis'
-    expect(span.meta[:commands]).to eq 'UNKNOWN_FUNCTION'
+    expect(span.meta[:commands]).to eq 'UNKNOWN_FUNCTION ?'
     expect(span.meta[:error]).to start_with 'ERR unknown command'
     expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
   end
