@@ -13,6 +13,7 @@ gem 'timecop', '~> 0.9.1'
 group :test do
   gem 'faraday', ENV['FARADAY_VERSION'], require: false
   gem 'msgr',    ENV['MSGR_VERSION'],    require: false
+  gem 'redis',   ENV['REDIS_VERSION'],   require: false
   gem 'restify', ENV['RESTIFY_VERSION'], require: false
   gem 'sidekiq', ENV['SIDEKIQ_VERSION'], require: false
 
