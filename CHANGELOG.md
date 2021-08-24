@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Removed
+- Support for Ruby 2.4 (hard gem requirement)
+
+## [1.11.0] - 2020-12-18
+### Removed
 - Support for Ruby 2.4 and Rails 4.2
 
 ### Fixed
@@ -102,7 +106,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Add platform identifier
 
-[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.10.0...HEAD
+[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.11.0...HEAD
+[1.11.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.9.0...v1.10.0
 [1.9.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.8.0...v1.9.0
 [1.8.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.7.1...v1.8.0
