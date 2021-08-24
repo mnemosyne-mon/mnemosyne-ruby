@@ -1,25 +1,23 @@
 name: Lint
-on: [push]
+on:
+  - pull_request
+  - push
+
 jobs:
   rubocop:
     name: rubocop
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
       - uses: actions/checkout@master
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
+        env:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          BUNDLE_WITHOUT: development,test
         with:
-          ruby-version: 2.6
-      - uses: actions/cache@v2
-        with:
-          path: vendor
-          key: v1-ruby-2.6
-
-      - name: Run bundle install
-        run: |
-          bundle config path "$(pwd)/vendor/bundle"
-          bundle config without development,test
-          bundle install --jobs=4 --retry=3
+          ruby-version: 3.0
+          bundler-cache: true
 
       - name: Run rubocop
         run: bundle exec rubocop --parallel --color

@@ -11,15 +11,14 @@ gem 'rubocop', '~> 1.19.0'
 gem 'timecop', '~> 0.9.1'
 
 group :test do
-  gem 'faraday', ENV['FARADAY_VERSION'], require: false
-  gem 'msgr',    ENV['MSGR_VERSION'],    require: false
-  gem 'redis',   ENV['REDIS_VERSION'],   require: false
-  gem 'restify', ENV['RESTIFY_VERSION'], require: false
-  gem 'sidekiq', ENV['SIDEKIQ_VERSION'], require: false
-
-  gem 'rails', require: false
-  gem 'sqlite3', require: false
-  gem 'webmock', require: false
+  gem 'faraday'
+  gem 'msgr'
+  gem 'rails'
+  gem 'redis'
+  gem 'restify'
+  gem 'sidekiq'
+  gem 'sqlite3'
+  gem 'webmock'
 end
 
 group :development do
