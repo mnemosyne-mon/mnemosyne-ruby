@@ -7,7 +7,7 @@ module Mnemosyne
     PATCH = 0
     STAGE = nil
 
-    STRING = [MAJOR, MINOR, PATCH, STAGE].reject(&:nil?).join('.')
+    STRING = [MAJOR, MINOR, PATCH, STAGE].compact.join('.')
 
     def self.to_s
       STRING
