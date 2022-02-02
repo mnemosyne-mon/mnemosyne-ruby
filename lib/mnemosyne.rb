@@ -47,6 +47,7 @@ module Mnemosyne
     require 'mnemosyne/probes/restify/base'
     require 'mnemosyne/probes/sidekiq/client'
     require 'mnemosyne/probes/sidekiq/server'
+    require 'mnemosyne/probes/view_component/render_component'
   end
 
   module Middleware
