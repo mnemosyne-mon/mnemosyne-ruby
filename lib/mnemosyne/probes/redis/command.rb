@@ -60,9 +60,46 @@ module Mnemosyne
             # that should be included verbatim in the metadata. Arguments not
             # listed here will be replaced by a "?" character.
             #
+            # The value can be a list of safe argument indices, or "*" (all).
+            #
             KNOWN_ARGUMENTS = {
-              'GET' => [0],
-              'SET' => [0]
+              'BLPOP' => '*',
+              'BRPOP' => '*',
+              'EVALSHA' => [0, 1],
+              'EXISTS' => '*',
+              'EXPIRE' => '*',
+              'GET' => '*',
+              'HGET' => '*',
+              'HGETALL' => '*',
+              'HMGET' => '*',
+              'HMSET' => [0, 1],
+              'HSCAN' => '*',
+              'INCRBY' => '*',
+              'LLEN' => '*',
+              'LPUSH' => [0],
+              'LRANGE' => '*',
+              'LREM' => [0, 1],
+              'MGET' => '*',
+              'MSET' => [0],
+              'RPUSH' => [0],
+              'RPOP' => '*',
+              'SADD' => [0],
+              'SCARD' => '*',
+              'SCAN' => '*',
+              'SCRIPT LOAD' => [],
+              'SET' => [0],
+              'SREM' => [0],
+              'SSCAN' => '*',
+              'UNLINK' => '*',
+              'ZADD' => [0],
+              'ZCARD' => '*',
+              'ZINCRBY' => [0, 1],
+              'ZRANGE' => '*',
+              'ZRANGEBYSCORE' => '*',
+              'ZREM' => [0],
+              'ZREMRANGEBYSCORE' => '*',
+              'ZREVRANGE' => '*',
+              'ZSCAN' => '*'
             }.freeze
 
             def parse_name_and_args(command)
@@ -72,9 +109,16 @@ module Mnemosyne
               name = command.delete_at(0).to_s.upcase
 
               allowed = KNOWN_ARGUMENTS[name] || []
-              args = command.each_with_index.map do |arg, index|
-                allowed.include?(index) ? arg : '?'
-              end.join(' ')
+              args = case allowed
+                       when '*' # All arguments considered safe
+                         command
+                       when Array # A list of allowed argument indices
+                         command.each_with_index.map do |arg, index|
+                           allowed.include?(index) ? arg : '?'
+                         end
+                       else # Unknown command - assume nothing is safe
+                         Array.new(command.length, '?')
+                     end.join(' ')
 
               [name, args]
             end
