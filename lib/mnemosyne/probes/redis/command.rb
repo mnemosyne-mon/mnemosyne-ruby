@@ -63,8 +63,43 @@ module Mnemosyne
             # The value can be a list of safe argument indices, or "*" (all).
             #
             KNOWN_ARGUMENTS = {
+              'BLPOP' => '*',
+              'BRPOP' => '*',
+              'EVALSHA' => [0, 1],
+              'EXISTS' => '*',
+              'EXPIRE' => '*',
               'GET' => '*',
-              'SET' => [0]
+              'HGET' => '*',
+              'HGETALL' => '*',
+              'HMGET' => '*',
+              'HMSET' => [0, 1],
+              'HSCAN' => '*',
+              'INCRBY' => '*',
+              'LLEN' => '*',
+              'LPUSH' => [0],
+              'LRANGE' => '*',
+              'LREM' => [0, 1],
+              'MGET' => '*',
+              'MSET' => [0],
+              'RPUSH' => [0],
+              'RPOP' => '*',
+              'SADD' => [0],
+              'SCARD' => '*',
+              'SCAN' => '*',
+              'SCRIPT LOAD' => [],
+              'SET' => [0],
+              'SREM' => [0],
+              'SSCAN' => '*',
+              'UNLINK' => '*',
+              'ZADD' => [0],
+              'ZCARD' => '*',
+              'ZINCRBY' => [0, 1],
+              'ZRANGE' => '*',
+              'ZRANGEBYSCORE' => '*',
+              'ZREM' => [0],
+              'ZREMRANGEBYSCORE' => '*',
+              'ZREVRANGE' => '*',
+              'ZSCAN' => '*'
             }.freeze
 
             def parse_name_and_args(command)
