@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.12.1] - 2022-03-21
+### Added
+- More commands whitelisted in Redis span metadata (#44)
+
 ## [1.12.0] - 2021-08-24
 ### Added
 - Support for `redis` gem (#34)
@@ -111,7 +115,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Add platform identifier
 
-[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.12.0...HEAD
+[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.12.1...HEAD
+[1.12.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.12.0...v1.12.1
 [1.12.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.10.0...v1.12.0
 [1.11.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.9.0...v1.10.0
