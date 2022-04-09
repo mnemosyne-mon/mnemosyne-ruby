@@ -12,6 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         ruby:
+          - "3.1"
           - "3.0"
           - "2.7"
           - "2.6"
@@ -71,6 +72,12 @@ jobs:
             spec: --tag probe:sidekiq
             gemfile: gemfiles/sidekiq_60.gemfile
         exclude:
+          - suite: rails-5.0
+            ruby: 3.1
+          - suite: rails-5.1
+            ruby: 3.1
+          - suite: rails-5.2
+            ruby: 3.1
           - suite: rails-5.0
             ruby: 3.0
           - suite: rails-5.1
