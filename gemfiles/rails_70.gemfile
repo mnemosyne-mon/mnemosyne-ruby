@@ -10,7 +10,7 @@ gem "timecop", "~> 0.9.1"
 group :test do
   gem "faraday"
   gem "msgr"
-  gem "rails", "~> 5.2.0"
+  gem "rails", "~> 7.0.0"
   gem "redis"
   gem "restify"
   gem "sidekiq"

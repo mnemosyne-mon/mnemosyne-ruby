@@ -12,6 +12,13 @@ appraise 'faraday-10' do
   end
 end
 
+appraise 'rails-70' do
+  group :test do
+    gem 'rails', '~> 7.0.0'
+    gem 'sqlite3', '~> 1.4'
+  end
+end
+
 appraise 'rails-61' do
   group :test do
     gem 'rails', '~> 6.1.0'

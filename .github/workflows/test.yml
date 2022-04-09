@@ -28,6 +28,7 @@ jobs:
           - rails-5.2
           - rails-6.0
           - rails-6.1
+          - rails-7.0
           - redis-4.0
           - restify
           - sidekiq-5
@@ -60,6 +61,9 @@ jobs:
           - suite: rails-6.1
             spec: --tag probe:rails --tag ~probe
             gemfile: gemfiles/rails_61.gemfile
+          - suite: rails-7.0
+            spec: --tag probe:rails --tag ~probe
+            gemfile: gemfiles/rails_70.gemfile
           - suite: redis-4.0
             spec: --tag probe:redis
             gemfile: gemfiles/redis_40.gemfile
@@ -84,6 +88,10 @@ jobs:
             ruby: 3.0
           - suite: rails-5.2
             ruby: 3.0
+          - suite: rails-7.0
+            ruby: 2.6
+          - suite: rails-7.0
+            ruby: 2.5
 
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
