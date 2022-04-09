@@ -14,6 +14,7 @@ Currently supported probes:
 * Restify: Remote calls including tracing middleware
 * Sidekiq: Client and server tracing
 * Rack: Middleware for request tracing
+* ViewComponent: Component rendering (needs [additional configuration](https://viewcomponent.org/guide/instrumentation.html))
 
 ## Installation
 
