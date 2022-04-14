@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.13.0] - 2022-04-14
+### Added
+- Support for `view_component` gem (#42)
+- Support for Ruby 3.1 and Rails 7.0 (formally)
+
 ## [1.12.1] - 2022-03-21
 ### Added
 - More commands whitelisted in Redis span metadata (#44)
