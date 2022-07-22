@@ -36,6 +36,7 @@ jobs:
         include:
           - suite: core
             spec: --tag ~probe
+            gemfile: gemfiles/core.gemfile
           - suite: faraday-0.9
             spec: --tag probe:faraday
             gemfile: gemfiles/faraday_09.gemfile

@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+appraise 'core' do
+  remove_gem 'rubocop'
+end
+
 appraise 'faraday-09' do
   remove_gem 'rubocop'
 
