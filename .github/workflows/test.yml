@@ -45,8 +45,10 @@ jobs:
             gemfile: gemfiles/faraday_10.gemfile
           - suite: msgr
             spec: --tag probe:msgr
+            gemfile: gemfiles/core.gemfile
           - suite: rack
             spec: --tag probe:rack
+            gemfile: gemfiles/core.gemfile
           - suite: rails-5.0
             spec: --tag probe:rails --tag ~probe
             gemfile: gemfiles/rails_50.gemfile
@@ -70,6 +72,7 @@ jobs:
             gemfile: gemfiles/redis_40.gemfile
           - suite: restify
             spec: --tag probe:restify
+            gemfile: gemfiles/core.gemfile
           - suite: sidekiq-5
             spec: --tag probe:sidekiq
             gemfile: gemfiles/sidekiq_50.gemfile
