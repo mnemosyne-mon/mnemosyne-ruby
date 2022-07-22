@@ -108,7 +108,7 @@ jobs:
         env:
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
-          BUNDLE_WITHOUT: development rubocop
+          BUNDLE_WITHOUT: development
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true

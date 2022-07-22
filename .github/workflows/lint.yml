@@ -16,7 +16,7 @@ jobs:
           BUNDLE_RETRY: 3
           BUNDLE_WITHOUT: development test
         with:
-          ruby-version: 3.0
+          ruby-version: 3.1
           bundler-cache: true
 
       - name: Run rubocop

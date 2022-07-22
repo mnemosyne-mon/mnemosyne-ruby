@@ -6,10 +6,12 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rake', '~> 13.0'
-gem 'rspec', '~> 3.6'
-gem 'timecop', '~> 0.9.1'
+gem 'rubocop', '~> 1.30.0'
 
 group :test do
+  gem 'rspec', '~> 3.6'
+  gem 'timecop', '~> 0.9.1'
+
   gem 'faraday'
   gem 'msgr'
   gem 'rails'
@@ -18,10 +20,6 @@ group :test do
   gem 'sidekiq'
   gem 'sqlite3'
   gem 'webmock'
-end
-
-group :rubocop do
-  gem 'rubocop', '~> 1.30.0'
 end
 
 group :development do
