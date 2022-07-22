@@ -96,6 +96,7 @@ jobs:
 
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
+      BUNDLE_WITHOUT: development
 
     services:
       rabbitmq:
@@ -109,7 +110,6 @@ jobs:
         env:
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
-          BUNDLE_WITHOUT: development
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
