@@ -14,7 +14,7 @@ jobs:
         env:
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
-          BUNDLE_WITHOUT: development,test
+          BUNDLE_WITHOUT: development test
         with:
           ruby-version: 3.0
           bundler-cache: true
