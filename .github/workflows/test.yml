@@ -15,8 +15,6 @@ jobs:
           - "3.1"
           - "3.0"
           - "2.7"
-          - "2.6"
-          - "2.5"
         suite:
           - core
           - faraday-0.9
@@ -92,10 +90,6 @@ jobs:
             ruby: 3.0
           - suite: rails-5.2
             ruby: 3.0
-          - suite: rails-7.0
-            ruby: 2.6
-          - suite: rails-7.0
-            ruby: 2.5
 
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}

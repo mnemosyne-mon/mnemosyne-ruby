@@ -22,7 +22,7 @@ module Mnemosyne
             callers.shift until callers[0].include? 'lib/acfs/global.rb:'
 
             meta = {
-              backtrace: callers[1..-1]
+              backtrace: callers[1..]
             }
 
             span = ::Mnemosyne::Span.new 'external.run.acfs',
