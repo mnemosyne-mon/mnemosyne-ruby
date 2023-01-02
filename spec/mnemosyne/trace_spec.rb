@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Mnemosyne::Trace do
   let(:name) { 'trace.test.mnemosyne' }
   let(:kwargs) { {} }
-  let(:trace) { ::Mnemosyne::Trace.new(nil, name, **kwargs) }
+  let(:trace) { Mnemosyne::Trace.new(nil, name, **kwargs) }
 
   describe '.serialize' do
     subject { trace.serialize }
@@ -18,14 +18,14 @@ RSpec.describe Mnemosyne::Trace do
     end
 
     describe '[start]' do
-      let(:kwargs) { {start: ::Mnemosyne::Clock.to_tick(Time.now)} }
+      let(:kwargs) { {start: Mnemosyne::Clock.to_tick(Time.now)} }
 
       subject { super()[:start] }
       it { is_expected.to eq kwargs[:start] }
     end
 
     describe '[stop]' do
-      let(:kwargs) { {finish: ::Mnemosyne::Clock.to_tick(Time.now)} }
+      let(:kwargs) { {finish: Mnemosyne::Clock.to_tick(Time.now)} }
 
       subject { super()[:stop] }
       it { is_expected.to eq kwargs[:finish] }
@@ -44,7 +44,7 @@ RSpec.describe Mnemosyne::Trace do
     end
 
     describe '[span]' do
-      let(:span) { ::Mnemosyne::Span.new 'span.test.mnemosyne' }
+      let(:span) { Mnemosyne::Span.new 'span.test.mnemosyne' }
 
       before do
         trace << span
@@ -67,7 +67,7 @@ RSpec.describe Mnemosyne::Trace do
 
       subject { super()[:errors] }
       it do
-        is_expected.to eq [::Mnemosyne::Trace::Error.new(error).serialize]
+        is_expected.to eq [Mnemosyne::Trace::Error.new(error).serialize]
       end
 
       context 'with error w/o stacktrace' do

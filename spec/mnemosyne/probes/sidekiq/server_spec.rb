@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'support/sidekiq'
 
-RSpec.describe ::Mnemosyne::Probes::Sidekiq::Server, probe: :sidekiq do
+RSpec.describe Mnemosyne::Probes::Sidekiq::Server, probe: :sidekiq do
   it 'creates a trace' do
     trace = with_instrumentation do
       HardWorker.perform_async('test')

@@ -9,7 +9,7 @@ RSpec.describe Mnemosyne::Probes::Faraday::Base, probe: :faraday do
     # is executed first. In that case the probe would not have been loaded
     # otherwise but Faraday has already build and locks its default middleware
     # stack and the Probe cannot patch it anymore.
-    ::Mnemosyne::Probes.activate!
+    Mnemosyne::Probes.activate!
     require 'faraday'
   end
 

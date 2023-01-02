@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'support/redis'
 
-RSpec.describe ::Mnemosyne::Probes::Redis::Command, probe: :redis do
+RSpec.describe Mnemosyne::Probes::Redis::Command, probe: :redis do
   let(:redis) { Redis.new host: '127.0.0.1', port: 16_379 }
 
   it 'still works without tracing' do

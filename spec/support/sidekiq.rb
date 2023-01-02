@@ -7,7 +7,7 @@ require 'sidekiq/testing'
 require 'mnemosyne/middleware/sidekiq'
 
 Sidekiq::Testing.server_middleware do |chain|
-  chain.add ::Mnemosyne::Middleware::Sidekiq
+  chain.add Mnemosyne::Middleware::Sidekiq
 end
 
 class HardWorker

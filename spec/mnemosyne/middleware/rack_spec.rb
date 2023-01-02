@@ -3,14 +3,14 @@
 require 'spec_helper'
 require 'rack'
 
-RSpec.describe ::Mnemosyne::Middleware::Rack, probe: :rack do
+RSpec.describe Mnemosyne::Middleware::Rack, probe: :rack do
   let(:app) { ->(_env) { response } }
 
   let(:rack) do
     app = self.app
 
-    ::Rack::Builder.new do
-      use ::Mnemosyne::Middleware::Rack
+    Rack::Builder.new do
+      use Mnemosyne::Middleware::Rack
       run app
     end
   end
@@ -138,7 +138,7 @@ RSpec.describe ::Mnemosyne::Middleware::Rack, probe: :rack do
 
   context 'with exception on submit' do
     it 'does not abort response' do
-      expect_any_instance_of(::Mnemosyne::Trace).to receive(:submit).and_raise(Exception)
+      expect_any_instance_of(Mnemosyne::Trace).to receive(:submit).and_raise(Exception)
 
       expect do
         with_instrumentation do
