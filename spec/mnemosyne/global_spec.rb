@@ -8,7 +8,7 @@ RSpec.describe Mnemosyne::Global do
       trace = with_trace do
         raise 'error message'
       rescue RuntimeError => e
-        ::Mnemosyne.attach_error(e)
+        Mnemosyne.attach_error(e)
       end
 
       expect(trace.errors).to be_an Array

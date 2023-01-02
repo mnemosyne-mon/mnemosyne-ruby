@@ -3,7 +3,7 @@
 require 'spec_helper'
 require 'support/active_record'
 
-RSpec.describe ::Mnemosyne::Probes::ActiveRecord::Query, probe: :rails do
+RSpec.describe Mnemosyne::Probes::ActiveRecord::Query, probe: :rails do
   before { Record.create name: 'test' }
 
   it 'creates a trace' do

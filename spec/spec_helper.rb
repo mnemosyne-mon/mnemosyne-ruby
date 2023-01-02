@@ -11,8 +11,8 @@ if ENV['DEBUG']
   require 'pry-byebug'
 end
 
-::Mnemosyne::Logging.logger = ::Logger.new($stdout).tap do |logger|
-  logger.level = ::Logger::DEBUG
+Mnemosyne::Logging.logger = Logger.new($stdout).tap do |logger|
+  logger.level = Logger::DEBUG
 end
 
 module TracingHelper

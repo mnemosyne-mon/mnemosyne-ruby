@@ -3,12 +3,12 @@
 require 'spec_helper'
 require 'support/msgr'
 
-RSpec.describe ::Mnemosyne::Probes::Msgr::Consumer, probe: :msgr do
+RSpec.describe Mnemosyne::Probes::Msgr::Consumer, probe: :msgr do
   let(:client) do
-    ::Msgr::Client.new \
+    Msgr::Client.new \
       size: 1,
       uri: ENV.fetch('AMQP_SERVER', 'amqp://localhost'),
-      prefix: ::SecureRandom.hex(2),
+      prefix: SecureRandom.hex(2),
       pool_class: '::Msgr::TestPool'
   end
 
@@ -29,13 +29,13 @@ RSpec.describe ::Mnemosyne::Probes::Msgr::Consumer, probe: :msgr do
 
   after do
     client.stop delete: true
-    ::Msgr::TestPool.reset
+    Msgr::TestPool.reset
   end
 
   it 'creates a trace' do
     trace = with_instrumentation do
       client.publish message, to: 'test.index'
-      ::Msgr::TestPool.run
+      Msgr::TestPool.run
     end
 
     expect(trace.name).to eq 'app.messaging.receive.msgr'
@@ -68,7 +68,7 @@ RSpec.describe ::Mnemosyne::Probes::Msgr::Consumer, probe: :msgr do
   it 'reports errors' do
     trace = with_instrumentation do
       client.publish message, to: 'test.error'
-      ::Msgr::TestPool.run
+      Msgr::TestPool.run
     rescue RuntimeError
       nil
     end
