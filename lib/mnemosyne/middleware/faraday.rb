@@ -10,7 +10,7 @@ module Mnemosyne
 
         return @app.call(env) unless trace
 
-        span = ::Mnemosyne::Span.new 'external.http.faraday', \
+        span = ::Mnemosyne::Span.new 'external.http.faraday',
           meta: {url: env[:url].to_s, method: env[:method]}
 
         span.start!

@@ -29,13 +29,15 @@ module Mnemosyne
       raise ArgumentError.new 'Platform is required' if platform.blank?
 
       if @platform =~ /[^a-zA-Z0-9-]/
-        raise ArgumentError.new \
+        raise ArgumentError.new(
           'Platform may only contain alphanumeric characters'
+        )
       end
 
       unless @platform =~ /\A[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\z/
-        raise ArgumentError.new \
+        raise ArgumentError.new(
           'Platform must start and end with a alphanumeric characters'
+        )
       end
 
       raise ArgumentError.new('Application is required') if application.blank?
