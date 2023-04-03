@@ -42,7 +42,7 @@ RSpec.describe Mnemosyne::Configuration do
     context 'with invalid platform (I)' do
       let(:params) { {'platform' => 'helö'} }
       it do
-        is_expected.to raise_error ArgumentError, \
+        is_expected.to raise_error ArgumentError,
           'Platform may only contain alphanumeric characters'
       end
     end
@@ -50,7 +50,7 @@ RSpec.describe Mnemosyne::Configuration do
     context 'with invalid platform (II)' do
       let(:params) { {'platform' => '-abc'} }
       it do
-        is_expected.to raise_error ArgumentError, \
+        is_expected.to raise_error ArgumentError,
           'Platform must start and end with a alphanumeric characters'
       end
     end
@@ -58,7 +58,7 @@ RSpec.describe Mnemosyne::Configuration do
     context 'with invalid platform (III)' do
       let(:params) { {'platform' => 'a-b-c-'} }
       it do
-        is_expected.to raise_error ArgumentError, \
+        is_expected.to raise_error ArgumentError,
           'Platform must start and end with a alphanumeric characters'
       end
     end
