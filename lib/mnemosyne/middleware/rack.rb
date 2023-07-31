@@ -37,8 +37,8 @@ module Mnemosyne
           @closed
         end
 
-        def each(*args, &block)
-          @body.each(*args, &block)
+        def each(...)
+          @body.each(...)
         rescue StandardError, LoadError, SyntaxError => e
           @trace.attach_error(e)
           raise
