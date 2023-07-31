@@ -5,7 +5,7 @@ module Mnemosyne
     module ViewComponent
       module RenderComponent
         class Probe < ::Mnemosyne::Probe
-          subscribe '!render.view_component'
+          subscribe 'render.view_component'
 
           def call(trace, _name, start, finish, _id, payload)
             start  = ::Mnemosyne::Clock.to_tick(start)

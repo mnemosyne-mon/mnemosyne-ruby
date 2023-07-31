@@ -2,7 +2,7 @@
 
 The ruby client plugin for the Mnemosyne monitoring system. It extracts full application traces including cross-application requests for distributed applications (services etc.).
 
-Currently supported probes:
+Supported probes:
 
 * Acfs: Remote calls including tracing middleware
 * ActionController: Processing actions and rendering
@@ -18,19 +18,11 @@ Currently supported probes:
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your Gemfile:
 
 ```ruby
 gem 'mnemosyne-ruby', '~> 1.0'
 ```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install mnemosyne
 
 Note: Removing support for ancient Ruby or Rails versions will not result in a new major. Please be extra careful when using ancient Ruby or Rails versions and updating gems.
 
@@ -41,4 +33,3 @@ TODO
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
