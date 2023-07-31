@@ -24,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- Replace reprecated `!render.view_component` hook with `render.view_component`
+- Replace deprecated `!render.view_component` hook with `render.view_component`
 - Removed tests for Rails 5.0 and 5.1
 
 ## [1.13.0] - 2022-04-14
