@@ -16,6 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixes
 
+- Method signature for `#publish` in MSGR probe
+
 ### Breaks
 
 ## [1.14.0] - (2023-07-31)

@@ -13,7 +13,7 @@ module Mnemosyne
         end
 
         module Instrumentation
-          def publish(payload, **options)
+          def publish(payload, options = {})
             if (trace = ::Mnemosyne::Instrumenter.current_trace)
               meta = {}
               span = ::Mnemosyne::Span.new(NAME, meta: meta)
