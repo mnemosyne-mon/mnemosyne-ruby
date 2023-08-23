@@ -15,6 +15,12 @@ Mnemosyne::Logging.logger = Logger.new($stdout).tap do |logger|
   logger.level = Logger::DEBUG
 end
 
+module VersionHelper
+  def version_cmp(v1, comp, v2)
+    Gem::Version.new(v1).send(comp, Gem::Version.new(v2))
+  end
+end
+
 module TracingHelper
   def with_instrumentation(**kwargs, &block)
     traces = []
@@ -47,6 +53,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.include VersionHelper
   config.include TracingHelper
 
   config.filter_run :focus

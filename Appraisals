@@ -64,6 +64,14 @@ appraise 'redis-40' do
   end
 end
 
+appraise 'redis-50' do
+  remove_gem 'rubocop'
+
+  group :test do
+    gem 'redis', '~> 5.0'
+  end
+end
+
 appraise 'sidekiq-50' do
   remove_gem 'rubocop'
 

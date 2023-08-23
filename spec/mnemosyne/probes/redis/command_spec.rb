@@ -37,9 +37,9 @@ RSpec.describe Mnemosyne::Probes::Redis::Command, probe: :redis do
 
   it 'creates just one span for pipelined (parallel) commands' do
     trace = with_trace do
-      result = redis.pipelined do
-        redis.set 'foo', 'bar'
-        redis.set 'baz', 'bam'
+      result = redis.pipelined do |r|
+        r.set 'foo', 'bar'
+        r.set 'baz', 'bam'
       end
 
       expect(result).to eq %w[OK OK]
@@ -55,6 +55,11 @@ RSpec.describe Mnemosyne::Probes::Redis::Command, probe: :redis do
   end
 
   it 'traces queued commands (also run in parallel when committing)' do
+    if version_cmp(Redis::VERSION, :>=, '5')
+      # Redis gem v5+ removed the deprecated #queue and #commit methods
+      skip 'Not available in Redis 5+'
+    end
+
     trace = with_trace do
       redis.queue 'SET', 'mykey', 'hello world'
       redis.queue 'SET', 'foo', 'bar'
@@ -73,6 +78,11 @@ RSpec.describe Mnemosyne::Probes::Redis::Command, probe: :redis do
   end
 
   it 'traces commands queued with array syntax' do
+    if version_cmp(Redis::VERSION, :>=, '5')
+      # Redis gem v5+ removed the deprecated #queue and #commit methods
+      skip 'Not available in Redis 5+'
+    end
+
     trace = with_trace do
       redis.queue %w[SET mykey hello]
       redis.queue %w[SET foo bar]
