@@ -4,6 +4,8 @@
 /coverage/
 /doc/
 /Gemfile.lock
+/gemfiles/.bundle/
+/log/
 /pkg/
 /spec/examples.txt
 /spec/reports/

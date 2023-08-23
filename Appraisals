@@ -56,24 +56,6 @@ appraise 'rails-52' do
   end
 end
 
-appraise 'rails-51' do
-  remove_gem 'rubocop'
-
-  group :test do
-    gem 'rails', '~> 5.1.0'
-    gem 'sqlite3', '~> 1.4'
-  end
-end
-
-appraise 'rails-50' do
-  remove_gem 'rubocop'
-
-  group :test do
-    gem 'rails', '~> 5.0.0'
-    gem 'sqlite3', '~> 1.3.6'
-  end
-end
-
 appraise 'redis-40' do
   remove_gem 'rubocop'
 
