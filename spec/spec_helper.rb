@@ -16,8 +16,8 @@ Mnemosyne::Logging.logger = Logger.new($stdout).tap do |logger|
 end
 
 module VersionHelper
-  def version_cmp(v1, comp, v2)
-    Gem::Version.new(v1).send(comp, Gem::Version.new(v2))
+  def version_cmp(version1, comp, version2)
+    Gem::Version.new(version1).send(comp, Gem::Version.new(version2))
   end
 end
 
