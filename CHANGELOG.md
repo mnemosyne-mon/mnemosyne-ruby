@@ -4,25 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [Unreleased]
 
----
+## [1.15.0] - 2023-08-23
 
-### New
+### Added
 
 - Support for `redis` gem v5+
 
-### Changes
-
-### Fixes
+### Fixed
 
 - Method signature for `#publish` in MSGR probe
 
-### Breaks
-
 ## [1.14.0] - (2023-07-31)
 
-### New
+### Added
 
 - Tests with Ruby 3.2
 
@@ -196,6 +192,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Add platform identifier
 
+[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.15.0...HEAD
+[1.15.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.14.0...v1.15.0
 [1.14.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.14.0...v1.13.0
 [1.13.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.13.0...v1.12.1
 [1.12.1]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.12.1...v1.12.0
