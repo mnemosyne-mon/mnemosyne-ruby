@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Separate new tracing for `redis-client` gem
+
+### Fixed
+
+- `NoMethodError` when `RedisClient` is used directly
+
 ## [1.15.0] - 2023-08-23
 
 ### Added

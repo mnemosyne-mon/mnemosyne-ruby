@@ -16,6 +16,7 @@ group :test do
   gem 'msgr'
   gem 'rails'
   gem 'redis'
+  gem 'redis-client'
   gem 'restify'
   gem 'sidekiq'
   gem 'sqlite3'

@@ -43,6 +43,7 @@ module Mnemosyne
     require 'mnemosyne/probes/msgr/client'
     require 'mnemosyne/probes/msgr/consumer'
     require 'mnemosyne/probes/redis/command'
+    require 'mnemosyne/probes/redis-client/command'
     require 'mnemosyne/probes/responder/respond'
     require 'mnemosyne/probes/restify/base'
     require 'mnemosyne/probes/sidekiq/client'
@@ -52,6 +53,10 @@ module Mnemosyne
 
   module Middleware
     require 'mnemosyne/middleware/rack'
+  end
+
+  module Support
+    require 'mnemosyne/support/redis'
   end
 
   require 'mnemosyne/railtie' if defined?(Rails)

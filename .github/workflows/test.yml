@@ -28,6 +28,7 @@ jobs:
           - rails-7.0
           - redis-4.0
           - redis-5.0
+          - redis-client
           - restify
           - sidekiq-5
           - sidekiq-6
@@ -66,6 +67,9 @@ jobs:
           - suite: redis-5.0
             spec: --tag probe:redis
             gemfile: gemfiles/redis_50.gemfile
+          - suite: redis-client
+            spec: --tag probe:redis_client
+            gemfile: gemfiles/core.gemfile
           - suite: restify
             spec: --tag probe:restify
             gemfile: gemfiles/core.gemfile
