@@ -87,3 +87,11 @@ appraise 'sidekiq-60' do
     gem 'sidekiq', '~> 6.0'
   end
 end
+
+appraise 'sidekiq-70' do
+  remove_gem 'rubocop'
+
+  group :test do
+    gem 'sidekiq', '~> 7.0'
+  end
+end
