@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.16.0] - 2023-08-24
+
 ### Added
 
 - Separate new tracing for `redis-client` gem
@@ -200,7 +202,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Add platform identifier
 
-[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.15.0...HEAD
+[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.16.0...HEAD
+[1.16.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.15.0...v1.16.0
 [1.15.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.14.0...v1.15.0
 [1.14.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.14.0...v1.13.0
 [1.13.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.13.0...v1.12.1
