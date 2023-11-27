@@ -12,7 +12,12 @@ module Mnemosyne
           module Instrumentation
             def render_exception(env, exception)
               if (trace = ::Mnemosyne::Instrumenter.current_trace)
-                trace.attach_error(exception)
+                if exception.respond_to?(:unwrapped_exception) && exception.respond_to?(:exception)
+                  # ActionDispatch::ExceptionWrapper
+                  trace.attach_error(exception.exception)
+                else
+                  trace.attach_error(exception)
+                end
               end
 
               super
