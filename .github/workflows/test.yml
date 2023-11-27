@@ -26,6 +26,7 @@ jobs:
           - rails-6.0
           - rails-6.1
           - rails-7.0
+          - rails-7.1
           - redis-4.0
           - redis-5.0
           - redis-client
@@ -61,6 +62,9 @@ jobs:
           - suite: rails-7.0
             spec: --tag probe:rails --tag ~probe
             gemfile: gemfiles/rails_70.gemfile
+          - suite: rails-7.1
+            spec: --tag probe:rails --tag ~probe
+            gemfile: gemfiles/rails_71.gemfile
           - suite: redis-4.0
             spec: --tag probe:redis
             gemfile: gemfiles/redis_40.gemfile
