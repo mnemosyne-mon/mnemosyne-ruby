@@ -122,3 +122,23 @@ jobs:
         env:
           AMQP_SERVER: amqp://localhost:${{ job.services.rabbitmq.ports[5672] }}
         run: bundle exec rspec --color ${{ matrix.spec }}
+
+  rubocop:
+    name: rubocop
+    runs-on: ubuntu-22.04
+
+    env:
+      BUNDLE_WITHOUT: development test
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: ruby/setup-ruby@v1
+        env:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+        with:
+          ruby-version: 3.1
+          bundler-cache: true
+
+      - name: Run rubocop
+        run: bundle exec rubocop --parallel --color
