@@ -16,8 +16,11 @@ module Mnemosyne
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
-            span = ::Mnemosyne::Span.new 'app.responder.respond',
-              start: start, finish: finish
+            span = ::Mnemosyne::Span.new(
+              'app.responder.respond',
+              start:,
+              finish:
+            )
 
             trace << span
           end

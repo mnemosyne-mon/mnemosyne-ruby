@@ -37,12 +37,12 @@ module Mnemosyne
 
     def serialize
       {
-        uuid: uuid,
-        name: name,
-        type: type,
-        start: start,
+        uuid:,
+        name:,
+        type:,
+        start:,
         stop: finish,
-        meta: meta
+        meta:
       }
     end
   end

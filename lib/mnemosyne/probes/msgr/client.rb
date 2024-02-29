@@ -16,7 +16,7 @@ module Mnemosyne
           def publish(payload, options = {})
             if (trace = ::Mnemosyne::Instrumenter.current_trace)
               meta = {}
-              span = ::Mnemosyne::Span.new(NAME, meta: meta)
+              span = ::Mnemosyne::Span.new(NAME, meta:)
               span.start!
 
               options[:headers] ||= {}

@@ -24,7 +24,7 @@ module Mnemosyne
                 raw: job.clone
               }
 
-              span = ::Mnemosyne::Span.new('external.job.sidekiq', meta: meta)
+              span = ::Mnemosyne::Span.new('external.job.sidekiq', meta:)
               span.finish! oneshot: true
 
               job['mnemosyne.transaction'] = trace.transaction

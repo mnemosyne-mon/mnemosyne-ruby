@@ -25,8 +25,12 @@ module Mnemosyne
               backtrace: callers[1..]
             }
 
-            span = ::Mnemosyne::Span.new 'external.run.acfs',
-              start: start, finish: finish, meta: meta
+            span = ::Mnemosyne::Span.new(
+              'external.run.acfs',
+              start:,
+              finish:,
+              meta:
+            )
 
             trace << span
           end

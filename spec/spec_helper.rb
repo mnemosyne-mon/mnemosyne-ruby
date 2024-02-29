@@ -22,17 +22,15 @@ module VersionHelper
 end
 
 module TracingHelper
-  def with_instrumentation(**kwargs, &block)
+  def with_instrumentation(**kwargs, &)
     traces = []
     client = ->(trace) { traces << trace }
     config = ::Mnemosyne::Configuration.new \
       'application' => kwargs.delete(:application) { 'test' }
 
-    instrumenter = ::Mnemosyne::Instrumenter.new \
-      config: config,
-      client: client
+    instrumenter = ::Mnemosyne::Instrumenter.new(config:, client:)
 
-    ::Mnemosyne::Instrumenter.with(instrumenter, &block)
+    ::Mnemosyne::Instrumenter.with(instrumenter, &)
 
     traces.first
   end

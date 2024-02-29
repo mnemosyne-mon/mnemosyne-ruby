@@ -16,9 +16,9 @@ module Mnemosyne
           @body.respond_to?(*args)
         end
 
-        def method_missing(*args, &block)
+        def method_missing(*args, &)
           super if args.first && args.first.to_s == 'to_ary'
-          @body.__send__(*args, &block)
+          @body.__send__(*args, &)
         end
 
         def close
@@ -64,9 +64,11 @@ module Mnemosyne
           ::SecureRandom.uuid
         end
 
-        trace = ::Mnemosyne::Instrumenter.trace 'app.web.request.rack',
-          transaction: transaction,
-          origin: origin
+        trace = ::Mnemosyne::Instrumenter.trace(
+          'app.web.request.rack',
+          transaction:,
+          origin:
+        )
 
         if trace
           trace.start!

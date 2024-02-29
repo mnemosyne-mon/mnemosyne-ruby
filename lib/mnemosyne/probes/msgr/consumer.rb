@@ -24,9 +24,11 @@ module Mnemosyne
               ::SecureRandom.uuid
             end
 
-            trace = ::Mnemosyne::Instrumenter.trace NAME,
-              transaction: transaction,
-              origin: origin
+            trace = ::Mnemosyne::Instrumenter.trace(
+              NAME,
+              transaction:,
+              origin:
+            )
 
             if trace
               trace.meta[:properties] = {

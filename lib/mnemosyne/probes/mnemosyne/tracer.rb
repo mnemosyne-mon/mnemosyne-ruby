@@ -11,8 +11,12 @@ module Mnemosyne
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
-            span = ::Mnemosyne::Span.new 'custom.trace',
-              start: start, finish: finish, meta: payload
+            span = ::Mnemosyne::Span.new(
+              'custom.trace',
+              start:,
+              finish:,
+              meta: payload
+            )
 
             trace << span
           end

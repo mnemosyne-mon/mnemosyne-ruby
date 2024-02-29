@@ -18,8 +18,12 @@ module Mnemosyne
               binds: extract_bind_values(payload)
             }
 
-            span = ::Mnemosyne::Span.new 'db.query.active_record',
-              start: start, finish: finish, meta: meta
+            span = ::Mnemosyne::Span.new(
+              'db.query.active_record',
+              start:,
+              finish:,
+              meta:
+            )
 
             trace << span
           end

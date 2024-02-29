@@ -15,16 +15,11 @@ jobs:
           - "3.3"
           - "3.2"
           - "3.1"
-          - "3.0"
-          - "2.7"
         suite:
           - core
-          - faraday-0.9
           - faraday-1.0
           - msgr
           - rack
-          - rails-5.2
-          - rails-6.0
           - rails-6.1
           - rails-7.0
           - rails-7.1
@@ -32,16 +27,12 @@ jobs:
           - redis-5.0
           - redis-client
           - restify
-          - sidekiq-5
           - sidekiq-6
           - sidekiq-7
         include:
           - suite: core
             spec: --tag ~probe
             gemfile: gemfiles/core.gemfile
-          - suite: faraday-0.9
-            spec: --tag probe:faraday
-            gemfile: gemfiles/faraday_09.gemfile
           - suite: faraday-1.0
             spec: --tag probe:faraday
             gemfile: gemfiles/faraday_10.gemfile
@@ -51,12 +42,6 @@ jobs:
           - suite: rack
             spec: --tag probe:rack
             gemfile: gemfiles/core.gemfile
-          - suite: rails-5.2
-            spec: --tag probe:rails --tag ~probe
-            gemfile: gemfiles/rails_52.gemfile
-          - suite: rails-6.0
-            spec: --tag probe:rails --tag ~probe
-            gemfile: gemfiles/rails_60.gemfile
           - suite: rails-6.1
             spec: --tag probe:rails --tag ~probe
             gemfile: gemfiles/rails_61.gemfile
@@ -78,24 +63,12 @@ jobs:
           - suite: restify
             spec: --tag probe:restify
             gemfile: gemfiles/core.gemfile
-          - suite: sidekiq-5
-            spec: --tag probe:sidekiq
-            gemfile: gemfiles/sidekiq_50.gemfile
           - suite: sidekiq-6
             spec: --tag probe:sidekiq
             gemfile: gemfiles/sidekiq_60.gemfile
           - suite: sidekiq-7
             spec: --tag probe:sidekiq
             gemfile: gemfiles/sidekiq_70.gemfile
-        exclude:
-          - suite: rails-5.2
-            ruby: '3.3'
-          - suite: rails-5.2
-            ruby: '3.2'
-          - suite: rails-5.2
-            ruby: '3.1'
-          - suite: rails-5.2
-            ruby: '3.0'
 
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}

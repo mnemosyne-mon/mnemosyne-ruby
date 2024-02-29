@@ -4,14 +4,6 @@ appraise 'core' do
   remove_gem 'rubocop'
 end
 
-appraise 'faraday-09' do
-  remove_gem 'rubocop'
-
-  group :test do
-    gem 'faraday', '~> 0.9'
-  end
-end
-
 appraise 'faraday-10' do
   remove_gem 'rubocop'
 
@@ -47,24 +39,6 @@ appraise 'rails-61' do
   end
 end
 
-appraise 'rails-60' do
-  remove_gem 'rubocop'
-
-  group :test do
-    gem 'rails', '~> 6.0.0'
-    gem 'sqlite3', '~> 1.4'
-  end
-end
-
-appraise 'rails-52' do
-  remove_gem 'rubocop'
-
-  group :test do
-    gem 'rails', '~> 5.2.0'
-    gem 'sqlite3', '~> 1.4'
-  end
-end
-
 appraise 'redis-40' do
   remove_gem 'rubocop'
 
@@ -78,14 +52,6 @@ appraise 'redis-50' do
 
   group :test do
     gem 'redis', '~> 5.0'
-  end
-end
-
-appraise 'sidekiq-50' do
-  remove_gem 'rubocop'
-
-  group :test do
-    gem 'sidekiq', '~> 5.0'
   end
 end
 
