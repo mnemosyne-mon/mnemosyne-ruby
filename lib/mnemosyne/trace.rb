@@ -2,7 +2,7 @@
 
 module Mnemosyne
   class Trace < Span
-    BT_REGEXP = /^((?:[a-zA-Z]:)?[^:]+):(\d+)(?::in `([^']+)')?$/.freeze
+    BT_REGEXP = /^((?:[a-zA-Z]:)?[^:]+):(\d+)(?::in `([^']+)')?$/
 
     attr_reader :uuid, :transaction, :origin, :span, :errors
 
@@ -46,13 +46,13 @@ module Mnemosyne
 
     def serialize
       {
-        uuid: uuid,
-        origin: origin,
-        transaction: transaction,
-        name: name,
-        start: start,
+        uuid:,
+        origin:,
+        transaction:,
+        name:,
+        start:,
         stop: finish,
-        meta: meta,
+        meta:,
         span: @span.map(&:serialize),
         errors: @errors.map(&:serialize)
       }

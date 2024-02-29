@@ -20,8 +20,12 @@ module Mnemosyne
               queue: job.queue_name
             }
 
-            span = ::Mnemosyne::Span.new 'app.job.perform.active_job',
-              start: start, finish: finish, meta: meta
+            span = ::Mnemosyne::Span.new(
+              'app.job.perform.active_job',
+              start:,
+              finish:,
+              meta:
+            )
 
             trace << span
           end

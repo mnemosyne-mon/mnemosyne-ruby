@@ -3,8 +3,12 @@
 module Mnemosyne
   module Global
     def trace(name, meta: {}, &block)
-      ::ActiveSupport::Notifications.instrument 'trace.mnemosyne',
-        name: name, meta: meta, &block
+      ::ActiveSupport::Notifications.instrument(
+        'trace.mnemosyne',
+        name:,
+        meta:,
+        &block
+      )
     end
 
     def attach_error(err)

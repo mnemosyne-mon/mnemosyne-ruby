@@ -19,8 +19,12 @@ module Mnemosyne
               format: extract_format(payload[:env])
             }
 
-            span = ::Mnemosyne::Span.new 'app.controller.request.grape',
-              start: start, finish: finish, meta: meta
+            span = ::Mnemosyne::Span.new(
+              'app.controller.request.grape',
+              start:,
+              finish:,
+              meta:
+            )
 
             trace << span
           end

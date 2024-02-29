@@ -17,15 +17,18 @@ module Mnemosyne
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
-            span = ::Mnemosyne::Span.new 'app.controller.renderers.rails',
-              start: start, finish: finish
+            span = ::Mnemosyne::Span.new(
+              'app.controller.renderers.rails',
+              start:,
+              finish:
+            )
 
             trace << span
           end
         end
 
         module Instrumentation
-          def render_to_body(*args, &block)
+          def render_to_body(*args, &)
             ::ActiveSupport::Notifications.instrument CATEGORY do
               super
             end

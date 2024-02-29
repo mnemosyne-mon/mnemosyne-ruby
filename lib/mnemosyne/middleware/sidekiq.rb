@@ -9,15 +9,17 @@ module Mnemosyne
 
         meta = {
           raw: job,
-          queue: queue,
+          queue:,
           worker: worker.class.name,
           arguments: job['args']
         }
 
-        trace = ::Mnemosyne::Instrumenter.trace 'app.job.perform.sidekiq',
-          transaction: transaction,
-          origin: origin,
-          meta: meta
+        trace = ::Mnemosyne::Instrumenter.trace(
+          'app.job.perform.sidekiq',
+          transaction:,
+          origin:,
+          meta:
+        )
 
         trace&.start!
 

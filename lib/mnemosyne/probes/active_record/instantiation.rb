@@ -16,8 +16,12 @@ module Mnemosyne
               class_name: payload[:class_name]
             }
 
-            span = ::Mnemosyne::Span.new 'db.instantiation.active_record',
-              start: start, finish: finish, meta: meta
+            span = ::Mnemosyne::Span.new(
+              'db.instantiation.active_record',
+              start:,
+              finish:,
+              meta:
+            )
 
             trace << span
           end

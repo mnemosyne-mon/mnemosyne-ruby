@@ -11,8 +11,12 @@ module Mnemosyne
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
 
-            span = ::Mnemosyne::Span.new 'view.render.component.view_component',
-              start: start, finish: finish, meta: payload
+            span = ::Mnemosyne::Span.new(
+              'view.render.component.view_component',
+              start:,
+              finish:,
+              meta: payload
+            )
 
             trace << span
           end

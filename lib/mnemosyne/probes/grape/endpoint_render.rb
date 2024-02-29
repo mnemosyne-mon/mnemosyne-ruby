@@ -14,8 +14,11 @@ module Mnemosyne
             endpoint = payload[:endpoint]
             return unless endpoint
 
-            span = ::Mnemosyne::Span.new 'view.render.grape',
-              start: start, finish: finish
+            span = ::Mnemosyne::Span.new(
+              'view.render.grape',
+              start:,
+              finish:
+            )
 
             trace << span
           end

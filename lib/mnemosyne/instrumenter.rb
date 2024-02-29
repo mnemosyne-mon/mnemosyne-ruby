@@ -66,7 +66,7 @@ module Mnemosyne
 
           client = Client.new(config)
 
-          @instance = new(config: config, client: client)
+          @instance = new(config:, client:)
         end
       rescue StandardError => e
         ::Mnemosyne::Logging.logger.warn(Mnemosyne) do
