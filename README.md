@@ -6,14 +6,19 @@ Supported probes:
 
 * Acfs: Remote calls including tracing middleware
 * ActionController: Processing actions and rendering
-* ActiveView: Template and Partial rendering
+* ActionDispatch: Error capturing
+* ActiveJob: Background job execution
 * ActiveRecord: SQL query time
+* ActiveView: Template and Partial rendering
+* Faraday: HTTP client operations and tracing injection
 * Grape: Endpoint run, filter and render times
 * Mnemosyne: Custom traces
+* Msgr: Event publishing and consumer processing
+* Rack: Middleware for request tracing
+* Redis: Client operations
 * Responders: render time
 * Restify: Remote calls including tracing middleware
 * Sidekiq: Client and server tracing
-* Rack: Middleware for request tracing
 * ViewComponent: Component rendering (needs [additional configuration](https://viewcomponent.org/guide/instrumentation.html))
 
 ## Installation
@@ -21,14 +26,10 @@ Supported probes:
 Add this line to your Gemfile:
 
 ```ruby
-gem 'mnemosyne-ruby', '~> 1.0'
+gem 'mnemosyne-ruby', '~> 2.0'
 ```
 
 Note: Removing support for ancient Ruby or Rails versions will not result in a new major. Please be extra careful when using ancient Ruby or Rails versions and updating gems.
-
-## Usage
-
-TODO
 
 ## License
 
