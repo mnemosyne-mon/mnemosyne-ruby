@@ -12,6 +12,14 @@ appraise 'faraday-10' do
   end
 end
 
+appraise 'faraday-20' do
+  remove_gem 'rubocop'
+
+  group :test do
+    gem 'faraday', '~> 2.0'
+  end
+end
+
 appraise 'rails-71' do
   remove_gem 'rubocop'
 

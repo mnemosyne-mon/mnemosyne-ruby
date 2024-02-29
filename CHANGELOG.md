@@ -13,6 +13,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Dropped support for Sidekiq < 6.0
 - Dropped support for Faraday < 1.0
 
+### Added
+
+- Added Faraday 2.0 to test matrix
+
 ## [1.17.0] - 2023-11-28
 
 ### Added

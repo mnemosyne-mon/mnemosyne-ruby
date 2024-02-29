@@ -18,6 +18,7 @@ jobs:
         suite:
           - core
           - faraday-1.0
+          - faraday-2.0
           - msgr
           - rack
           - rails-6.1
@@ -36,6 +37,9 @@ jobs:
           - suite: faraday-1.0
             spec: --tag probe:faraday
             gemfile: gemfiles/faraday_10.gemfile
+          - suite: faraday-2.0
+            spec: --tag probe:faraday
+            gemfile: gemfiles/faraday_20.gemfile
           - suite: msgr
             spec: --tag probe:msgr
             gemfile: gemfiles/core.gemfile
