@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Removed
+
+- Dropped support for Ruby < 3.1
+- Dropped support for Rails < 6.1
+- Dropped support for Sidekiq < 6.0
+- Dropped support for Faraday < 1.0
+
 ## [1.17.0] - 2023-11-28
 
 ### Added
