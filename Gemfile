@@ -19,8 +19,10 @@ group :test do
   gem 'redis-client'
   gem 'restify'
   gem 'sidekiq'
-  gem 'sqlite3'
   gem 'webmock'
+
+  # Rails/ActiveRecord requires sqlite <2.0
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :development do

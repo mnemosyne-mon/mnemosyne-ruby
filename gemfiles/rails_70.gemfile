@@ -14,8 +14,8 @@ group :test do
   gem "redis-client"
   gem "restify"
   gem "sidekiq"
-  gem "sqlite3", "~> 1.4"
   gem "webmock"
+  gem "sqlite3", "~> 1.4"
 end
 
 group :development do
