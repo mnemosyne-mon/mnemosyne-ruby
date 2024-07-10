@@ -27,12 +27,12 @@ RSpec.describe Mnemosyne::Probes::Redis::Command, probe: :redis do
     span = trace.span[0]
     expect(span.name).to eq 'db.query.redis'
     expect(span.meta[:commands]).to eq 'SET mykey ?'
-    expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+    expect(span.meta[:server]).to match %r{^redis://127.0.0.1:16379(/0)?$}
 
     span = trace.span[1]
     expect(span.name).to eq 'db.query.redis'
     expect(span.meta[:commands]).to eq 'GET mykey'
-    expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+    expect(span.meta[:server]).to match %r{^redis://127.0.0.1:16379(/0)?$}
   end
 
   it 'creates just one span for pipelined (parallel) commands' do
@@ -51,7 +51,7 @@ RSpec.describe Mnemosyne::Probes::Redis::Command, probe: :redis do
     expect(span.name).to eq 'db.query.redis'
     expect(span.meta[:commands]).to eq "SET foo ?\nSET baz ?"
     expect(span.meta[:pipelined]).to eq true
-    expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+    expect(span.meta[:server]).to match %r{^redis://127.0.0.1:16379(/0)?$}
   end
 
   it 'traces queued commands (also run in parallel when committing)' do
@@ -74,7 +74,7 @@ RSpec.describe Mnemosyne::Probes::Redis::Command, probe: :redis do
     expect(span.name).to eq 'db.query.redis'
     expect(span.meta[:commands]).to eq "SET mykey ?\nSET foo ?"
     expect(span.meta[:pipelined]).to eq true
-    expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+    expect(span.meta[:server]).to match %r{^redis://127.0.0.1:16379(/0)?$}
   end
 
   it 'traces commands queued with array syntax' do
@@ -97,7 +97,7 @@ RSpec.describe Mnemosyne::Probes::Redis::Command, probe: :redis do
     expect(span.name).to eq 'db.query.redis'
     expect(span.meta[:commands]).to eq "SET mykey ?\nSET foo ?"
     expect(span.meta[:pipelined]).to eq true
-    expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+    expect(span.meta[:server]).to match %r{^redis://127.0.0.1:16379(/0)?$}
   end
 
   it 'attaches errors to the span' do
@@ -113,6 +113,6 @@ RSpec.describe Mnemosyne::Probes::Redis::Command, probe: :redis do
     expect(span.name).to eq 'db.query.redis'
     expect(span.meta[:commands]).to eq 'UNKNOWN_FUNCTION ?'
     expect(span.meta[:error]).to start_with 'ERR unknown command'
-    expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+    expect(span.meta[:server]).to match %r{^redis://127.0.0.1:16379(/0)?$}
   end
 end

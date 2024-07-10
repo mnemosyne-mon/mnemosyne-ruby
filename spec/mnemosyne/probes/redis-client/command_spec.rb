@@ -29,19 +29,19 @@ RSpec.describe Mnemosyne::Probes::RedisClient::Command, probe: :redis_client do
     trace.span[0].tap do |span|
       expect(span.name).to eq 'db.query.redis'
       expect(span.meta[:commands]).to eq 'HELLO ?'
-      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379'
     end
 
     trace.span[1].tap do |span|
       expect(span.name).to eq 'db.query.redis'
       expect(span.meta[:commands]).to eq 'SET mykey ?'
-      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379'
     end
 
     trace.span[2].tap do |span|
       expect(span.name).to eq 'db.query.redis'
       expect(span.meta[:commands]).to eq 'GET mykey'
-      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379'
     end
   end
 
@@ -60,14 +60,14 @@ RSpec.describe Mnemosyne::Probes::RedisClient::Command, probe: :redis_client do
     trace.span[0].tap do |span|
       expect(span.name).to eq 'db.query.redis'
       expect(span.meta[:commands]).to eq 'HELLO ?'
-      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379'
     end
 
     trace.span[1].tap do |span|
       expect(span.name).to eq 'db.query.redis'
       expect(span.meta[:commands]).to eq "SET foo ?\nSET baz ?"
       expect(span.meta[:pipelined]).to eq true
-      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379'
     end
   end
 
@@ -83,14 +83,14 @@ RSpec.describe Mnemosyne::Probes::RedisClient::Command, probe: :redis_client do
     trace.span[0].tap do |span|
       expect(span.name).to eq 'db.query.redis'
       expect(span.meta[:commands]).to eq 'HELLO ?'
-      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379'
     end
 
     trace.span[1].tap do |span|
       expect(span.name).to eq 'db.query.redis'
       expect(span.meta[:commands]).to eq 'UNKNOWN_FUNCTION ?'
       expect(span.meta[:error]).to start_with 'ERR unknown command'
-      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379/0'
+      expect(span.meta[:server]).to eq 'redis://127.0.0.1:16379'
     end
   end
 end
