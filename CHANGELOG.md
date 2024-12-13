@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Increase compatibility of Kernel#require patch
+
 ## [2.0.0] - 2024-02-29
 
 ### Removed

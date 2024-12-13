@@ -21,20 +21,18 @@ module Mnemosyne
         @registry ||= ::Mnemosyne::Registry.new
       end
     end
-  end
-end
 
-module Kernel
-  alias require_without_mn require
+    module Loader
+      module_function
 
-  def require(name)
-    ret = require_without_mn(name)
-
-    begin
-      ::Mnemosyne::Probes.required(name)
-    rescue Exception # rubocop:disable Lint/RescueException,Lint/SuppressedException
+      def require(name)
+        super(name).tap do
+          ::Mnemosyne::Probes.required(name)
+        rescue Exception # rubocop:disable Lint/RescueException,Lint/SuppressedException
+        end
+      end
     end
 
-    ret
+    ::Kernel.prepend(Loader)
   end
 end
