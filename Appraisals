@@ -20,6 +20,24 @@ appraise 'faraday-20' do
   end
 end
 
+appraise 'rails-80' do
+  remove_gem 'rubocop'
+
+  group :test do
+    gem 'rails', '~> 8.0.0'
+    gem 'sqlite3', '~> 2.0'
+  end
+end
+
+appraise 'rails-72' do
+  remove_gem 'rubocop'
+
+  group :test do
+    gem 'rails', '~> 7.2.0'
+    gem 'sqlite3', '~> 1.4'
+  end
+end
+
 appraise 'rails-71' do
   remove_gem 'rubocop'
 
