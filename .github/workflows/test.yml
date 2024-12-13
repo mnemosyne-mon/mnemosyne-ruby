@@ -21,9 +21,11 @@ jobs:
           - faraday-2.0
           - msgr
           - rack
-          - rails-6.1
-          - rails-7.0
+          - rails-8.0
+          - rails-7.2
           - rails-7.1
+          - rails-7.0
+          - rails-6.1
           - redis-4.0
           - redis-5.0
           - redis-client
@@ -46,15 +48,21 @@ jobs:
           - suite: rack
             spec: --tag probe:rack
             gemfile: gemfiles/core.gemfile
-          - suite: rails-6.1
+          - suite: rails-8.0
             spec: --tag probe:rails --tag ~probe
-            gemfile: gemfiles/rails_61.gemfile
-          - suite: rails-7.0
+            gemfile: gemfiles/rails_80.gemfile
+          - suite: rails-7.2
             spec: --tag probe:rails --tag ~probe
-            gemfile: gemfiles/rails_70.gemfile
+            gemfile: gemfiles/rails_72.gemfile
           - suite: rails-7.1
             spec: --tag probe:rails --tag ~probe
             gemfile: gemfiles/rails_71.gemfile
+          - suite: rails-7.0
+            spec: --tag probe:rails --tag ~probe
+            gemfile: gemfiles/rails_70.gemfile
+          - suite: rails-6.1
+            spec: --tag probe:rails --tag ~probe
+            gemfile: gemfiles/rails_61.gemfile
           - suite: redis-4.0
             spec: --tag probe:redis
             gemfile: gemfiles/redis_40.gemfile
@@ -73,6 +81,9 @@ jobs:
           - suite: sidekiq-7
             spec: --tag probe:sidekiq
             gemfile: gemfiles/sidekiq_70.gemfile
+        exclude:
+          - ruby: "3.1"
+            suite: rails-8.0
 
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
