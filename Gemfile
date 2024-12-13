@@ -21,8 +21,7 @@ group :test do
   gem 'sidekiq'
   gem 'webmock'
 
-  # Rails/ActiveRecord requires sqlite <2.0
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '~> 2.0'
 end
 
 group :development do
