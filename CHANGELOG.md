@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.1.2] - 2024-12-18
+
 ### Fixed
 
 - Issue with require hook in Rails app
@@ -243,7 +245,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Add platform identifier
 
-[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v2.1.1...HEAD
+[Unreleased]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v2.1.2...HEAD
+[2.1.2]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v2.1.1...v2.1.2
 [2.1.1]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/mnemosyne-mon/mnemosyne-ruby/compare/v1.17.0...v2.0.0
