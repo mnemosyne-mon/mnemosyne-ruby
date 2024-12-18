@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- Issue with require hook in Rails app
+
 ## [2.1.1] - 2024-12-13
 
 ### Added
