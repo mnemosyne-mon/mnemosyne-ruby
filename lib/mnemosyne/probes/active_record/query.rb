@@ -8,7 +8,7 @@ module Mnemosyne
           subscribe 'sql.active_record'
 
           def call(trace, _name, start, finish, _id, payload)
-            return if payload[:name] == 'SCHEMA' || payload[:name] == 'CACHE'
+            return if %w[SCHEMA CACHE].include?(payload[:name])
 
             start  = ::Mnemosyne::Clock.to_tick(start)
             finish = ::Mnemosyne::Clock.to_tick(finish)
