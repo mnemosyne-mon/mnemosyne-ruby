@@ -8,8 +8,9 @@ module Mnemosyne
           subscribe 'respond.responders.mnemosyne'
 
           def setup
-            ::ActionController::Responder.prepend \
+            ::ActionController::Responder.prepend(
               ::Mnemosyne::Probes::Responder::Respond::Instrumentation
+            )
           end
 
           def call(trace, _name, start, finish, _id, _payload)
