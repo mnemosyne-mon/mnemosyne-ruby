@@ -12,6 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         ruby:
+          - "3.4"
           - "3.3"
           - "3.2"
           - "3.1"
@@ -86,6 +87,12 @@ jobs:
             spec: --tag probe:sidekiq
             gemfile: gemfiles/sidekiq_70.gemfile
         exclude:
+          - ruby: "3.4"
+            suite: rails-7.1
+          - ruby: "3.4"
+            suite: rails-7.0
+          - ruby: "3.4"
+            suite: rails-6.1
           - ruby: "3.1"
             suite: rails-8.0
 
