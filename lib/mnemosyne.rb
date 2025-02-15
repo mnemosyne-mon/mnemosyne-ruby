@@ -2,6 +2,8 @@
 
 require 'mnemosyne/version'
 
+require 'logger'
+
 require 'active_support'
 require 'active_support/core_ext/object/blank'
 require 'active_support/notifications'
