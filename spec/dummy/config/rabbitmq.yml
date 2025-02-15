@@ -1,2 +1,3 @@
 shared:
   enabled: false
+  checkcredentials: false
