@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'rspec'
+
+require 'rails'
 require 'sidekiq'
 require 'sidekiq/testing'
 

@@ -26,7 +26,8 @@ group :test do
 end
 
 group :development do
-  gem 'appraisal'
+  gem 'appraisal', require: false
+  gem 'debug', require: false
 
   gem 'pry', require: false
   gem 'pry-byebug', require: false

@@ -2,14 +2,9 @@
 
 require 'rspec'
 
-require 'active_job'
+require 'support/sidekiq'
 
-# When sidekiq is already required before Rails, it won't load
-# "sidekiq/rails", which defines the job wrapper required by the AJ
-# adapter.
-#
-# See https://github.com/sidekiq/sidekiq/issues/6612
-require 'sidekiq/rails'
+require 'active_job'
 
 class HardJob < ActiveJob::Base
   queue_as :default

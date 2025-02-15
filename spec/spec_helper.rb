@@ -7,9 +7,13 @@ require 'mnemosyne'
 require 'timecop'
 
 if ENV['DEBUG']
-  require 'pry'
-  require 'pry-byebug'
+  # Only load if requested to avoid interactions otherwise
+  require 'debug'
 end
+
+# Ensure Rails env since it gets set differently when some railties or
+# engines are loaded:
+ENV['RAILS_ENV'] = 'test'
 
 Mnemosyne::Logging.logger = Logger.new($stdout).tap do |logger|
   logger.level = Logger::DEBUG
