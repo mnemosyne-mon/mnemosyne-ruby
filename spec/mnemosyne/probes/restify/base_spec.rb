@@ -23,7 +23,7 @@ RSpec.describe Mnemosyne::Probes::Restify::Base, probe: :restify do
 
       expect(span.name).to eq 'external.http.restify'
       expect(span.meta[:url]).to eq 'http://google.com'
-      expect(span.meta[:method]).to eq :get
+      expect(span.meta[:method]).to eq 'get'
       expect(span.meta[:status]).to eq 200
     end
 

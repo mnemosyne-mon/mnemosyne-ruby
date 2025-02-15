@@ -12,7 +12,7 @@ module Mnemosyne
           module Instrumentation
             def call(request)
               if (trace = ::Mnemosyne::Instrumenter.current_trace)
-                meta = {url: request.uri.to_s, method: request.method}
+                meta = {url: request.uri.to_s, method: request.method.to_s}
                 span = ::Mnemosyne::Span.new('external.http.restify', meta:)
 
                 span.start!
