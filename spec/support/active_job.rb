@@ -6,6 +6,9 @@ require 'support/sidekiq'
 
 require 'active_job'
 
+# https://github.com/sidekiq/sidekiq/issues/6612
+require 'sidekiq'
+
 class HardJob < ActiveJob::Base
   queue_as :default
 
