@@ -10,13 +10,13 @@ group :test do
   gem "timecop", "~> 0.9.1"
   gem "faraday"
   gem "msgr"
-  gem "rails", "~> 7.1.0"
+  gem "rails"
   gem "redis"
   gem "redis-client"
-  gem "restify"
+  gem "restify", "~> 1.0"
   gem "sidekiq"
   gem "webmock"
-  gem "sqlite3", "~> 1.4"
+  gem "sqlite3", "~> 2.0"
 end
 
 group :development do

@@ -81,6 +81,22 @@ appraise 'redis-50' do
   end
 end
 
+appraise 'restify-1' do
+  remove_gem 'rubocop'
+
+  group :test do
+    gem 'restify', '~> 1.0'
+  end
+end
+
+appraise 'restify-2' do
+  remove_gem 'rubocop'
+
+  group :test do
+    gem 'restify', '~> 2.0'
+  end
+end
+
 appraise 'sidekiq-60' do
   remove_gem 'rubocop'
 
