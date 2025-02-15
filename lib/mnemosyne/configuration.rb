@@ -6,6 +6,11 @@ require 'cgi'
 
 module Mnemosyne
   class Configuration
+    DEFAULT_PORTS = {
+      'amqp' => 5672,
+      'amqps' => 5671
+    }.freeze
+
     attr_reader :application
     attr_reader :hostname
     attr_reader :platform
@@ -53,11 +58,6 @@ module Mnemosyne
     def default_hostname
       Socket.gethostname
     end
-
-    DEFAULT_PORTS = {
-      'amqp' => 5672,
-      'amqps' => 5671
-    }.freeze
 
     def make_amqp_uri(amqp)
       uri = URI('')
