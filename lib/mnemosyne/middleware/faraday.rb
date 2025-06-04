@@ -20,7 +20,7 @@ module Mnemosyne
           'X-Mnemosyne-Origin' => span.uuid
         }.compact)
 
-        @app.call(env).on_complete do |env| # rubocop:disable Lint/ShadowingOuterLocalVariable
+        @app.call(env).on_complete do |env|
           span.meta[:status] = env[:status]
 
           trace << span.finish!
