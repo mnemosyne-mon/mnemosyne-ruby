@@ -8,7 +8,7 @@ gemspec
 gem 'rake', '~> 13.0'
 gem 'rake-release', '~> 1.4.0'
 gem 'rspec', '~> 3.6'
-gem 'rubocop', '~> 1.87.0'
+gem 'rubocop', '~> 1.88.0'
 
 group :test do
   gem 'timecop', '~> 0.9.1'
